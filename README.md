@@ -25,6 +25,8 @@ The PHP configuration files of the application you may find at platform/applicat
 The platform auto-detects its base URL address nevertheless its public part is on the document root of the web-server or not.
 I don't expect you to be forced to set it up manually within platform/application/config/config.php.
 
-Features Beyond CodeIgniter
----------------------------
+Features
+--------
 
+* CodeIgniter 3.0-dev
+* Support for the old CI 2.x class/file name convention. When you port your older libraries, models, and controllers, you would not be forced to rename them to the new "ucfirst" naming convention.
