@@ -152,3 +152,22 @@ require $PLATFORMDESTROY;
 
 In this "vanilla-style" script all the libraries, helpers, models, configuration options are accessible.
 This feature is very convenient when you migrate a non-MVC site to CodeIgniter.
+
+Also, have a look at the normal front-controller index.php:
+
+```php
+<?php
+
+/*
+ * --------------------------------------------------------------------
+ * The Front-Controller.
+ * --------------------------------------------------------------------
+ */
+
+require dirname(__FILE__).'/config.php';
+require $PLATFORMRUN;
+
+```
+
+Nice, right?
+
