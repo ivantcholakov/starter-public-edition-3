@@ -35,6 +35,7 @@ you would not be forced to rename them according to the new strict "ucfirst" nam
 * Modular Extensions - HMVC for CodeIgniter, https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc
 * Enhanced bootsrapping process by Ivan Tcholakov, see the content of the folder platform/core/bootstrap/.
 In addition to the normal MVC execution, it is possible to run non-MVC scripts, for example:
+
 ```php
 <?php
 
@@ -148,5 +149,6 @@ require $PLATFORMDESTROY;
 </html>
 
 ```
+
 In this "vanilla-style" script all the libraries, helpers, models, configuration options are accessible.
 This feature is very convenient when you migrate a non-MVC site to CodeIgniter.
