@@ -201,3 +201,5 @@ class Welcome_controller extends Base_Controller {
 
 Thus the class name Welcome is available to be used as a model name instead of those ugly names Welcome_model, Welcome_m, etc.
 The technique of this hack is available, but it is not mandatory.
+
+* Hack 4. Running CodeIgniter from the Command Line, http://net.tutsplus.com/tutorials/php/6-codeigniter-hacks-for-the-masters/ - see the file www/cli.php.
