@@ -1,4 +1,2 @@
-starter-public-edition-3
-========================
-
-A PHP application starter, based on CodeIgniter
+A PHP Application Starter, Based on CodeIgniter
+===============================================
