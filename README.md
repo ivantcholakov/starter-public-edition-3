@@ -173,7 +173,7 @@ Nice, right?
 
 * Enhanced rooting has been implemented. Within a module you are able to place controllers in this way:
 
-    modules/demo/controllers/page/Page.php     -> address: site_url/demo/page/[index/method]
+    modules/demo/controllers/page/Page.php     -> address: site_url/demo/page/[index/method]  
     modules/demo/controllers/page/Other.php    -> address: site_url/demo/page/other/[index/method]
 
 * SEO Friendly URLS in CodeIgniter, http://www.einsteinseyes.com/blog/techno-babble/seo-friendly-urls-in-codeigniter-2-0-hmvc/
@@ -210,4 +210,5 @@ The technique of this hack is available, but it is not mandatory.
 * Template library for CodeIgniter by Phil Sturgeon, http://philsturgeon.co.uk/code/codeigniter-template
 * CodeIgniter Asset Library by Phil Sturgeon.
 * UTF-8 string support for CodeIgniter based on Kohana's implementation, https://github.com/ivantcholakov/codeigniter-utf8
-* 
+* PHP fallback function http_build_url(), https://github.com/ivantcholakov/http_build_url
+* Some basic javascripts + normalize.css.
