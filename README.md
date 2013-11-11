@@ -212,3 +212,11 @@ The technique of this hack is available, but it is not mandatory.
 * UTF-8 string support for CodeIgniter based on Kohana's implementation, https://github.com/ivantcholakov/codeigniter-utf8
 * PHP fallback function http_build_url(), https://github.com/ivantcholakov/http_build_url
 * Some basic javascripts + normalize.css.
+
+License Information
+-------------------
+
+For my original code:  
+Author: Ivan Tcholakov ivantcholakov@gmail.com, 2012-2013.  
+License: The MIT License (MIT), http://opensource.org/licenses/MIT
+
