@@ -11,7 +11,7 @@
         </p>
 
         <p>
-            Note: This is an old version of the platform. Further efforts will be applied on Application Starter 4.
+            Note: This is an old version of the platform. Further efforts will be applied on Application Starter 4, which supports multiple applications.
         </p>
 
         <h2>Self-Diagnostics</h2>
