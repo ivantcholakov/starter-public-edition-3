@@ -28,5 +28,8 @@ I don't expect you to be forced to set it up manually within platform/applicatio
 Features
 --------
 
-* CodeIgniter 3.0-dev
-* Support for the old CI 2.x class/file name convention. When you port your older libraries, models, and controllers, you would not be forced to rename them to the new strict "ucfirst" naming convention.
+* CodeIgniter 3.0-dev, http://codeigniter.com/, https://github.com/EllisLab/CodeIgniter
+* Support for the old CI 2.x class/file name convention. When you port your older libraries, models, and controllers,
+you would not be forced to rename them according to the new strict "ucfirst" naming convention.
+* Native PHP session support by default.
+* Modular Extensions - HMVC for CodeIgniter, https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc
