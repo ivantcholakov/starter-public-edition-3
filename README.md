@@ -208,5 +208,6 @@ The technique of this hack is available, but it is not mandatory.
 * CodeIgniter Form Validation External Callbacks, https://gist.github.com/1503599, http://ellislab.com/forums/viewthread/205469/
 * User Agent Helper Functions for CodeIgniter, https://github.com/ivantcholakov/codeigniter-user-agent-helper
 * Template library for CodeIgniter by Phil Sturgeon, http://philsturgeon.co.uk/code/codeigniter-template
-* CodeIgniter Asset Library by Phil Sturgeon
-
+* CodeIgniter Asset Library by Phil Sturgeon.
+* UTF-8 string support for CodeIgniter based on Kohana's implementation, https://github.com/ivantcholakov/codeigniter-utf8
+* 
