@@ -29,4 +29,4 @@ Features
 --------
 
 * CodeIgniter 3.0-dev
-* Support for the old CI 2.x class/file name convention. When you port your older libraries, models, and controllers, you would not be forced to rename them to the new "ucfirst" naming convention.
+* Support for the old CI 2.x class/file name convention. When you port your older libraries, models, and controllers, you would not be forced to rename them to the new strict "ucfirst" naming convention.
