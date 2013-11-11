@@ -172,5 +172,6 @@ require $PLATFORMRUN;
 Nice, right?
 
 * Enhanced rooting has been implemented. Within a module you are able to place controllers in this way:
+
     modules/demo/controllers/page/Page.php     -> address: site_url/demo/page/[index]
     modules/demo/controllers/page/Other.php    -> address: site_url/demo/page/other/[index]
