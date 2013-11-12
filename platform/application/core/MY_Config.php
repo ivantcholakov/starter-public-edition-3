@@ -56,6 +56,39 @@ class MY_Config extends CI_Config {
         }
     }
 
+    // --------------------------------------------------------------------
+
+    /**
+     * Base URL
+     *
+     * Returns base_url [. uri_string]
+     *
+     * @uses        CI_Config::_uri_string()
+     *
+     * @param       string|string[]    $uri    URI string or an array of segments
+     * @param       string    $protocol
+     * @return      string
+     */
+    public function base_url($uri = '', $protocol = NULL)
+    {
+        // Added by Ivan Tcholakov, 09-NOV-2013.
+        if (is_array($uri)) {
+            $uri = implode('/', $uri);
+        }
+        //
+
+        $base_url = $this->slash_item('base_url');
+
+        if (isset($protocol))
+        {
+            $base_url = $protocol.substr($base_url, strpos($base_url, '://'));
+        }
+
+        return $base_url.ltrim($this->_uri_string($uri), '/');
+    }
+
+    // --------------------------------------------------------------------
+
     /**
      * Site URL
      *
