@@ -4,7 +4,7 @@ A PHP Application Starter, Based on CodeIgniter
 Requirements
 ------------
 
-PHP 5.2.4 (officially, actually the platform works on PHP 5.2.0), Apache 2.2 - 2.4.
+PHP 5.2.4+ (officially, actually the platform works on PHP 5.2.0), Apache 2.2 - 2.4.
 For database support seek information within CodeIgniter 3.0-dev documentation.
 
 Installation
