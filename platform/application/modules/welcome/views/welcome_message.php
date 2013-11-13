@@ -11,7 +11,8 @@
         </p>
 
         <p>
-            Note: This is an old version of the platform. Further efforts will be applied on Application Starter 4, which supports multiple applications.
+            Note: This is an older version of the platform. Further efforts will be applied on Application Starter 4, which supports multiple applications.
+            See <a href="https://github.com/ivantcholakov/starter-public-edition-4/" target="_blank">https://github.com/ivantcholakov/starter-public-edition-4/</a>
         </p>
 
         <h2>Self-Diagnostics</h2>

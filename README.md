@@ -1,5 +1,11 @@
-A PHP Application Starter, Based on CodeIgniter
-===============================================
+A PHP Application Starter, Version 3, Based on CodeIgniter
+==========================================================
+
+Note
+----
+
+This is an older version of the platform. Further efforts will be applied on Application Starter 4, which supports multiple applications.
+See https://github.com/ivantcholakov/starter-public-edition-4/
 
 Requirements
 ------------
