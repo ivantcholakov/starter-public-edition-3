@@ -63,6 +63,7 @@ class Template
         }
 
         $this->_ci->load->helper('asset');
+        $this->_ci->load->helper('template');
 
         log_message('debug', 'Template class Initialized');
     }

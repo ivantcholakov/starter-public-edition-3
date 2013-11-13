@@ -6,10 +6,8 @@ class Base_Controller extends MY_Controller {
 
         parent::__construct();
 
-        $this->load->library('template');
-
         $this->load->helper('url');
-        $this->load->helper('template');
+        $this->load->library('template');
         
         $default_title = config_item('default_title');
         $default_description = config_item('default_description');
