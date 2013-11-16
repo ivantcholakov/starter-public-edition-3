@@ -5,7 +5,12 @@
  * @license The MIT License, http://opensource.org/licenses/MIT for my modifications.
  */
 
-class MY_Config extends CI_Config {
+/* load the MX_Loader class */
+if (!class_exists('MX_Config', false)) {
+    require APPPATH.'third_party/MX/Config.php';
+}
+
+class MY_Config extends MX_Config {
 
     /**
      * Class constructor
