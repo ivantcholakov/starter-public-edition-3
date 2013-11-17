@@ -182,7 +182,7 @@ Nice, right?
     modules/demo/controllers/page/Page.php     -> address: site_url/demo/page/[index/method]  
     modules/demo/controllers/page/Other.php    -> address: site_url/demo/page/other/[index/method]
 
-* SEO Friendly URLS in CodeIgniter, http://www.einsteinseyes.com/blog/techno-babble/seo-friendly-urls-in-codeigniter-2-0-hmvc/
+* SEO Friendly URLs in CodeIgniter, http://www.einsteinseyes.com/blog/techno-babble/seo-friendly-urls-in-codeigniter-2-0-hmvc/
 * Hack 2. Prevent Model-Controller Name Collision, http://net.tutsplus.com/tutorials/php/6-codeigniter-hacks-for-the-masters/
 
 Instead of:
