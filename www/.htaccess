@@ -223,9 +223,9 @@ AddDefaultCharset utf-8
 
     #RewriteBase /
 
+    # Remove index.php segment from the URL.
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-
     RewriteCond $1 !\.php$
     RewriteCond $1 !^(index\.php|robots\.txt|favicon\.ico)
     RewriteRule ^(.*)$ ./index.php/$1 [L,QSA]

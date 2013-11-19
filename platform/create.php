@@ -127,16 +127,6 @@ require BASEPATH.'core/Controller.php';
 
 /*
  * ------------------------------------------------------
- *  Load the global functions
- * ------------------------------------------------------
- */
-// Added by Ivan Tcholakov.
-require APPPATH.'core/MY_Common.php';
-//
-require BASEPATH.'core/Common.php';
-
-/*
- * ------------------------------------------------------
  *  Load the framework constants
  * ------------------------------------------------------
  */
@@ -144,10 +134,18 @@ if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
 {
     require APPPATH.'config/'.ENVIRONMENT.'/constants.php';
 }
-else
-{
-    require APPPATH.'config/constants.php';
-}
+
+require APPPATH.'config/constants.php';
+
+/*
+ * ------------------------------------------------------
+ *  Load the global functions
+ * ------------------------------------------------------
+ */
+// Added by Ivan Tcholakov.
+require APPPATH.'core/MY_Common.php';
+//
+require BASEPATH.'core/Common.php';
 
 /*
  * ------------------------------------------------------
