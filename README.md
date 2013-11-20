@@ -217,6 +217,7 @@ The technique of this hack is available, but it is not mandatory.
 * CodeIgniter Asset Library by Phil Sturgeon.
 * UTF-8 string support for CodeIgniter based on Kohana's implementation, https://github.com/ivantcholakov/codeigniter-utf8
 * PHP fallback function http_build_url(), https://github.com/ivantcholakov/http_build_url
+* MY_Model, https://github.com/ivantcholakov/codeigniter-base-model
 * Some basic javascripts + normalize.css.
 
 License Information
