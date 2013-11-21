@@ -149,6 +149,11 @@ class MY_Model extends CI_Model
     protected $qb_as_sql = NULL;
 
     /**
+     * Additional scope that enforces JSON presentation of the returned result.
+     */
+    protected $_as_json = NULL;
+
+    /**
      * A flag indicating $this->distinct() usage.
      */
     protected $qb_distinct = NULL;
@@ -261,8 +266,14 @@ class MY_Model extends CI_Model
             return $this->_return_value($row);
         }
 
+        $as_json = $this->_as_json;
+
         $this->_reset_state();
 
+        if ($as_json)
+        {
+            return json_encode($row);
+        }
         return $row;
     }
 
@@ -315,7 +326,14 @@ class MY_Model extends CI_Model
             $row = $this->trigger('after_get', $row, ($key == count($result) - 1));
         }
 
+        $as_json = $this->_as_json;
+
         $this->_reset_state();
+
+        if ($as_json)
+        {
+            return json_encode($result);
+        }
 
         return $result;
     }
@@ -895,9 +913,18 @@ class MY_Model extends CI_Model
 
         $row = $this->_database->get($this->_table)->row_array();
 
+        $result = isset($row[$this->primary_key]);
+
+        $as_json = $this->_as_json;
+
         $this->_reset_state();
 
-        return isset($row[$this->primary_key]);
+        if ($as_json)
+        {
+            return json_encode($result);
+        }
+
+        return $result;
     }
 
     /**
@@ -918,7 +945,14 @@ class MY_Model extends CI_Model
 
         $row = $this->trigger('after_get', $row);
 
+        $as_json = $this->_as_json;
+
         $this->_reset_state();
+
+        if ($as_json)
+        {
+            return json_encode($row);
+        }
 
         return $row;
     }
@@ -966,7 +1000,14 @@ class MY_Model extends CI_Model
 
         $options = $this->trigger('after_dropdown', $options);
 
+        $as_json = $this->_as_json;
+
         $this->_reset_state();
+
+        if ($as_json)
+        {
+            return json_encode($options);
+        }
 
         return $options;
     }
@@ -1027,7 +1068,14 @@ class MY_Model extends CI_Model
 
         $result = $this->_database->count_all_results($this->_table);
 
+        $as_json = $this->_as_json;
+
         $this->_reset_state();
+
+        if ($as_json)
+        {
+            return json_encode($result);
+        }
 
         return $result;
     }
@@ -1183,6 +1231,12 @@ class MY_Model extends CI_Model
     public function as_sql()
     {
         $this->qb_as_sql = TRUE;
+        return $this;
+    }
+
+    public function as_json()
+    {
+        $this->_as_json = TRUE;
         return $this;
     }
 
@@ -1861,14 +1915,18 @@ class MY_Model extends CI_Model
      */
     protected function _return_value(& $row)
     {
+        $as_json = $this->_as_json;
+
         $this->_reset_state();
+
+        $result = NULL;
 
         if (is_array($row))
         {
             if (!empty($row))
             {
                 reset($row);
-                return current($row);
+                $result = current($row);
             }
         }
         elseif (is_object($row))
@@ -1876,11 +1934,16 @@ class MY_Model extends CI_Model
             $row_array = get_object_vars($row);
             if (!empty($row_array))
             {
-                return current($row_array);
+                $result = current($row_array);
             }
         }
 
-        return NULL;
+        if ($as_json)
+        {
+            return json_encode($result);
+        }
+
+        return $result;
     }
 
     /**
@@ -1918,6 +1981,8 @@ class MY_Model extends CI_Model
 
                 return 'TRUNCATE '.$this->_database->protect_identifiers($this->_table, TRUE);
         }
+
+        return NULL;
     }
 
     /**
@@ -1953,6 +2018,7 @@ class MY_Model extends CI_Model
         $this->qb_as_value = FALSE;
         $this->qb_as_sql = FALSE;
         $this->qb_distinct = FALSE;
+        $this->_as_json = FALSE;
     }
 
 }
