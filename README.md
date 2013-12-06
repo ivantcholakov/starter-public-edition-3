@@ -221,6 +221,7 @@ The technique of this hack is available, but it is not mandatory.
 * Some basic javascripts + normalize.css.
 * cURL library for CodeIgniter, https://github.com/philsturgeon/codeigniter-curl
 * A simple Event System for CodeIgniter, https://github.com/ericbarnes/CodeIgniter-Events
+* Support for database stored settings (Settings library).
 
 License Information
 -------------------
