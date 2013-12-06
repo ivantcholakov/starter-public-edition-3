@@ -219,6 +219,7 @@ The technique of this hack is available, but it is not mandatory.
 * PHP fallback function http_build_url(), https://github.com/ivantcholakov/http_build_url
 * MY_Model, https://github.com/ivantcholakov/codeigniter-base-model
 * Some basic javascripts + normalize.css.
+* cURL library for CodeIgniter, https://github.com/philsturgeon/codeigniter-curl
 
 License Information
 -------------------
