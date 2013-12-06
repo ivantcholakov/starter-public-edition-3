@@ -1765,8 +1765,14 @@ class MY_Model extends CI_Model
     {
         $table_name = (string) $table_name;
 
-        if ($table_name == '') {
+        if ($table_name == '')
+        {
             $table_name = $this->_table;
+        }
+
+        if (!isset($this->_database) || !is_object($this->_database))
+        {
+            return FALSE;
         }
 
         return $this->_database->table_exists($table_name);
@@ -1807,12 +1813,12 @@ class MY_Model extends CI_Model
      */
     public function validate($data)
     {
-        if($this->skip_validation)
+        if ($this->skip_validation)
         {
             return $data;
         }
 
-        if(!empty($this->validate))
+        if (!empty($this->validate))
         {
             foreach($data as $key => $val)
             {
@@ -1821,7 +1827,7 @@ class MY_Model extends CI_Model
 
             $this->load->library('form_validation');
 
-            if(is_array($this->validate))
+            if (is_array($this->validate))
             {
                 $this->form_validation->set_rules($this->validate);
 
