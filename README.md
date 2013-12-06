@@ -220,6 +220,7 @@ The technique of this hack is available, but it is not mandatory.
 * MY_Model, https://github.com/ivantcholakov/codeigniter-base-model
 * Some basic javascripts + normalize.css.
 * cURL library for CodeIgniter, https://github.com/philsturgeon/codeigniter-curl
+* A simple Event System for CodeIgniter, https://github.com/ericbarnes/CodeIgniter-Events
 
 License Information
 -------------------
