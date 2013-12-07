@@ -10,4 +10,6 @@
 | -------------------------------------------------------------------
 */
 
-$autoload['classes'] = array();
+$autoload['classes'] = array(
+    'Textile' => APPPATH.'libraries/Textile.php',
+);
