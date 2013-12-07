@@ -11,6 +11,7 @@
 */
 
 $autoload['classes'] = array(
+    'PHPMailer' => APPPATH.'third_party/phpmailer/class.phpmailer.php',
     'Markdownify' => APPPATH.'third_party/markdownify/markdownify.php',
     'Markdownify_Extra' => APPPATH.'third_party/markdownify/markdownify_extra.php',
     'Markdown_Parser' => APPPATH.'third_party/markdown/markdown.php',
