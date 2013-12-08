@@ -1,5 +1,7 @@
 <?php
 
+require APPPATH.'third_party/htmlpurifier/library/HTMLPurifier/Bootstrap.php';
+
 spl_autoload_register('_common_autoloader');
 
 /**
@@ -90,6 +92,11 @@ function _common_autoloader($class) {
 
     if (is_file($location = APPPATH.'classes/'.str_replace('_', DIRECTORY_SEPARATOR, $class).'.php')) {
         require $location;
+        return true;
+    }
+
+    // Autoload HTMLPurifier classes.
+    if (HTMLPurifier_Bootstrap::autoload($class)) {
         return true;
     }
 
