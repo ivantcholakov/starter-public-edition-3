@@ -121,11 +121,11 @@ class Transliterate {
             if (!isset($search) || !is_array($search)) {
 
                 if (file_exists(APPPATH.'config/foreign_chars.php')) {
-                    include(APPPATH.'config/foreign_chars.php');
+                    include APPPATH.'config/foreign_chars.php';
                 }
 
                 if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php')) {
-                    include(APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php');
+                    include APPPATH.'config/'.ENVIRONMENT.'/foreign_chars.php';
                 }
 
                 if (empty($foreign_characters) || !is_array($foreign_characters)) {
