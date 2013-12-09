@@ -10,6 +10,8 @@ class MY_Controller extends MX_Controller {
     public $controller;
     public $method;
 
+    public $parse_i18n;
+
     public function __construct() {
 
         parent::__construct();
@@ -23,6 +25,9 @@ class MY_Controller extends MX_Controller {
         $this->load->library('form_validation');
         $this->form_validation->CI =& $this;    // Hack to make form validation work properly with HMVC.
                                                 // See https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/wiki/Home
+
+        // See http://devzone.zend.com/1441/zend-framework-and-translation/
+        $this->parse_i18n = (bool) $this->config->item('parse_i18n');
     }
 
     // --------------------------------------------------------------
