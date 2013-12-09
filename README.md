@@ -231,7 +231,7 @@ The technique of this hack is available, but it is not mandatory.
 * AES (256, 192, 128) Symmetric Encryption, Compatible with OpenSSL, https://github.com/ivantcholakov/gibberish-aes-php
 * HTML Purifier, http://htmlpurifier.org/
 * MY_Lang, language translations: Support has been implemented for placeholders %s, %d, etc.
-* Translation within views by usin the i18n tag, http://devzone.zend.com/1441/zend-framework-and-translation/
+* Translation within views by using i18n tag, http://devzone.zend.com/1441/zend-framework-and-translation/
 
 How to use this feature:
 
@@ -254,7 +254,7 @@ You can override the global setting 'parse_i18n' within the controller by insert
 $this->parse_i18n = TRUE // or FALSE
 ```
 
-Parsing of <i18n> tags is done on the final output buffer only when the
+Parsing of <i18n> tags is done on the final output buffer only when
 the MIME-type is 'text/html'.
 
 License Information

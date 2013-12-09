@@ -396,7 +396,7 @@ $config['compress_output'] = FALSE;
 | by inserting the line:
 | $this->parse_i18n = TRUE // or FALSE
 |
-| Parsing of <i18n> tags is done on the final output buffer only when the
+| Parsing of <i18n> tags is done on the final output buffer only when
 | the MIME-type is 'text/html'.
 |
 */
