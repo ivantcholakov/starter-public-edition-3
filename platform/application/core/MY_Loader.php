@@ -263,6 +263,46 @@ class MY_Loader extends MX_Loader {
             : new $name();
     }
 
+    public function driver($library = '', $params = NULL, $object_name = NULL)
+    {
+        if (is_array($library))
+        {
+            foreach ($library as $driver)
+            {
+                $this->driver($driver);
+            }
+            // Modified by Ivan Tcholakov, 12-DEC-2013.
+            // See https://github.com/EllisLab/CodeIgniter/issues/2165
+            //return;
+            return $this;
+            //
+        }
+
+        if ($library === '')
+        {
+            // Modified by Ivan Tcholakov, 12-DEC-2013.
+            // See https://github.com/EllisLab/CodeIgniter/issues/2165
+            //return FALSE;
+            return $this;
+            //
+        }
+
+        if ( ! class_exists('CI_Driver_Library', FALSE))
+        {
+            // We aren't instantiating an object here, just making the base class available
+            require BASEPATH.'libraries/Driver.php';
+        }
+
+        // We can save the loader some time since Drivers will *always* be in a subfolder,
+        // and typically identically named to the library
+        if ( ! strpos($library, '/'))
+        {
+            $library = ucfirst($library).'/'.$library;
+        }
+
+        return $this->library($library, $params, $object_name);
+    }
+
     public function parser($driver = '', $params = NULL, $object_name = NULL)
     {
         $driver = (string) $driver;
@@ -286,7 +326,12 @@ class MY_Loader extends MX_Loader {
             $object_name = $driver;
         }
 
-        return $this->load->driver('parser', $params, $object_name);
+        // Modified by Ivan Tcholakov, 12-DEC-2013.
+        // See https://github.com/EllisLab/CodeIgniter/issues/2165
+        //return $this->load->driver('parser', $params, $object_name);
+        $this->load->driver('parser', $params, $object_name);
+        return $this;
+        //
     }
 
 }
