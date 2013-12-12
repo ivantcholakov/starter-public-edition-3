@@ -43,6 +43,7 @@ class MY_Loader extends MX_Loader {
         } else {
             $class = lcfirst($class);
         }
+
         $subclass = APPPATH.'libraries/'.$subdir.config_item('subclass_prefix').$class.'.php';
 
         // Is this a class extension request?
@@ -66,7 +67,9 @@ class MY_Loader extends MX_Loader {
                 // Before we deem this to be a duplicate request, let's see
                 // if a custom object name is being supplied. If so, we'll
                 // return a new instance of the object
-                if ($object_name !== NULL)
+                // Modified by Ivan Tcholakov, 12-DEC-2013.
+                if ($object_name != '')
+                //
                 {
                     $CI =& get_instance();
                     if ( ! isset($CI->$object_name))
@@ -102,7 +105,10 @@ class MY_Loader extends MX_Loader {
                 // Before we deem this to be a duplicate request, let's see
                 // if a custom object name is being supplied. If so, we'll
                 // return a new instance of the object
-                if ($object_name !== NULL)
+                // Modified by Ivan Tcholakov, 12-DEC-2013.
+                //if ($object_name !== NULL)
+                if ($object_name != '')
+                //
                 {
                     $CI =& get_instance();
                     if ( ! isset($CI->$object_name))
@@ -129,7 +135,10 @@ class MY_Loader extends MX_Loader {
         }
 
         // One last attempt. Maybe the library is in a subdirectory, but it wasn't specified?
-        if ($subdir === '')
+        // Modified by Ivan Tcholakov, 12-DEC-2013.
+        //if ($subdir === '')
+        if ($subdir == '')
+        //
         {
             return $this->_ci_load_class($class.'/'.$class, $params, $object_name);
         }
@@ -252,6 +261,32 @@ class MY_Loader extends MX_Loader {
         $CI->$object_name = isset($config)
             ? new $name($config)
             : new $name();
+    }
+
+    public function parser($driver = '', $params = NULL, $object_name = NULL)
+    {
+        $driver = (string) $driver;
+
+        if ($driver == '')
+        {
+            $driver = 'parser';
+        }
+
+        if (!empty($params) && is_array($params))
+        {
+            $params = array_merge($params, array('parser_driver' => $driver));
+        }
+        else
+        {
+            $params = array('parser_driver' => $driver);
+        }
+
+        if (!isset($object_name) || $object_name == '')
+        {
+            $object_name = $driver;
+        }
+
+        return $this->load->driver('parser', $params, $object_name);
     }
 
 }
