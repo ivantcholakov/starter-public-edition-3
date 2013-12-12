@@ -16,12 +16,12 @@
  * through the world wide web, please send an email to
  * licensing@ellislab.com so we can send you a copy immediately.
  *
- * @package     CodeIgniter
- * @author      EllisLab Dev Team
- * @copyright   Copyright (c) 2008 - 2013, EllisLab, Inc. (http://ellislab.com/)
- * @license     http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link        http://codeigniter.com
- * @since       Version 1.0
+ * @package         CodeIgniter
+ * @author          EllisLab Dev Team
+ * @copyright       Copyright (c) 2008 - 2013, EllisLab, Inc. (http://ellislab.com/)
+ * @license         http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ * @link            http://codeigniter.com
+ * @since           Version 1.0
  * @filesource
  */
 
@@ -97,6 +97,7 @@ switch (ENVIRONMENT)
         exit('The application environment is not set correctly.');
 }
 
+
 /*
  * --------------------------------------------------------------------
  * Mark the initialization type. Do not modify this setting.
@@ -147,6 +148,7 @@ require APPPATH.'core/MY_Common.php';
 //
 require BASEPATH.'core/Common.php';
 
+
 /*
  * ------------------------------------------------------
  *  Define a custom error handler so we can log PHP errors
@@ -158,6 +160,7 @@ register_shutdown_function('_shutdown_handler');
 // Kill magic quotes
 is_php('5.4') OR @ini_set('magic_quotes_runtime', 0);
 
+
 /*
  * ------------------------------------------------------
  *  Set the subclass_prefix
@@ -167,7 +170,7 @@ is_php('5.4') OR @ini_set('magic_quotes_runtime', 0);
  * The subclass prefix allows CI to know if a core class is
  * being extended via a library in the local application
  * "libraries" folder. Since CI allows config items to be
- * overriden via data set in the main index. php file,
+ * overriden via data set in the main index.php file,
  * before proceeding we need to know if a subclass_prefix
  * override exists. If so, we will set this value now,
  * before any classes are loaded
@@ -179,6 +182,7 @@ if ( ! empty($assign_to_config['subclass_prefix']))
     get_config(array('subclass_prefix' => $assign_to_config['subclass_prefix']));
 }
 
+
 /*
  * ------------------------------------------------------
  *  Start the timer... tick tock tick tock...
@@ -187,6 +191,7 @@ if ( ! empty($assign_to_config['subclass_prefix']))
 $BM =& load_class('Benchmark', 'core');
 $BM->mark('total_execution_time_start');
 $BM->mark('loading_time:_base_classes_start');
+
 
 /*
  * ------------------------------------------------------
@@ -276,6 +281,7 @@ if (isset($routing))
     $RTR->_set_overrides($routing);
 }
 
+
 // Added by Ivan Tcholakov.
 //--------------------------------------------------------------------------
 
@@ -288,6 +294,7 @@ if (!NORMAL_MVC_EXECUTION) {
 
 //--------------------------------------------------------------------------
 //
+
 
 /*
  * ------------------------------------------------------
@@ -312,6 +319,7 @@ if (NORMAL_MVC_EXECUTION
     exit;
 }
 
+
 /*
  * -----------------------------------------------------
  * Load the security class for xss and csrf support
@@ -333,6 +341,7 @@ $IN =& load_class('Input', 'core');
  */
 $LANG =& load_class('Lang', 'core');
 
+
 /*
  * ------------------------------------------------------
  *  Load the app controller and local controller
@@ -343,6 +352,7 @@ $LANG =& load_class('Lang', 'core');
 //// Load the base controller class
 //require BASEPATH.'core/Controller.php';
 //
+
 
 /**
  * Reference to the CI_Controller method.
@@ -425,6 +435,7 @@ if (NORMAL_MVC_EXECUTION) {
 
 //--------------------------------------------------------------------------
 //
+
 
 // Set a mark point for benchmarking
 $BM->mark('loading_time:_base_classes_end');
