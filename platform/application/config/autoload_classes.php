@@ -16,5 +16,4 @@ $autoload['classes'] = array(
     'Markdownify_Extra' => APPPATH.'third_party/markdownify/markdownify_extra.php',
     'Markdown_Parser' => APPPATH.'third_party/markdown/markdown.php',
     'MarkdownExtra_Parser' => APPPATH.'third_party/markdown/markdown.php',
-    'Textile' => APPPATH.'libraries/Textile.php',
 );
