@@ -323,6 +323,14 @@ echo $this->textile->parse_string('h1. Hello!', NULL, TRUE);
 echo $this->textile->parse('hello.textile', NULL, TRUE);
 ```
 
+* Parser class: A Markdown driver has been added.
+
+```php
+$this->load->parser('markdown');
+echo $this->markdown->parse_string('# Hello!', NULL, TRUE);
+echo $this->markdown->parse('hello.markdown', NULL, TRUE);
+```
+
 License Information
 -------------------
 
