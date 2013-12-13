@@ -96,7 +96,6 @@ function &DB($params = '', $query_builder_override = NULL)
 	}
 	elseif (is_string($params))
 	{
-
 		/**
 		 * Parse the URL from the DSN string
 		 * Database settings can be passed as discreet
