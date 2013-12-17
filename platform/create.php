@@ -242,6 +242,9 @@ file_exists(HTMLPURIFIER_CACHE_SERIALIZER_PATH) OR @mkdir(HTMLPURIFIER_CACHE_SER
 define('MUSTACHE_CACHE', WRITABLEPATH.'mustache/');
 file_exists(MUSTACHE_CACHE) OR @mkdir(MUSTACHE_CACHE, DIR_WRITE_MODE, TRUE);
 
+// For the LESS-compiler, with trailing slash.
+define('LESS_CACHE', WRITABLEPATH.'less/');
+file_exists(LESS_CACHE) OR @mkdir(LESS_CACHE, DIR_WRITE_MODE, TRUE);
 
 /*
  * ------------------------------------------------------
