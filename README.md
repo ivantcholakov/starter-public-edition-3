@@ -153,7 +153,6 @@ require $PLATFORMDESTROY;
 
 </body>
 </html>
-
 ```
 
 In this "vanilla-style" script all the libraries, helpers, models, configuration options are accessible.
@@ -172,7 +171,6 @@ Also, have a look at the normal front-controller index.php:
 
 require dirname(__FILE__).'/config.php';
 require $PLATFORMRUN;
-
 ```
 
 Nice, right?
@@ -192,7 +190,6 @@ Instead of:
 class Welcome extends Base_Controller {
     // ...
 }
-
 ```
 
 you can write:
@@ -202,7 +199,6 @@ you can write:
 class Welcome_controller extends Base_Controller {
     // ...
 }
-
 ```
 
 Thus the class name Welcome is available to be used as a model name instead of those ugly names Welcome_model, Welcome_m, etc.
@@ -361,6 +357,11 @@ command:
 ```bash
 php cli.php less compile
 ```
+
+Credits
+-------
+
+* Many thanks to Irida Design OOD (http://iridadesign.com) for sponsoring this project.
 
 License Information
 -------------------
