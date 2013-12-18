@@ -29,4 +29,15 @@ $config['less_compile'] = array(
         'compress' => true
     ),
 
+    array(
+        'source' => FCPATH.'assets/less/lib/font-awesome-4/font-awesome.less',
+        'destination' => FCPATH.'assets/css/lib/font-awesome-4/font-awesome.css',
+        'compress' => false
+    ),
+    array(
+        'source' => FCPATH.'assets/less/lib/font-awesome-4/font-awesome.less',
+        'destination' => FCPATH.'assets/css/lib/font-awesome-4/font-awesome.min.css',
+        'compress' => true
+    ),
+
 );
