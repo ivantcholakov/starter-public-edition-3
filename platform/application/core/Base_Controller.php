@@ -11,6 +11,8 @@ class Base_Controller extends MY_Controller {
             ->helper('url')
             ->library('template')
         ;
+
+        $this->template->set_layout('site_example');
         
         $default_title = config_item('default_title');
         $default_description = config_item('default_description');

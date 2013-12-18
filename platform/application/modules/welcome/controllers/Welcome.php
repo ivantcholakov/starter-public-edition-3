@@ -13,7 +13,6 @@ class Welcome extends Base_Controller {
 
         $this->template
             ->title('Application Starter 3 Public Edition')
-            ->inject_partial('css', css('welcome.css'))
         ;
     }
 

@@ -1,10 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-    <div id="container">
-
-        <div id="body">
-
-            <h1 class="my_section">Application Starter 3 Public Edition by Ivan Tcholakov, 2013</h1>
+            <div class="page-header">
+                <h1>Application Starter 3 Public Edition</h1>
+            </div>
 
             <p>
                 Project repository: <a href="https://github.com/ivantcholakov/starter-public-edition-3/" target="_blank">https://github.com/ivantcholakov/starter-public-edition-3/</a>
@@ -25,6 +23,7 @@
 
                 <div>
                     <img id="captcha_image"
+                        class="img-thumbnail"
                         src="<?php echo $this->captcha->src.'?nocache='.rand(100000000, 999999999); ?>"
                         style="cursor: pointer;"
                         title="Click on the image if you want to change the proposed text."
@@ -34,9 +33,3 @@
                 <div id="captcha_test"></div>
 
             </p>
-
-        </div>
-
-        <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-
-    </div>
