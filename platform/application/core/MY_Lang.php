@@ -133,8 +133,9 @@ class MY_Lang extends MX_Lang {
         // Parse attributes:
         // i18n:title
         // i18n:alt
+        // i18n:placeholder
         $string = preg_replace_callback(
-            '/i18n:(title|alt)(\s*=\s*["\'])([^"\']+)(["\'])/im',
+            '/i18n:(title|alt|placeholder)(\s*=\s*["\'])([^"\']+)(["\'])/im',
             array($this, '_parse_i18n_attributes_callback'),
             $string
         );
