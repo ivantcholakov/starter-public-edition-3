@@ -246,7 +246,7 @@ or
 ```
 where $lang['dear'] = 'Dear Mr. %s %s,';
 
-Here is a way how to translate title, alt and placeholder attributes:
+Here is a way how to translate title, alt, placeholder and valie attributes:
 
 ```php
 <img src="..." i18n:title="click_me" />
