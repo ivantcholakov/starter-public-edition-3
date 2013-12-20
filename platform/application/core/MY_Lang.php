@@ -50,7 +50,7 @@ class MY_Lang extends MX_Lang {
 
                 $value = @ vsprintf($value, $param);
 
-            } elseif ($param != '') {
+            } else {
 
                 $value = sprintf($value, $param);
             }
