@@ -240,7 +240,7 @@ Then in your views you can use the following syntax:
 ```php
 <i18n>translate_this</i18n>
 ```
-or
+or with parameters
 ```php
 <i18n replacement="John,McClane">dear</i18n>
 ```
@@ -250,6 +250,10 @@ Here is a way how to translate title, alt, placeholder and valie attributes:
 
 ```php
 <img src="..." i18n:title="click_me" />
+```
+or with parameters
+```php
+<img src="..." i18n:title="dear|John,McClane" />
 ```
 
 You can override the global setting 'parse_i18n' within the controller by inserting the line:
