@@ -45,12 +45,23 @@ class MY_Lang extends MX_Lang {
         } else {
 
             $value = $this->language[$line];
+            $line_has_parameters = strpos($value, '%') !== false;
 
             if (is_array($param) && !empty($param)) {
+
+                if (!$line_has_parameters) {
+                    // Prepend missing parameters.
+                    $value = str_repeat('%s', count($param)).$value;
+                }
 
                 $value = @ vsprintf($value, $param);
 
             } else {
+
+                if (!$line_has_parameters && $param != '') {
+                    // Prepend the missing parameter.
+                    $value = '%s'.$value;
+                }
 
                 $value = sprintf($value, $param);
             }
