@@ -33,7 +33,6 @@ class Contact_map_widget_controller extends MY_Controller {
 
         $data = $this->settings->get(array(
             'contact_map',
-            'contact_show_map',
         ));
 
         // TODO: A workaround, 24-DEC-2013.
