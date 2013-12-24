@@ -70,12 +70,12 @@ class MY_Email extends CI_Email {
 
         if ($this->mailer_engine == 'phpmailer') {
 
-            // If your system uses class autoloading feature,
-            // then the following require statement would not be needed.
-            if (!class_exists('PHPMailer', false)) {
-                require_once APPPATH.'third_party/phpmailer/PHPMailerAutoload.php';
-            }
-            //
+            //// If your system uses class autoloading feature,
+            //// then the following require statement would not be needed.
+            //if (!class_exists('PHPMailer', false)) {
+            //    require_once APPPATH.'third_party/phpmailer/PHPMailerAutoload.php';
+            //}
+            ////
 
             $this->phpmailer = new PHPMailer();
             $this->phpmailer->PluginDir = APPPATH.'third_party/phpmailer/';
