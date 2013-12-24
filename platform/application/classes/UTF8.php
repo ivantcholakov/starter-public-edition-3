@@ -11,7 +11,7 @@
  */
 
 if (!defined('SYSPATH')) {
-    define('SYSPATH', COMMONPATH.'third_party/kohana/');
+    define('SYSPATH', APPPATH.'third_party/kohana/');
 }
 
 if (!defined('EXT')) {
