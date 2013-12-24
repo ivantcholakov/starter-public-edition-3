@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Common_Events_Contact_Form_Widget {
+class Events_Contact_Form_Widget {
 
     protected $ci;
     protected $settings;
