@@ -3,15 +3,15 @@
 /*
 | -------------------------------------------------------------------
 |  Auto-load Classes in PHP5 Way - A Location Map
-|  An Example:
+|
+|  An example:
 |  $autoload['classes'] = array(
-|      'PHPMailer' => APPPATH.'third_party/phpmailer/class.phpmailer.php',
+|      'Markdown_Parser' => APPPATH.'third_party/markdown/markdown.php',
 |  );
 | -------------------------------------------------------------------
 */
 
 $autoload['classes'] = array(
-    'PHPMailer' => APPPATH.'third_party/phpmailer/class.phpmailer.php',
     'Markdownify' => APPPATH.'third_party/markdownify/markdownify.php',
     'Markdownify_Extra' => APPPATH.'third_party/markdownify/markdownify_extra.php',
     'Markdown_Parser' => APPPATH.'third_party/markdown/markdown.php',

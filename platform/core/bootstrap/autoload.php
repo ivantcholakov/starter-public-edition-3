@@ -1,5 +1,6 @@
 <?php
 
+require APPPATH.'third_party/phpmailer/PHPMailerAutoload.php';
 require APPPATH.'third_party/htmlpurifier/library/HTMLPurifier/Bootstrap.php';
 
 spl_autoload_register('_common_autoloader');
