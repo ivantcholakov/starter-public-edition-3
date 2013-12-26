@@ -361,7 +361,10 @@ if ( ! function_exists('convert_accented_characters'))
 	 * @param	string	$str	Input string
 	 * @return	string
 	 */
-	function convert_accented_characters($str)
+	// Modified by Ivan Tcholakov, 26-DEC-2013.
+	//function convert_accented_characters($str)
+	function convert_accented_characters($str, $language = null)
+	//
 	{
 		static $array_from, $array_to;
 
