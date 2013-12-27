@@ -19,7 +19,7 @@ class Contact_form_widget_controller extends MY_Controller {
             ->helper('language')
             ->helper('url')
             ->helper('asset')
-            ->parser('i18n')
+            //->parser('i18n')
             ->language('ui')
             ->language('contact')
             ->language('mailer')
@@ -46,10 +46,12 @@ class Contact_form_widget_controller extends MY_Controller {
 
         $data['mailer_error_html'] = $this->load->view('messages_html', array('success' => false, 'message' => $this->lang->line('mailer_error').' (AJAX)'), true);
 
-        // TODO: A workaround, 24-DEC-2013.
-        //echo $this->i18n->parse('contact_form_widget', $data, TRUE);
-        echo $this->i18n->parse_string($this->load->view('contact_form_widget', $data, true), null, true);
-        //
+        //// TODO: A workaround, 24-DEC-2013.
+        ////echo $this->i18n->parse('contact_form_widget', $data, TRUE);
+        //echo $this->i18n->parse_string($this->load->view('contact_form_widget', $data, true), null, true);
+        ////
+
+        $this->load->view('contact_form_widget', $data, false, 'i18n');
     }
 
 }
