@@ -341,8 +341,10 @@ class Template
             } else {
                 $title = $title_segments;
             }
+
             $this->_title = trim($this->_title) != '' ? $this->_title.$this->_title_separator.$title : $title;
         }
+
         return $this;
     }
 
@@ -784,8 +786,9 @@ class Template
         // Only bother looking in themes if there is a theme
         if ( ! empty($this->_theme))
         {
-            $location        = $this->get_theme_path();
-            $theme_views    = array(
+            $location = $this->get_theme_path();
+
+            $theme_views = array(
                 $this->get_views_path(true) . 'modules/' . $this->_module . '/' . $view,
                 // This allows build('pages/page') to still overload same as build('page')
                 $this->get_views_path(true) . 'modules/' . $view,
