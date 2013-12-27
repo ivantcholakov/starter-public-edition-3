@@ -35,6 +35,7 @@ Features
 --------
 
 * CodeIgniter 3.0-dev, http://codeigniter.com/, https://github.com/EllisLab/CodeIgniter
+* On a web-server you can place your site (www folder) within a subdirectory.
 * Support for the old CI 2.x class/file name convention. When you port your older libraries, models, and controllers,
 you would not be forced to rename them according to the new strict "ucfirst" naming convention.
 * Native PHP session support by default.
