@@ -372,6 +372,7 @@ php cli.php less compile
 into platform/applications/{application_name}/database.
 The copied files can be modified/customized. See https://github.com/ivantcholakov/starter-public-edition-4/issues/5
 * CodeIgniter Cache Helper, https://github.com/stevenbenner/codeigniter-cache-helper
+* auto_link() helper accepts attributes, https://github.com/EllisLab/CodeIgniter/wiki/auto-link
 
 Credits
 -------
