@@ -16,20 +16,3 @@
             <h2>Self-Diagnostics</h2>
 
             <p><?php echo $diagnostics; ?></p>
-
-            <h2>Captcha Test</h2>
-
-            <p>
-
-                <div>
-                    <img id="captcha_image"
-                        class="img-thumbnail"
-                        src="<?php echo $this->captcha->src.'?nocache='.rand(100000000, 999999999); ?>"
-                        style="cursor: pointer;"
-                        title="Click on the image if you want to change the proposed text."
-                    />
-                </div>
-
-                <div id="captcha_test"></div>
-
-            </p>

@@ -20,8 +20,6 @@ class Welcome extends Base_Controller {
 
         // This is just a demo page, code is done in ad-hoc manner.
 
-        $this->load->library('kcaptcha', null, 'captcha');
-
         // Collecting diagnostics data.
 
         $writable_folders = array(
@@ -73,34 +71,7 @@ class Welcome extends Base_Controller {
 
         $this->template
             ->set('diagnostics', $diagnostics)
-            ->set_partial('scripts', 'welcome_scripts')
             ->build('welcome_message');
-    }
-
-    public function test_captcha() {
-
-        if (!IS_AJAX_REQUEST) {
-            show_404();
-        }
-
-        $this->load->library('kcaptcha', null, 'captcha');
-
-        $valid_user_input = $this->captcha->get_keystring();
-        $invalid_user_input = $this->captcha->generate_keystring();
-
-        ob_start();
-?>
-
-                Test user input <?php echo $valid_user_input; ?> : <strong><?php echo $this->captcha->valid($valid_user_input) ? 'valid' : 'invalid'; ?></strong>
-                <br />
-                Test user input <?php echo $invalid_user_input; ?> : <strong><?php echo $this->captcha->valid($invalid_user_input) ? 'valid' : 'invalid'; ?></strong>
-
-<?php
-        $output = ob_get_contents();
-        ob_end_clean();
-
-        $this->output->set_header('Content-type: text/html; charset=utf-8');
-        $this->output->set_output($output);
     }
 
 }
