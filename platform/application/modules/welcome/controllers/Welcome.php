@@ -20,6 +20,9 @@ class Welcome extends Base_Controller {
 
         // This is just a demo page, code is done in ad-hoc manner.
 
+        $yes = '<span style="color: green;">Yes</span>';
+        $no  = '<span style="color: red;">No</span>';
+
         // Collecting diagnostics data.
 
         $writable_folders = array(
@@ -56,7 +59,7 @@ class Welcome extends Base_Controller {
             }
         }
 
-        $diagnostics[] = '<strong>Mailer:</strong>';
+        $diagnostics[] = '<br /><strong>Mailer:</strong>';
 
         if ($mailer_enabled) {
 
@@ -66,6 +69,12 @@ class Welcome extends Base_Controller {
 
             $diagnostics[] = 'Mailer service - <span style="color: red">disabled. Check $config[\'mailer_enabled\'] option within platform/application/config/config_site.php. Check also the mailer settings within platform/application/config/email.php.</span>';
         }
+
+        $diagnostics[] = '<br /><strong>UTF-8 support:</strong>';
+        $diagnostics[] = 'IS_UTF8_CHARSET - '.(IS_UTF8_CHARSET ? $yes : $no);
+        $diagnostics[] = 'MBSTRING_INSTALLED - '.(MBSTRING_INSTALLED ? $yes : $no);
+        $diagnostics[] = 'ICONV_INSTALLED - '.(ICONV_INSTALLED ? $yes : $no);
+        $diagnostics[] = 'PCRE_UTF8_INSTALLED - '.(PCRE_UTF8_INSTALLED ? $yes : $no);
 
         $diagnostics = implode('<br />', $diagnostics);
 
