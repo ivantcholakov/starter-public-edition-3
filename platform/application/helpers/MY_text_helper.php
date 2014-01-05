@@ -70,3 +70,43 @@ if (!function_exists('convert_accented_characters') && IS_UTF8_CHARSET) {
     }
 
 }
+
+if (!function_exists('ellipsize') && IS_UTF8_CHARSET)
+{
+    /**
+     * Ellipsize String (UTF-8 compatible version)
+     *
+     * This function will strip tags from a string, split it at its max_length and ellipsize
+     *
+     * @param   string      string to ellipsize
+     * @param   int         max length of string
+     * @param   mixed       int (1|0) or float, .5, .2, etc for position to split
+     * @param   string      ellipsis ; Default '...'
+     * @return  string      ellipsized string
+     */
+    function ellipsize($str, $max_length, $position = 1, $ellipsis = '&hellip;')
+    {
+        // Strip tags
+        $str = trim(strip_tags($str));
+
+        // Is the string long enough to ellipsize?
+        if (UTF8::strlen($str) <= $max_length)
+        {
+            return $str;
+        }
+
+        $beg = UTF8::substr($str, 0, floor($max_length * $position));
+        $position = ($position > 1) ? 1 : $position;
+
+        if ($position === 1)
+        {
+            $end = UTF8::substr($str, 0, -($max_length - UTF8::strlen($beg)));
+        }
+        else
+        {
+            $end = UTF8::substr($str, -($max_length - UTF8::strlen($beg)));
+        }
+
+        return $beg.$ellipsis.$end;
+    }
+}
