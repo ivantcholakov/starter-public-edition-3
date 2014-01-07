@@ -7,8 +7,6 @@ class Base_Controller extends MY_Controller {
         parent::__construct();
 
         $this->load
-            ->library('settings')
-            ->helper('url')
             ->library('template')
         ;
 

@@ -29,7 +29,13 @@ class MY_Controller extends MX_Controller {
         // See http://devzone.zend.com/1441/zend-framework-and-translation/
         $this->parse_i18n = (bool) $this->config->item('parse_i18n');
 
-        $this->load->library('registry');
+        $this->load
+            ->library('registry')
+            ->library('settings')
+            ->helper('url')
+            ->helper('language')
+            ->language('ui')
+        ;
     }
 
     // --------------------------------------------------------------
