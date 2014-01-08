@@ -74,7 +74,7 @@
 */
 
 $route['default_controller'] = 'welcome';
-$route['404_override'] = '';
+$route['404_override'] = 'error_404';
 $route['translate_uri_dashes'] = TRUE;
 
 /* End of file routes.php */
