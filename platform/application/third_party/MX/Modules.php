@@ -235,7 +235,7 @@ class Modules
                     return array($fullpath, ucfirst($file));
                 }
 
-                if (is_file($fullpath.$file_ext)) { 
+                if (is_file($fullpath.$file_ext)) {
                     return array($fullpath, $file);
                 }
             }
@@ -289,4 +289,5 @@ class Modules
             }
         }
     }
+
 }

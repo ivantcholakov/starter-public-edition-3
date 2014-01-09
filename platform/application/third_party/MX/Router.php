@@ -146,6 +146,7 @@ class MX_Router extends CI_Router
     }
 
     public function set_class($class) {
+
         $this->class = $class.$this->config->item('controller_suffix');
     }
 

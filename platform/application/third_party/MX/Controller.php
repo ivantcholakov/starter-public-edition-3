@@ -58,4 +58,5 @@ class MX_Controller
 
         return CI::$APP->$class;
     }
+
 }

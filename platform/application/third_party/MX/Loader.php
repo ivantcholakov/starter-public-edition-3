@@ -198,6 +198,7 @@ class MX_Loader extends CI_Loader
     public function dbforge($db = NULL, $return = FALSE)
     {
         $CI =& get_instance();
+
         if ( ! is_object($db) OR ! ($db instanceof CI_DB))
         {
             class_exists('CI_DB', FALSE) OR $this->database();
@@ -317,6 +318,7 @@ class MX_Loader extends CI_Loader
 
     /** Load a module language file **/
     public function language($langfile = array(), $idiom = '', $return = FALSE, $add_suffix = TRUE, $alt_path = '') {
+
         // Modified by Ivan Tcholakov, 12-DEC-2013.
         // See https://github.com/EllisLab/CodeIgniter/issues/2165
         //return CI::$APP->lang->load($langfile, $idiom, $return, $add_suffix, $alt_path, $this->_module);
@@ -511,6 +513,7 @@ class MX_Loader extends CI_Loader
         }
 
         $CI =& get_instance();
+
         if (isset($CI->$name))
         {
             show_error('The model name you are loading is the name of a resource that is already being used: '.$name);
@@ -734,7 +737,9 @@ class MX_Loader extends CI_Loader
 
         log_message('debug', 'File loaded: '.$_ci_path);
 
-        if ($_ci_return == TRUE) return ob_get_clean();
+        if ($_ci_return == TRUE) {
+            return ob_get_clean();
+        }
 
         if (ob_get_level() > $this->_ci_ob_level + 1) {
             ob_end_flush();

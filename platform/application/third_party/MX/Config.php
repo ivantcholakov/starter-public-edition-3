@@ -74,4 +74,5 @@ class MX_Config extends CI_Config
             return $this->item($file);
         }
     }
+
 }
