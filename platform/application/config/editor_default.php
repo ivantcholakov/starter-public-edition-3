@@ -9,7 +9,7 @@ $config['config']['contentsLanguage'] = 'en';
 $config['config']['contentsLangDirection'] = 'ltr';
 $config['config']['contentsCss'] = array();
 $config['config']['contentsCss'][] = BASE_URL.'assets/css/lib/bootstrap-3/bootstrap.css';
-$config['config']['contentsCss'][] = BASE_URL.'assets/css/editor.css';
+$config['config']['contentsCss'][] = BASE_URL.'assets/css/lib/editor.css';
 
 $config['config']['width'] = '';
 $config['config']['height'] = '100';
