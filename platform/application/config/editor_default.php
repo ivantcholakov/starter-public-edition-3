@@ -8,7 +8,7 @@ $config['config']['defaultLanguage'] = 'en';
 $config['config']['contentsLanguage'] = 'en';
 $config['config']['contentsLangDirection'] = 'ltr';
 $config['config']['contentsCss'] = array();
-$config['config']['contentsCss'][] = BASE_URL.'assets/css/lib/bootstrap-2/bootstrap.css';
+$config['config']['contentsCss'][] = BASE_URL.'assets/css/lib/bootstrap-3/bootstrap.css';
 $config['config']['contentsCss'][] = BASE_URL.'assets/css/editor.css';
 
 $config['config']['width'] = '';
