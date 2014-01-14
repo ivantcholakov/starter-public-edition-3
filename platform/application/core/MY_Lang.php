@@ -20,7 +20,7 @@ class MY_Lang extends MX_Lang {
      * @param       bool            $log_errors     Whether to log an error message if the line is not found
      * @return      string                          Translation
      */
-    public function line($line = '', $param = NULL, $log_errors = TRUE) {
+    public function line($line, $param = NULL, $log_errors = TRUE) {
 
         $line = (string) $line;
 
