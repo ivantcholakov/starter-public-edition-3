@@ -14,6 +14,7 @@ class Email_test_controller extends Base_Controller {
         $this->load
             ->language('mailer')
             ->library('kcaptcha', null, 'captcha')
+            ->parser()
         ;
 
         $this->lang->load('captcha', '', FALSE, TRUE, '', 'captcha');
@@ -57,8 +58,19 @@ class Email_test_controller extends Base_Controller {
 
         $this->captcha->clear();
 
+        extract(Modules::run('email/test/get_message'));
+
+        $has_logo = file_exists(FCPATH.'apple-touch-icon-precomposed.png');
+
+        $body = $this->parser->parse_string(
+            $body,
+            array(/* 'has_logo' => $has_logo, */ 'has_logo' => false, 'logo_src' => base_url('apple-touch-icon-precomposed.png')),
+            true,
+            'mustache'
+        );
+        
         $this->template
-            ->set(compact('success', 'messages'))
+            ->set(compact('success', 'messages', 'subject', 'body'))
             ->enable_parser_body('i18n')
             ->build('email_test');
     }
