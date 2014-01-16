@@ -141,14 +141,17 @@ $config['subclass_prefix'] = 'MY_';
 | Allowed URL Characters
 |--------------------------------------------------------------------------
 |
-| This lets you specify with a regular expression which characters are permitted
-| within your URLs.  When someone tries to submit a URL with disallowed
-| characters they will get a warning message.
+| This lets you specify which characters are permitted within your URLs.
+| When someone tries to submit a URL with disallowed characters they will
+| get a warning message.
 |
 | As a security measure you are STRONGLY encouraged to restrict URLs to
 | as few characters as possible.  By default only these are allowed: a-z 0-9~%.:_-
 |
 | Leave blank to allow all characters -- but only if you are insane.
+|
+| The configured value is actually a regular expression character group
+| and it will be executed as: ! preg_match('/^[<permitted_uri_chars>]+$/i
 |
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
@@ -312,18 +315,18 @@ $config['sess_time_to_update']  = 300;
 | Cookie Related Variables
 |--------------------------------------------------------------------------
 |
-| 'cookie_prefix' = Set a prefix if you need to avoid collisions
-| 'cookie_domain' = Set to .your-domain.com for site-wide cookies
-| 'cookie_path'   =  Typically will be a forward slash
-| 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
+| 'cookie_prefix'   = Set a prefix if you need to avoid collisions
+| 'cookie_domain'   = Set to .your-domain.com for site-wide cookies
+| 'cookie_path'     =  Typically will be a forward slash
+| 'cookie_secure'   =  Cookies will only be set if a secure HTTPS connection exists.
 | 'cookie_httponly' = Cookie will only be accessible via HTTP(S) (no javascript) 
 |
 */
-$config['cookie_prefix'] = '';
+$config['cookie_prefix']    = '';
 $config['cookie_domain']    = (IS_CLI || $_SERVER['SERVER_NAME'] == 'localhost') ? '' : $_SERVER['SERVER_NAME'];
 $config['cookie_path']      = $DETECT_URL['base_uri'];
-$config['cookie_secure'] = FALSE;
-$config['cookie_httponly'] = FALSE;
+$config['cookie_secure']    = FALSE;
+$config['cookie_httponly']  = FALSE;
 
 /*
 |--------------------------------------------------------------------------
