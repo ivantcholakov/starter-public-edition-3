@@ -397,38 +397,39 @@ $BM->mark('loading_time:_base_classes_end');
 function _find_controller_file($class, $directory, & $found_class, & $found_path) {
 
     global $CFG;
-
     $suffix_pattern = '/'.preg_quote($CFG->config['controller_suffix'], '/').'$/';
+
+    $search_dir = APPPATH.'controllers/'.$directory;
 
     $found_class = ucfirst($class);
 
-    if (file_exists(APPPATH.'controllers/'.$directory.$found_class.'.php')) {
+    if (file_exists($search_dir.$found_class.'.php')) {
 
-        $found_path = APPPATH.'controllers/'.$directory.$found_class.'.php';
+        $found_path = $search_dir.$found_class.'.php';
         return true;
     }
 
     $found_class = preg_replace($suffix_pattern, '', $found_class);
 
-    if (file_exists(APPPATH.'controllers/'.$directory.$found_class.'.php')) {
+    if (file_exists($search_dir.$found_class.'.php')) {
 
-        $found_path = APPPATH.'controllers/'.$directory.$found_class.'.php';
+        $found_path = $search_dir.$found_class.'.php';
         return true;
     }
 
     $found_class = lcfirst($class);
 
-    if (file_exists(APPPATH.'controllers/'.$directory.$found_class.'.php')) {
+    if (file_exists($search_dir.$found_class.'.php')) {
 
-        $found_path = APPPATH.'controllers/'.$directory.$found_class.'.php';
+        $found_path = $search_dir.$found_class.'.php';
         return true;
     }
 
     $found_class = preg_replace($suffix_pattern, '', $found_class);
 
-    if (file_exists(APPPATH.'controllers/'.$directory.$found_class.'.php')) {
+    if (file_exists($search_dir.$found_class.'.php')) {
 
-        $found_path = APPPATH.'controllers/'.$directory.$found_class.'.php';
+        $found_path = $search_dir.$found_class.'.php';
         return true;
     }
 
