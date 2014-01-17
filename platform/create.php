@@ -387,10 +387,6 @@ function &ci()
 }
 //
 
-if (file_exists(APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php'))
-{
-    require_once APPPATH.'core/'.$CFG->config['subclass_prefix'].'Controller.php';
-}
 
 // Set a mark point for benchmarking
 $BM->mark('loading_time:_base_classes_end');
