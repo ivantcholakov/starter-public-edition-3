@@ -530,11 +530,19 @@ class CI_Router {
 	 * Set directory name
 	 *
 	 * @param	string	$dir	Directory name
+	 * @param	bool	$appent	Whether we're appending rather then setting the full value
 	 * @return	void
 	 */
-	public function set_directory($dir)
+	public function set_directory($dir, $append = FALSE)
 	{
-		$this->directory = str_replace(array('/', '.'), '', $dir).'/';
+		if ($append !== TRUE OR empty($this->directory))
+		{
+			$this->directory = str_replace('.', '', trim($dir, '/')).'/';
+		}
+		else
+		{
+			$this->directory .= str_replace('.', '', trim($dir, '/')).'/';
+		}
 	}
 
 	// --------------------------------------------------------------------
