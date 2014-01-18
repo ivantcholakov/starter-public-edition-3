@@ -35,6 +35,12 @@ require dirname(__FILE__).'/Modules.php';
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  **/
+
+// SEO Friendly URLS in CodeIgniter 2.0 + HMVC
+// http://www.einsteinseyes.com/blog/techno-babble/seo-friendly-urls-in-codeigniter-2-0-hmvc/
+
+// Controller location logic has been slightly modified by Ivan Tcholakov, 2012.
+
 class MX_Router extends CI_Router
 {
     protected $module;
@@ -77,77 +83,188 @@ class MX_Router extends CI_Router
 
         $this->module = '';
         $this->directory = '';
-        $ext = $this->config->item('controller_suffix').'.php';
 
-        /* use module route if available */
-        if (isset($segments[0]) AND $routes = Modules::parse_routes($segments[0], implode('/', $segments))) {
+        // Use module route if available.
+        if (isset($segments[0]) && $routes = Modules::parse_routes($segments[0], implode('/', $segments))) {
             $segments = $routes;
         }
 
-        /* get the segments array elements */
-        list($module, $directory, $controller) = array_pad($segments, 3, NULL);
+        // Get the segments array elements.
+        list($segment0, $segment1, $segment2) = array_pad($segments, 3, NULL);
 
-        /* check modules */
+        $segment0 = str_replace('-', '_', $segment0);
+        $segment1 = str_replace('-', '_', $segment1);
+        $segment2 = str_replace('-', '_', $segment2);
+
+        // Check modules.
         foreach (Modules::$locations as $location => $offset) {
 
-            /* module exists? */
-            if (is_dir($source = $location.$module.'/controllers/')) {
+            // Module exists?
+            if (is_dir($source = $location.$segment0.'/controllers/')) {
 
-                $this->module = $module;
-                $this->directory = $offset.$module.'/controllers/';
+                $is_module_default_controller = false;
+                $is_module_controller = false;
+                $is_module_directory = false;
+                $is_module_directory_default_controller = false;
+                $is_module_directory_controller = false;
 
-                /* module sub-controller exists? */
-                if ($directory AND is_file($source.$directory.$ext)) {
-                    return array_slice($segments, 1);
+                $subdirectory = '';
+
+                $this->module = $segment0;
+                $this->directory = $offset.$segment0.'/controllers/';
+
+                // module/controller
+                if (
+                        $segment1 
+                        &&
+                        (
+                            $this->is_controller($source.ucfirst($segment1))
+                            ||
+                            $this->is_controller($source.$segment1)
+                        )
+                    ) {
+                    $is_module_controller = true;
                 }
 
-                /* module sub-directory exists? */
-                if ($directory AND is_dir($source.$directory.'/')) {
+                // module/directory
+                if ($segment1 && is_dir($source.$segment1.'/')) {
 
-                    $source = $source.$directory.'/';
-                    $this->directory .= $directory.'/';
+                    $is_module_directory = true;
 
-                    /* module sub-directory controller exists? */
-                    if (is_file($source.$directory.$ext)) {
-                        return array_slice($segments, 1);
+                    $source = $source.$segment1.'/';
+                    $subdirectory = $this->directory.$segment1.'/';
+
+                    // module/directory (deault_controller = directory)
+                    if (
+                            $this->is_controller($source.ucfirst($segment1))
+                            ||
+                            $this->is_controller($source.$segment1)
+                        ) {
+                        $is_module_directory_default_controller = true;
                     }
 
-                    /* module sub-directory sub-controller exists? */
-                    if ($controller AND is_file($source.$controller.$ext))    {
+                    // module/directory/controller
+                    if (
+                            $segment2
+                            &&
+                            (
+                                $this->is_controller($source.ucfirst($segment2))
+                                ||
+                                $this->is_controller($source.$segment2)
+                            )
+                        ) {
+                        $is_module_directory_controller = true;
+                    }
+                }
+
+                // module (deault_controller = module)
+                if (
+                        $this->is_controller($source.ucfirst($segment0))
+                        ||
+                        $this->is_controller($source.$segment0)
+                    ) {
+                    $is_module_default_controller = true;
+                }
+
+                /*
+                // This is the original logic.
+                if ($is_module_controller) {
+                    return array_slice($segments, 1);
+                } elseif ($is_module_directory) {
+                    $this->directory = $subdirectory;
+                    if ($is_module_directory_default_controller) {
+                        return array_slice($segments, 1);
+                    } elseif ($is_module_directory_controller) {
                         return array_slice($segments, 2);
                     }
-                }
-
-                /* module controller exists? */
-                if (is_file($source.$module.$ext)) {
+                } elseif ($is_module_default_controller) {
                     return $segments;
                 }
+                */
+
+                // This is the modified logic, Ivan Tcholakov, 16-JUN-2012.
+                $result = false;
+
+                if ($is_module_controller && $is_module_directory && ($is_module_directory_default_controller || $is_module_directory_controller)) {
+                    $this->directory = $subdirectory;
+                    if ($is_module_directory_default_controller) {
+                        $result = array_slice($segments, 1);
+                    } elseif ($is_module_directory_controller) {
+                        $result = array_slice($segments, 2);
+                    }
+                } elseif ($is_module_controller) {
+                    $result = array_slice($segments, 1);
+                } elseif ($is_module_directory) {
+                    $this->directory = $subdirectory;
+                    if ($is_module_directory_controller) {
+                        $result = array_slice($segments, 2);
+                    } elseif ($is_module_directory_default_controller) {
+                        $result = array_slice($segments, 1);
+                    }
+                } elseif ($is_module_default_controller) {
+                    $result = $segments;
+                }
+
+                if ($result !== false) {
+                    return $result;
+                }
+                //
             }
         }
 
-        /* application controller exists? */
-        if (is_file(APPPATH.'controllers/'.$module.$ext)) {
+        // Application controller exists?
+        if (
+                $this->is_controller(APPPATH.'controllers/'.ucfirst($segment0))
+                ||
+                $this->is_controller(APPPATH.'controllers/'.$segment0)
+            ) {
             return $segments;
         }
 
-        /* application sub-directory controller exists? */
-        if ($directory AND is_file(APPPATH.'controllers/'.$module.'/'.$directory.$ext)) {
-
-            $this->directory = $module.'/';
+        // Application sub-directory controller exists?
+        if (
+                $segment1
+                && 
+                (
+                    $this->is_controller(APPPATH.'controllers/'.$segment0.'/'.ucfirst($segment1))
+                    ||
+                    $this->is_controller(APPPATH.'controllers/'.$segment0.'/'.$segment1)
+                )
+            ) {
+            $this->directory = $segment0.'/';
             return array_slice($segments, 1);
         }
 
-        /* application sub-directory default controller exists? */
-        if (is_file(APPPATH.'controllers/'.$module.'/'.$this->default_controller.$ext)) {
-
-            $this->directory = $module.'/';
+        // Application sub-directory default controller exists?
+        if (
+                $this->is_controller(APPPATH.'controllers/'.$segment0.'/'.ucfirst($this->default_controller))
+                ||
+                $this->is_controller(APPPATH.'controllers/'.$segment0.'/'.$this->default_controller)
+            ) {
+            $this->directory = $segment0.'/';
             return array($this->default_controller);
         }
     }
 
     public function set_class($class) {
 
-        $this->class = $class.$this->config->item('controller_suffix');
+        //$this->class = $class.$this->config->item('controller_suffix');
+        $this->class = str_replace('-', '_', $class).$this->config->item('controller_suffix');
+    }
+
+    public function set_method($method) {
+        $this->method = str_replace('-', '_', $method);
+    }
+
+    protected function is_controller($base_path) {
+
+        static $ext;
+
+        if (!isset($ext)) {
+            $ext = $this->config->item('controller_suffix').'.php';
+        }
+
+        return is_file($base_path.$ext) || is_file($base_path.'.php');
     }
 
 }
