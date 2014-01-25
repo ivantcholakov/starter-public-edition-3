@@ -290,6 +290,18 @@ A contact form has been created that with minimal adaptation you may use directl
 If you have no previous experience with CodeIgniter, get familiar with its User Guide first:
 http://ellislab.com/codeigniter/user-guide/
 
+Real Life Usage
+---------------
+
+With a little bit older version of this platform the following sites have been created (Bulgarian language only):
+
+* http://art-tochka.com/ - an online store, gifts
+* http://hop-mebeli.com/ - an online store, furniture
+* http://salonite.eu/ - an online catalog, beauty salons
+* http://detskigradini.net/ - an online catalog, kindergartens
+* http://sportiada.com/ - a online catalog, sport centers
+* A system for students accomodation, not publicly available
+
 Credits
 -------
 
