@@ -106,11 +106,13 @@ class MY_Config extends MX_Config {
      *
      * Returns base_url . index_page [. uri_string]
      *
-     * @access    public
-     * @param     mixed    the URI string
+     * @uses        CI_Config::_uri_string()
+     *
+     * @param       string|string[]    $uri         URI string or an array of segments
+     * @param       string              $protocol
      * @return    string
      */
-    public function site_url($uri = '')
+    public function site_url($uri = '', $protocol = NULL)
     {
         // Added by Ivan Tcholakov, 12-OCT-2013.
         if (is_array($uri)) {
@@ -118,9 +120,11 @@ class MY_Config extends MX_Config {
         }
         //
 
-        if (empty($uri))
+        $base_url = $this->slash_item('base_url');
+
+        if (isset($protocol))
         {
-            return $this->slash_item('base_url').$this->item('index_page');
+            $base_url = $protocol.substr($base_url, strpos($base_url, '://'));
         }
 
         $uri = $this->_uri_string($uri);
@@ -141,14 +145,14 @@ class MY_Config extends MX_Config {
                 }
             }
 
-            return $this->slash_item('base_url').$this->slash_item('index_page').$uri;
+            return $base_url.$this->slash_item('index_page').$uri;
         }
         elseif (strpos($uri, '?') === FALSE)
         {
             $uri = '?'.$uri;
         }
 
-        return $this->slash_item('base_url').$this->item('index_page').$uri;
+        return $base_url.$this->item('index_page').$uri;
     }
 
     // --------------------------------------------------------------------
