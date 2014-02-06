@@ -304,8 +304,8 @@ With a little bit older version of this platform the following sites have been c
 * http://hop-mebeli.com/ - an online store, furniture
 * http://salonite.eu/ - an online catalog, beauty salons
 * http://detskigradini.net/ - an online catalog, kindergartens
-* http://sportiada.com/ - a online catalog, sport centers
-* A system for students accomodation, not publicly available
+* http://sportiada.com/ - an online catalog, sport centers
+* a system for students accomodation, not publicly available
 
 Credits
 -------
