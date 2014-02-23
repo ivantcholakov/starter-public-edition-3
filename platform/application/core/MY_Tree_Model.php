@@ -200,12 +200,12 @@ class MY_Tree_Model extends MY_Model {
         if (!is_array($select)) {
 
             $select = trim($select);
-            $select = $select == '' ? '*' : $select;
+            $select = $select == '' ? $this->_table.'.*' : $select;
             $select = explode(',', $select);
 
         } elseif (empty($select)) {
 
-            $select = array('*');
+            $select = array($this->_table.'.*');
         }
 
         $select = array_merge(
