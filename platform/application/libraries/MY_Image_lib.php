@@ -25,7 +25,7 @@ class MY_Image_lib extends CI_Image_lib
         {
             if ($this->source_image !== $this->new_image && @copy($this->full_src_path, $this->full_dst_path))
             {
-                @chmod($this->full_dst_path, FILE_WRITE_MODE);
+                @chmod($this->full_dst_path, 0666);
             }
 
             return TRUE;
@@ -68,13 +68,13 @@ class MY_Image_lib extends CI_Image_lib
          */
         if ($this->image_library === 'gd2' && function_exists('imagecreatetruecolor'))
         {
-            $create    = 'imagecreatetruecolor';
-            $copy    = 'imagecopyresampled';
+            $create = 'imagecreatetruecolor';
+            $copy   = 'imagecopyresampled';
         }
         else
         {
-            $create    = 'imagecreate';
-            $copy    = 'imagecopyresized';
+            $create = 'imagecreate';
+            $copy   = 'imagecopyresized';
         }
 
         $dst_img = $create($this->width, $this->height);
@@ -112,7 +112,7 @@ class MY_Image_lib extends CI_Image_lib
         {
             $this->image_display_gd($dst_img);
         }
-        elseif ( ! $this->image_save_gd($dst_img)) // Or save it
+        elseif ( ! $this->image_save_gd($dst_img)) // ... or save it
         {
             return FALSE;
         }
@@ -121,8 +121,8 @@ class MY_Image_lib extends CI_Image_lib
         imagedestroy($dst_img);
         imagedestroy($src_img);
 
-        // Set the file to 777
-        @chmod($this->full_dst_path, FILE_WRITE_MODE);
+        // Set the file to 666
+        @chmod($this->full_dst_path, 0666);
 
         return TRUE;
     }
