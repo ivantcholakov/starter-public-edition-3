@@ -14,6 +14,8 @@ class Welcome extends Base_Controller {
         $this->template
             ->title('Application Starter 3 Public Edition')
         ;
+
+        $this->registry->set('nav', 'home');
     }
 
     public function index() {
