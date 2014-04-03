@@ -597,8 +597,8 @@ if (NORMAL_MVC_EXECUTION) {
 
 } else {
 
-    require APPPATH.'controllers/'.$class.'.php';
-
+    $found_path = APPPATH.'controllers/'.$class.'.php';
+    require $found_path;
 }
 
 //--------------------------------------------------------------------------
@@ -620,6 +620,11 @@ $EXT->call_hook('pre_controller');
 $BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_start');
 
 $CI = new $class();
+
+// Added by Ivan Tcholakov, 03-APR-2014.
+$CI->path = realpath($found_path);
+Modules::$registry[strtolower($CI->path)] = $CI;
+//
 
 /*
  * ------------------------------------------------------
