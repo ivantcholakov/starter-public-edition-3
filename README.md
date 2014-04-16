@@ -286,6 +286,7 @@ The copied files can be modified/customized. See https://github.com/ivantcholako
 * jQuery Validation Plugin, http://jqueryvalidation.org/
 * Extended JavaScript regular expressions XRegExp, http://xregexp.com/
 * An icon subset of flags from GoSquared, https://www.gosquared.com/resources/flag-icons/
+* Bootstrap Vertical Tabs, https://github.com/dbtek/bootstrap-vertical-tabs
 
 The Playground
 --------------
