@@ -287,6 +287,7 @@ The copied files can be modified/customized. See https://github.com/ivantcholako
 * Extended JavaScript regular expressions XRegExp, http://xregexp.com/
 * An icon subset of flags from GoSquared, https://www.gosquared.com/resources/flag-icons/
 * Bootstrap Vertical Tabs, https://github.com/dbtek/bootstrap-vertical-tabs
+* Jasny Bootstrap, The missing components for your favorite front-end framework, http://jasny.github.io/bootstrap/, https://github.com/jasny/bootstrap
 
 The Playground
 --------------
