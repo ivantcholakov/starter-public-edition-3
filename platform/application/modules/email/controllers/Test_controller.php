@@ -49,6 +49,9 @@ class Test_controller extends MY_Controller {
             );
         }
 
+        $this->load->library('email');
+        $body = $this->email->full_html($subject, $body);
+
         return Events::trigger('email', compact('subject', 'body', 'attach', 'to'));
     }
 
