@@ -7,6 +7,7 @@ if (!function_exists('base_uri')) {
 
         return get_instance()->config->base_uri($uri);
     }
+
 }
 
 if (!function_exists('site_uri')) {
@@ -16,6 +17,69 @@ if (!function_exists('site_uri')) {
 
         return get_instance()->config->site_uri($uri);
     }
+
+}
+
+if (!function_exists('to_https')) {
+
+    // Added by Ivan Tcholakov, 08-JUN-2014.
+    // Builds and returns the https version (SSL) of the input URL.
+    function to_https($url, $port = null) {
+
+        return http_build_url($url, array('scheme' => 'https', 'port' => $port == '' ? 443 : (int) $port));
+    }
+
+}
+
+if (!function_exists('to_http')) {
+
+    // Added by Ivan Tcholakov, 08-JUN-2014.
+    // Builds and returns the http version (non-SSL) of the input URL.
+    function to_http($url, $port = null) {
+
+        return http_build_url($url, array('scheme' => 'http', 'port' => $port == '' ? 80 : (int) $port));
+    }
+
+}
+
+if (!function_exists('force_https')) {
+
+    // Added by Ivan Tcholakov, 08-JUN-2014.
+    // Forces redirection to the https version of the current URL (forces SSL).
+    function force_https($port = null) {
+
+        if (!is_https()) {
+
+            $ci = get_instance();
+
+            if (isset($ci->session) && is_object($ci->session)) {
+                $ci->session->keep_flashdata();
+            }
+
+            redirect(to_https(CURRENT_URL,  $port));
+        }
+    }
+
+}
+
+if (!function_exists('force_http')) {
+
+    // Added by Ivan Tcholakov, 08-JUN-2014.
+    // Forces redirection to the http version of the current URL (forces non-SSL).
+    function force_http($port = null) {
+
+        if (is_https()) {
+
+            $ci = get_instance();
+
+            if (isset($ci->session) && is_object($ci->session)) {
+                $ci->session->keep_flashdata();
+            }
+
+            redirect(to_http(CURRENT_URL,  $port));
+        }
+    }
+
 }
 
 if (!function_exists('url_add_params')) {
