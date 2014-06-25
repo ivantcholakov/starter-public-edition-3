@@ -8,7 +8,8 @@ $config['config']['defaultLanguage'] = 'en';
 $config['config']['contentsLanguage'] = 'en';
 $config['config']['contentsLangDirection'] = 'ltr';
 $config['config']['contentsCss'] = array();
-$config['config']['contentsCss'][] = BASE_URL.'assets/css/lib/bootstrap-3/bootstrap.css';
+$config['config']['contentsCss'][] = BASE_URL.'assets/css/lib/bootstrap-3/bootstrap.min.css';
+$config['config']['contentsCss'][] = BASE_URL.'assets/css/lib/font-awesome-4/font-awesome.min.css';
 $config['config']['contentsCss'][] = BASE_URL.'assets/css/lib/editor.css';
 
 $config['config']['width'] = '';
