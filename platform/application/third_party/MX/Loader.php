@@ -1203,6 +1203,13 @@ class MX_Loader extends CI_Loader
         $this->_module = $module;
     }
 
+    // Added by Ivan Tcholakov, 25-JUN-2014.
+    // Use this accessor method for debugging purposes.
+    public function get_module() {
+
+        return $this->_module;
+    }
+
 }
 
 /** load the CI class for Modular Separation **/
