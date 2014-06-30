@@ -172,7 +172,7 @@ class CI_Image_lib {
 	public $wm_x_transp		= 4;
 
 	/**
-	 * X-coordinate of the watermark's pixel which color is to be
+	 * Y-coordinate of the watermark's pixel which color is to be
 	 * set as transparent within the watermark before merging
 	 * with the source image. The value FALSE forces using only transparency
 	 * information inside the image, if present.
