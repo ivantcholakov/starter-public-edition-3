@@ -101,6 +101,7 @@ The technique of this hack is available, but it is not mandatory.
 * MY_Model, https://github.com/ivantcholakov/codeigniter-base-model
 * Some basic javascripts + normalize.css.
 * cURL library for CodeIgniter, https://github.com/philsturgeon/codeigniter-curl
+* CodeIgniter-REST Client, https://github.com/philsturgeon/codeigniter-restclient
 * A simple Event System for CodeIgniter, https://github.com/ericbarnes/CodeIgniter-Events
 * Support for database stored settings (Settings library).
 * Textile, A Humane Web Text Generator, http://textile.thresholdstate.com/
