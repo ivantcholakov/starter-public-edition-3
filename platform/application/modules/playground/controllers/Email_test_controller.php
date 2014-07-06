@@ -76,7 +76,7 @@ class Email_test_controller extends Base_Controller {
             true,
             'mustache'
         );
-        
+
         $this->template
             ->set(compact('success', 'messages', 'subject', 'body'))
             ->enable_parser_body('i18n')
