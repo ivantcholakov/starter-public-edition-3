@@ -325,7 +325,9 @@ With a little bit older version of this platform the following sites have been c
 Credits
 -------
 
-* Many thanks to Irida Design OOD (http://iridadesign.com) for sponsoring this project.
+* Many thanks to Irida Design OOD, http://iridadesign.com - for sponsoring this project;
+* Gwenaeël Gallon, https://github.com/dev-ggallon - for an important bug-fix about detect_url(), French translation, and various component updates.
+* GitHub : quasiperfect, https://github.com/quasiperfect - for various suggestions and bug-reports.
 
 License Information
 -------------------
