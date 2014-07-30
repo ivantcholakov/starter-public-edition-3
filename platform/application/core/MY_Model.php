@@ -2186,7 +2186,7 @@ class MY_Model extends CI_Model
     }
 
     /**
-     * Resets all internal state flags and temporary scope data>
+     * Resets all internal state flags and temporary scope data.
      */
     protected function _reset_state()
     {
