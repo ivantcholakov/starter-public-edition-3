@@ -164,7 +164,7 @@ class MY_Lang extends MX_Lang {
 
         if ($pos === false) {
 
-            $result .= $this->line($attribute);
+            $result .= html_escape($this->line($attribute), FALSE);
 
         } else {
 
@@ -172,7 +172,7 @@ class MY_Lang extends MX_Lang {
             $format_values = substr($attribute, $pos + 1);
             $format_values = explode(',', $format_values);
 
-            $result .= $this->line($translate, $format_values);
+            $result .= html_escape($this->line($translate, $format_values), FALSE);
         }
 
         $result .= $matches[4];
