@@ -1293,18 +1293,18 @@ class MY_Model extends CI_Model
     /**
      * Don't care about soft deleted rows on the next call
      */
-    public function with_deleted()
+    public function with_deleted($enabled = TRUE)
     {
-        $this->_temporary_with_deleted = TRUE;
+        $this->_temporary_with_deleted = (bool) $enabled;
         return $this;
     }
 
     /**
      * Only get deleted rows on the next call
      */
-    public function only_deleted()
+    public function only_deleted($enabled = TRUE)
     {
-        $this->_temporary_only_deleted = TRUE;
+        $this->_temporary_only_deleted = (bool) $enabled;
         return $this;
     }
 
