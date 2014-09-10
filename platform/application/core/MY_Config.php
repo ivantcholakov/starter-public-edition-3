@@ -22,7 +22,6 @@ class MY_Config extends MX_Config {
     public function __construct()
     {
         $this->config =& get_config();
-        log_message('debug', 'Config Class Initialized');
 
         global $DETECT_URL;
 
@@ -111,6 +110,7 @@ class MY_Config extends MX_Config {
             define('PLATFORM_UPLOAD_PATH', $platform_upload_path);
         }
 
+        log_message('debug', 'Config Class Initialized');
     }
 
     // --------------------------------------------------------------------
