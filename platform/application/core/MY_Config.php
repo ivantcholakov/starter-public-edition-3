@@ -72,6 +72,45 @@ class MY_Config extends MX_Config {
             define('IS_UTF8_CHARSET', strtolower($this->config['charset']) === 'utf-8');
         }
         //
+
+        // Common Purpose File System Repositories
+
+        $public_upload_path = $this->add_slash(
+            isset($this->config['public_upload_path']) && $this->config['public_upload_path'] != ''
+                ? $this->config['public_upload_path']
+                : FCPATH.'upload/'
+        );
+
+        $this->set_item('public_upload_path', $public_upload_path);
+
+        if (!defined('PUBLIC_UPLOAD_PATH')) {
+            define('PUBLIC_UPLOAD_PATH', $public_upload_path);
+        }
+
+        $public_upload_url = $this->add_slash(
+            isset($this->config['public_upload_url']) && $this->config['public_upload_url'] != ''
+                ? str_replace('{base_url}', BASE_URL, $this->config['public_upload_url'])
+                : BASE_URL.'upload/'
+        );
+
+        $this->set_item('public_upload_url', $public_upload_url);
+
+        if (!defined('PUBLIC_UPLOAD_URL')) {
+            define('PUBLIC_UPLOAD_URL', $public_upload_url);
+        }
+
+        $platform_upload_path = $this->add_slash(
+            isset($this->config['platform_upload_path']) && $this->config['platform_upload_path'] != ''
+                ? $this->config['platform_upload_path']
+                : PLATFORMPATH.'upload/'
+        );
+
+        $this->set_item('platform_upload_path', $platform_upload_path);
+
+        if (!defined('PLATFORM_UPLOAD_PATH')) {
+            define('PLATFORM_UPLOAD_PATH', $platform_upload_path);
+        }
+
     }
 
     // --------------------------------------------------------------------

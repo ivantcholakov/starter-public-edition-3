@@ -592,6 +592,27 @@ $config['modules_locations'] = array(
     APPPATH.'modules/' => '../modules/',
 );
 
+/*
+|--------------------------------------------------------------------------
+| Common Purpose File System Repositories
+|--------------------------------------------------------------------------
+|
+| For uploading user files (documents, images movies, etc.) two file system
+| repositories are available:
+| public repository - the uploaded files are accessible by browsers (user agents);
+| platform repository - the uploaded files are accessible by PHP scripts only.
+|
+*/
+
+// Aslo defines PUBLIC_UPLOAD_PATH constant.
+$config['public_upload_path'] = FCPATH.'upload/';
+
+// Aslo defines PUBLIC_UPLOAD_URL constant.
+$config['public_upload_url'] = '{base_url}'.'upload/';
+
+// Aslo defines PLATFORM_UPLOAD_PATH constant.
+$config['platform_upload_path'] = PLATFORMPATH.'upload/';
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
