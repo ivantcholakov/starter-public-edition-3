@@ -463,6 +463,9 @@ class MX_Loader extends CI_Loader
 
             $model = ucfirst($_model);
 
+            // Disabled temporarily by Ivan Tcholakov, 06-OCT-2014.
+            // See https://github.com/ivantcholakov/starter-public-edition-4/issues/34
+            /*
             // Added by Ivan Tcholakov, 26-SEP-2014.
             // Proposed by actors315 (GitHub name).
             // "Avoid problems caused by recursive calls"
@@ -473,6 +476,7 @@ class MX_Loader extends CI_Loader
                 return $this;
             }
             //
+            */
 
             CI::$APP->$_alias = new $model();
 
@@ -546,6 +550,9 @@ class MX_Loader extends CI_Loader
             load_class('Model', 'core');
         }
 
+        // Disabled temporarily by Ivan Tcholakov, 06-OCT-2014.
+        // See https://github.com/ivantcholakov/starter-public-edition-4/issues/34
+        /*
         // Added by Ivan Tcholakov, 26-SEP-2014.
         // Proposed by actors315 (GitHub name).
         // "Avoid problems caused by recursive calls"
@@ -556,6 +563,7 @@ class MX_Loader extends CI_Loader
             return;
         }
         //
+        */
 
         $model = ucfirst(strtolower($model));
 
