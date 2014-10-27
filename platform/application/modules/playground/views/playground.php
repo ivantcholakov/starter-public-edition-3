@@ -54,6 +54,7 @@
                     <li><a href="<?php echo site_url('playground/online-editor/user-mode'); ?>">Online Editor Test</a></li>
                     <li><a href="<?php echo site_url('playground/email-test'); ?>">Email Test</a></li>
                     <li><a href="<?php echo site_url('playground/gravatar-test'); ?>">Gravatar Test</a></li>
+                    <li><a href="<?php echo site_url('playground/jquery-chosen'); ?>">jQuery Chosen Test</a></li>
                 </ul>
 
             </div>
