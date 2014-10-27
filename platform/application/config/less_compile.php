@@ -47,4 +47,15 @@ $config['less_compile'] = array(
         'compress' => true
     ),
 
+    array(
+        'source' => FCPATH.'assets/less/lib/bootstrap-chosen/bootstrap-chosen.less',
+        'destination' => FCPATH.'assets/css/lib/bootstrap-chosen/bootstrap-chosen.css',
+        'compress' => false
+    ),
+    array(
+        'source' => FCPATH.'assets/less/lib/bootstrap-chosen/bootstrap-chosen.less',
+        'destination' => FCPATH.'assets/css/lib/bootstrap-chosen/bootstrap-chosen.min.css',
+        'compress' => true
+    ),
+
 );
