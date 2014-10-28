@@ -22,7 +22,7 @@ CodeIgniter 3.0-dev Documentation
 
 Since CodeIgniter 3.0 has not been officially released yet, its documentation may be temporarily accessed these ways:
 
-* From the repository source: https://github.com/EllisLab/CodeIgniter/tree/develop/user_guide_src
+* From the repository source: https://github.com/bcit-ci/CodeIgniter/tree/develop/user_guide_src
 * From the CodeIgniter 3 Documentation Nightlies supported by Lonnie Ezell: http://ci3docs.cibonfire.com/
 
 Requirements
@@ -58,7 +58,7 @@ I don't expect you to be forced to set it up manually within platform/applicatio
 Features
 --------
 
-* CodeIgniter 3.0-dev, http://codeigniter.com/, https://github.com/EllisLab/CodeIgniter
+* CodeIgniter 3.0-dev, http://codeigniter.com/, https://github.com/bcit-ci/CodeIgniter
 * On a web-server you can place your site (www folder) within a subdirectory.
 * Support for the old CI 2.x class/file name convention. When you port your older libraries, models, and controllers,
 you would not be forced to rename them according to the new strict "ucfirst" naming convention.
@@ -292,7 +292,7 @@ php cli.php less compile
 into platform/applications/{application_name}/database.
 The copied files can be modified/customized. See https://github.com/ivantcholakov/starter-public-edition-4/issues/5
 * CodeIgniter Cache Helper, https://github.com/stevenbenner/codeigniter-cache-helper
-* auto_link() helper accepts attributes, https://github.com/EllisLab/CodeIgniter/wiki/auto-link
+* auto_link() helper accepts attributes, https://github.com/bcit-ci/CodeIgniter/wiki/auto-link
 * Menu Library, https://github.com/nihaopaul/Spark-Menu, https://github.com/Barnabas/Spark-Menu (the original spark-source), https://github.com/daylightstudio/FUEL-CMS/blob/master/fuel/modules/fuel/libraries/Menu.php
 * Function print_d() (enhanced debug print), https://github.com/vikerlane/print_d
 * Registry library for CodeIgniter, https://github.com/ivantcholakov/codeigniter-registry
