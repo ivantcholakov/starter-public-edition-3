@@ -25,7 +25,7 @@ class MY_Lang extends MX_Lang {
         $line = (string) $line;
 
         if (is_bool($param)) {
- 
+
             // Backward compatibility, the parent method line()
             // does not contain $param parameter.
             $log_errors = $param;
@@ -97,7 +97,7 @@ class MY_Lang extends MX_Lang {
 
         $delimiter_start_length = strlen($delimiter_start);
         $delimiter_end_length = strlen($delimiter_end);
-        
+
         $delimiter_begin = substr($delimiter_start, 0, -1);
 
         $offset = 0;
@@ -105,7 +105,7 @@ class MY_Lang extends MX_Lang {
         while (($pos_start = strpos($string, $delimiter_begin, $offset)) !== false)
         {
             $offset = $pos_start + $delimiter_start_length;
-            
+
             // Check for an tag ending '>'.
             $pos_tag_end = strpos($string, '>', $offset - 1);
 
@@ -126,7 +126,7 @@ class MY_Lang extends MX_Lang {
 
                 $offset = $pos_tag_end + 1;
             }
-            
+
             if (($pos_end = strpos($string, $delimiter_end, $offset)) === false)
             {
                 trigger_error("parse_i18n: No ending i18n tag after position [$offset] found!", E_USER_ERROR);
@@ -134,7 +134,7 @@ class MY_Lang extends MX_Lang {
 
             $translate = substr($string, $offset, $pos_end - $offset);
             $translate = $this->line($translate, $format_values);
-            
+
             $offset = $pos_end + $delimiter_end_length;
             $string = substr_replace($string, $translate, $pos_start, $offset - $pos_start);
             $offset = $offset - $delimiter_start_length - $delimiter_end_length;
