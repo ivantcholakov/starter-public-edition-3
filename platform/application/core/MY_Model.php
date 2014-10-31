@@ -1963,6 +1963,8 @@ class MY_Model extends CI_Model
         }
 
         $this->_reset_state();
+
+        return $this;
     }
 
     /* --------------------------------------------------------------
