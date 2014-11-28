@@ -54,6 +54,7 @@
                     <li><a href="<?php echo site_url('playground/online-editor/user-mode'); ?>">Online Editor Test</a></li>
                     <li><a href="<?php echo site_url('playground/email-test'); ?>">Email Test</a></li>
                     <li><a href="<?php echo site_url('playground/gravatar-test'); ?>">Gravatar Test</a></li>
+                    <li><a href="<?php echo site_url('playground/multiplayer'); ?>">Multiplayer Library Test</a></li>
                     <li><a href="<?php echo site_url('playground/jquery-chosen'); ?>">jQuery Chosen Test</a></li>
                     <li><a href="<?php echo site_url('playground/google-maps-v3'); ?>">Google Maps JavaScript API v3 Demo</a></li>
                     <li><a href="<?php echo site_url('playground/smileys'); ?>">Smiley Test</a></li>
