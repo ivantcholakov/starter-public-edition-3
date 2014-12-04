@@ -192,6 +192,7 @@ $config['composer_autoload'] = PLATFORMPATH.'vendor/autoload.php';
 */
 $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-=+';
 
+
 /*
 |--------------------------------------------------------------------------
 | Enable Query Strings
@@ -221,7 +222,7 @@ $config['allow_get_array'] = TRUE;
 $config['enable_query_strings'] = FALSE;
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
-$config['directory_trigger'] = 'd'; // experimental not currently in use
+$config['directory_trigger'] = 'd';
 
 /*
 |--------------------------------------------------------------------------
@@ -314,10 +315,21 @@ $config['error_views_path'] = '';
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| application/cache/ folder.  Use a full server path with trailing slash.
+| application/cache/ directory.  Use a full server path with trailing slash.
 |
 */
 $config['cache_path'] = WRITABLEPATH.'cache/';
+
+/*
+|--------------------------------------------------------------------------
+| Cache Include Query String
+|--------------------------------------------------------------------------
+|
+| Set this to TRUE if you want to use different cache files depending on the
+| URL query string.  Please be aware this might result in numerous cache files.
+|
+*/
+$config['cache_query_string'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -537,6 +549,7 @@ $config['minify_output'] = FALSE;
 |
 */
 $config['time_reference'] = 'local';
+
 
 /*
 |--------------------------------------------------------------------------
