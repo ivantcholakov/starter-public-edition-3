@@ -25,6 +25,14 @@ $config['contact_map'] = '<iframe width="100%" height="250" frameborder="0" scro
 
 /*
 |--------------------------------------------------------------------------
+| Copyright Note by the Site's Owner
+|--------------------------------------------------------------------------
+*/
+$config['copyright_note'] = 'Copyright &copy; 2012 - {year} Ivan Tcholakov and other contributors. License: The MIT License (MIT), <a href="http://opensource.org/licenses/MIT" target="_blank">http://opensource.org/licenses/MIT</a>';
+
+
+/*
+|--------------------------------------------------------------------------
 | Default Metadata: Title, Description, and Keywords.
 |--------------------------------------------------------------------------
 */
