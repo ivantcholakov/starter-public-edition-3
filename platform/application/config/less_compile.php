@@ -85,4 +85,17 @@ $config['less_compile'] = array(
         'compress' => true
     ),
 
+    array(
+        'name' => 'jasny-bootstrap-3',
+        'source' => FCPATH.'assets/less/lib/jasny-bootstrap-3/jasny-bootstrap-default.less',
+        'destination' => FCPATH.'assets/css/lib/jasny-bootstrap-3/jasny-bootstrap.css',
+        'compress' => false
+    ),
+    array(
+        'name' => 'jasny-bootstrap-3-min',
+        'source' => FCPATH.'assets/less/lib/jasny-bootstrap-3/jasny-bootstrap-default.less',
+        'destination' => FCPATH.'assets/css/lib/jasny-bootstrap-3/jasny-bootstrap.min.css',
+        'compress' => true
+    ),
+
 );
