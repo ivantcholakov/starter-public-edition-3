@@ -130,7 +130,7 @@ class MX_Router extends CI_Router
 
                 // module/controller
                 if (
-                        $segment1 
+                        $segment1
                         &&
                         (
                             $this->is_controller($source.ucfirst($segment1))
@@ -239,7 +239,7 @@ class MX_Router extends CI_Router
         // Application sub-directory controller exists?
         if (
                 $segment1
-                && 
+                &&
                 (
                     $this->is_controller(APPPATH.'controllers/'.$segment0.'/'.ucfirst($segment1))
                     ||
