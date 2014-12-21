@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('BASEPATH')) { exit('No direct script access allowed.'); }
 /*
  * Unbiased random password generator.
  * This code is placed into the public domain by Defuse Security.
@@ -24,7 +24,7 @@ class PasswordGenerator
         return self::getCustomPassword(str_split($hex), $length);
     }
 
-    /* 
+    /*
      * Create a random password composed of a custom character set.
      * $characterSet - An *array* of strings the password can be composed of.
      * $length - The number of random strings (in $characterSet) to include in the password.
@@ -40,7 +40,7 @@ class PasswordGenerator
             return false;
 
         $random = self::getRandomInts($length * 2);
-        $mask = self::getMinimalBitMask($charSetLen - 1); 
+        $mask = self::getMinimalBitMask($charSetLen - 1);
 
         $password = "";
 
@@ -113,7 +113,13 @@ class PasswordGenerator
         if ($numInts <= 0) {
             return $ints;
         }
-        $rawBinary = mcrypt_create_iv($numInts * PHP_INT_SIZE, MCRYPT_DEV_URANDOM);
+
+        // Modified by Ivan Tcholakov, 21-DEC-2014.
+        // The purpose of this change is making this method tollerant to different system configurations.
+        //$rawBinary = mcrypt_create_iv($numInts * PHP_INT_SIZE, MCRYPT_DEV_URANDOM);
+        $rawBinary = secure_random_bytes($numInts * PHP_INT_SIZE);
+        //
+
         for($i = 0; $i < $numInts; ++$i)
         {
             $thisInt = 0;
@@ -129,4 +135,3 @@ class PasswordGenerator
     }
 
 }
-?>
