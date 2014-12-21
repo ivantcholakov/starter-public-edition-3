@@ -324,6 +324,7 @@ The copied files can be modified/customized. See https://github.com/ivantcholako
 * metisMenu, Easy menu jQuery plugin for Twitter Bootstrap 3, https://github.com/onokumus/metisMenu
 * Social Buttons for Bootstrap, https://github.com/lipis/bootstrap-social
 * Secure Random Bytes in PHP, https://github.com/GeorgeArgyros/Secure-random-bytes-in-PHP
+* php-passgen - A library for generating cryptographically secure passwords in PHP, https://github.com/defuse/php-passgen
 
 The Playground
 --------------
