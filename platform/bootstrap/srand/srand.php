@@ -77,7 +77,6 @@ function secure_random_bytes($len) {
         }
     }
 
-
     /*
      * No build-in crypto randomness function found. We collect any entropy
      * available in the PHP core PRNGs along with some filesystem info and memory
@@ -149,5 +148,6 @@ function secure_random_bytes($len) {
     if ($handle) {
         @fclose($handle);
     }
+
     return substr($str, 0, $len);
 }
