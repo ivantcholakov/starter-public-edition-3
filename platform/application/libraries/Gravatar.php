@@ -14,6 +14,13 @@
  * @link http://opensource.org/licenses/MIT
  */
 
+// Gravatar pofile error results.
+defined('GRAVATAR_NO_ERROR') OR define('GRAVATAR_NO_ERROR', 0);
+defined('GRAVATAR_CANT_CONNECT') OR define('GRAVATAR_CANT_CONNECT', 1);
+defined('GRAVATAR_INVALID_EMAIL') OR define('GRAVATAR_INVALID_EMAIL', 2);
+defined('GRAVATAR_PROFILE_DOES_NOT_EXIST') OR define('GRAVATAR_PROFILE_DOES_NOT_EXIST', 3);
+defined('GRAVATAR_INCORRECT_FORMAT') OR define('GRAVATAR_INCORRECT_FORMAT', 4);
+
 class Gravatar {
 
     protected $base_url = 'http://www.gravatar.com/';
@@ -24,6 +31,8 @@ class Gravatar {
     protected $force_default_image = false;
     protected $rating = '';
     protected $useragent = 'PHP Gravatar Library';
+
+    protected $last_error = GRAVATAR_NO_ERROR;
 
     protected $is_https;
     protected $curl_exists;
@@ -163,13 +172,27 @@ class Gravatar {
 
         $result = $this->execute_profile_request($email, 'php');
 
-        if ($result == '') {
+        if ($this->last_error != GRAVATAR_NO_ERROR) {
             return null;
         }
 
         $result = @ unserialize($result);
 
-        if (!is_array($result) || !isset($result['entry']) || !isset($result['entry'][0])) {
+        if ($result === false) {
+
+            $this->last_error = GRAVATAR_INCORRECT_FORMAT;
+            return null;
+        }
+
+        if (!is_array($result)) {
+
+            $this->last_error = GRAVATAR_PROFILE_DOES_NOT_EXIST;
+            return null;
+        }
+
+        if (!isset($result['entry']) || !isset($result['entry'][0])) {
+
+            $this->last_error = GRAVATAR_INCORRECT_FORMAT;
             return null;
         }
 
@@ -186,11 +209,15 @@ class Gravatar {
      */
     public function execute_profile_request($email, $format = null) {
 
+        $this->last_error = GRAVATAR_NO_ERROR;
+
         // Modified by Ivan Tcholakov, 09-JAN-2015.
         //if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         //    return null;
         //}
         if (!valid_email($email)) {
+
+            $this->last_error = GRAVATAR_INVALID_EMAIL;
             return null;
         }
         //
@@ -220,9 +247,8 @@ class Gravatar {
             curl_setopt_array($ch, $options);
 
             $result = curl_exec($ch);
-        }
 
-        elseif ($this->allow_url_fopen) {
+        } elseif ($this->allow_url_fopen) {
 
             $url = $this->base_url.$this->create_hash($email).$format;
 
@@ -236,13 +262,31 @@ class Gravatar {
             $context = stream_context_create($options);
 
             $result = @ file_get_contents($url, false, $context);
+
+        } else {
+
+            $this->last_error = GRAVATAR_CANT_CONNECT;
+            return null;
         }
 
         if ($result === false) {
+
+            $this->last_error = GRAVATAR_CANT_CONNECT;
             return null;
         }
 
         return $result;
+    }
+
+    /**
+     * Returns the error code as a result of the last profile request operation.
+     *
+     * @return int          GRAVATAR_NO_ERROR - the last operation was successfull,
+     *                      other returned value indicates failure.
+     */
+    public function last_error() {
+
+        return $this->last_error;
     }
 
     /**
