@@ -32,7 +32,7 @@ class Gravatar {
     public function __construct($config = array()) {
 
         // Added by Ivan Tcholakov, 09-JAN-2015.
-        $this->ci->load->helper('email');
+        get_instance()->load->helper('email');
         //
 
         if (!is_array($config)) {
