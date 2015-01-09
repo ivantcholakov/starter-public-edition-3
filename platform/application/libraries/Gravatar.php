@@ -27,6 +27,7 @@ class Gravatar {
     protected $rating = '';
     protected $useragent = 'PHP Gravatar Library';
 
+    protected $is_https;
     protected $curl_exists;
     protected $allow_url_fopen;
 
@@ -79,6 +80,8 @@ class Gravatar {
             $this->useragent = (string) $config['gravatar_useragent'];
         }
 
+        $this->is_https = $this->is_https();
+
         $this->curl_exists = function_exists('curl_init');
 
         $allow_url_fopen = @ini_get('allow_url_fopen');
@@ -102,7 +105,7 @@ class Gravatar {
      */
     public function get($email, $size = null, $default_image = null, $force_default_image = null, $rating = null) {
 
-        $url = (is_https() ? $this->secure_base_url : $this->base_url).'avatar/'.$this->create_hash($email).$this->image_extension;
+        $url = ($this->is_https ? $this->secure_base_url : $this->base_url).'avatar/'.$this->create_hash($email).$this->image_extension;
 
         $query = array();
 
@@ -261,6 +264,22 @@ class Gravatar {
         //
     }
 
+    protected function is_https() {
+
+        if (function_exists('is_https')) {
+            return is_https();
+        }
+
+        if (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
+            return true;
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+            return true;
+        } elseif (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off') {
+            return true;
+        }
+
+        return false;
+    }
 
     //--------------------------------------------------------------------------
     // The following original methods are kept here for backward compatibility.
