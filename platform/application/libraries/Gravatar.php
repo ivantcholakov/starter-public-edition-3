@@ -16,8 +16,6 @@
 
 class Gravatar {
 
-    protected $ci;
-
     protected $base_url = 'http://www.gravatar.com/';
     protected $secure_base_url = 'https://secure.gravatar.com/';
     protected $image_extension = '.png';
@@ -32,8 +30,6 @@ class Gravatar {
     protected $allow_url_fopen;
 
     public function __construct($config = array()) {
-
-        $this->ci = get_instance();
 
         // Added by Ivan Tcholakov, 09-JAN-2015.
         $this->ci->load->helper('email');
