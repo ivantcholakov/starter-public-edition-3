@@ -213,6 +213,8 @@ class Gravatar {
 
         // Modified by Ivan Tcholakov, 09-JAN-2015.
         //if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //
+        //    $this->last_error = GRAVATAR_INVALID_EMAIL;
         //    return null;
         //}
         if (!valid_email($email)) {
