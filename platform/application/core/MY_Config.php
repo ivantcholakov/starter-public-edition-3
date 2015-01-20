@@ -110,7 +110,7 @@ class MY_Config extends MX_Config {
             define('PLATFORM_UPLOAD_PATH', $platform_upload_path);
         }
 
-        log_message('debug', 'Config Class Initialized');
+        log_message('info', 'Config Class Initialized');
     }
 
     // --------------------------------------------------------------------
