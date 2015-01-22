@@ -764,7 +764,7 @@ abstract class CI_DB_driver {
 			{
 				include_once BASEPATH.'database/DB_result.php';
 			}
-			
+
 			if (file_exists(APPPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php'))
 			{
 				include_once APPPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php';
@@ -1951,6 +1951,3 @@ abstract class CI_DB_driver {
 	}
 
 }
-
-/* End of file DB_driver.php */
-/* Location: ./system/database/DB_driver.php */
