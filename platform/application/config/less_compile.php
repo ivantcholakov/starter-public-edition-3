@@ -21,6 +21,19 @@
 $config['less_compile'] = array(
 
     array(
+        'name' => 'test',
+        'source' => FCPATH.'assets/less/test.less',
+        'destination' => FCPATH.'assets/css/test.css',
+        'compress' => false
+    ),
+    array(
+        'name' => 'test-min',
+        'source' => FCPATH.'assets/less/test.less',
+        'destination' => FCPATH.'assets/css/test.min.css',
+        'compress' => true
+    ),
+
+    array(
         'name' => 'bootstrap-3',
         'source' => FCPATH.'assets/less/lib/bootstrap-3/bootstrap.less',
         'destination' => FCPATH.'assets/css/lib/bootstrap-3/bootstrap.css',
