@@ -61,28 +61,29 @@ function &DB($params = '', $query_builder_override = NULL)
 		}
 
 		include($file_path);
-		// Added by Ivan Tcholakov, 27-APR-2013.
+
+		// Modified by Ivan Tcholakov, 05-FEB-2015.
+		//// Make packages contain database config files,
+		//// given that the controller instance already exists
+		//if (class_exists('CI_Controller', FALSE))
 		if (is_object(get_instance()))
-		{
 		//
-		// Make packages contain database config files
-		foreach (get_instance()->load->get_package_paths() as $path)
 		{
-			if ($path !== APPPATH)
+			foreach (get_instance()->load->get_package_paths() as $path)
 			{
-				if (file_exists($file_path = $path.'config/'.ENVIRONMENT.'/database.php'))
+				if ($path !== APPPATH)
 				{
-					include($file_path);
-				}
-				elseif (file_exists($file_path = $path.'config/database.php'))
-				{
-					include($file_path);
+					if (file_exists($file_path = $path.'config/'.ENVIRONMENT.'/database.php'))
+					{
+						include($file_path);
+					}
+					elseif (file_exists($file_path = $path.'config/database.php'))
+					{
+						include($file_path);
+					}
 				}
 			}
 		}
-		//
-		}
-		//
 
 		if ( ! isset($db) OR count($db) === 0)
 		{
