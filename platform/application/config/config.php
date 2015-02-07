@@ -279,7 +279,7 @@ $config['error_views_path'] = '';
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| application/cache/ directory.  Use a full server path with trailing slash.
+| application/cache/ directory. Use a full server path with trailing slash.
 |
 */
 $config['cache_path'] = WRITABLEPATH.'cache/';
@@ -358,16 +358,23 @@ $config['encryption_key_for_passwords'] = 'f@2M&';
 |
 |    How many seconds between CI regenerating the session ID.
 |
+| 'sess_regenerate_destroy'
+|
+|    Whether to destroy session data associated with the old session ID
+|    when auto-regenerating the session ID. When set to FALSE, the data
+|    will be later deleted by the garbage collector.
+|
 | Other session cookie settings are shared with the rest of the application,
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver']          = 'files';
-$config['sess_cookie_name']     = 'ac584bae';
-$config['sess_expiration']      = 4 * 60 * 60;  // 4 hours
-$config['sess_save_path']       = NULL;
-$config['sess_match_ip']        = FALSE;
-$config['sess_time_to_update']  = 300;
+$config['sess_driver'] = 'files';
+$config['sess_cookie_name'] = 'ac584bae';
+$config['sess_expiration'] = 4 * 60 * 60;  // 4 hours
+$config['sess_save_path'] = NULL;
+$config['sess_match_ip'] = FALSE;
+$config['sess_time_to_update'] = 300;
+$config['sess_regenerate_destroy'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
