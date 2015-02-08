@@ -20,6 +20,7 @@ if (!function_exists('text_to_html')) {
 
     function text_to_html($text) {
 
+/*
         static $parser;
 
         if (!isset($parser)) {
@@ -27,6 +28,15 @@ if (!function_exists('text_to_html')) {
         }
 
         return @ $parser->transform($text);
+*/
+
+        static $parser;
+
+        if (!isset($parser)) {
+            $parser = new ParsedownExtra();
+        }
+
+        return @ $parser->text($text);
     }
 
 }
