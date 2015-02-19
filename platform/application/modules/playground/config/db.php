@@ -15,7 +15,6 @@ $config['db'] = array(
     'char_set' => 'utf8',
     'dbcollat' => 'utf8_general_ci',
     'swap_pre' => '',
-    'autoinit' => TRUE,
     'encrypt'  => FALSE,
     'compress' => FALSE,
     'stricton' => FALSE,
