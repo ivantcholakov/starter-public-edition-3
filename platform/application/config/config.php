@@ -535,6 +535,7 @@ $config['parser_valid_drivers'] = array(
     'less',
     'smileys',
     'cssmin',
+    'jsmin',
 );
 
 /*
