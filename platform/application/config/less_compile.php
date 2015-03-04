@@ -20,6 +20,21 @@
 
 $config['less_compile'] = array(
 
+    // php cli.php less compile common common-min
+
+    array(
+        'name' => 'common',
+        'source' => FCPATH.'assets/less/lib/common/common.less',
+        'destination' => FCPATH.'assets/css/lib/common/common.css',
+        'compress' => false
+    ),
+    array(
+        'name' => 'common-min',
+        'source' => FCPATH.'assets/less/lib/common/common.less',
+        'destination' => FCPATH.'assets/css/lib/common/common.min.css',
+        'compress' => true
+    ),
+
     // php cli.php less compile bootstrap-3 bootstrap-3-min
 
     array(
