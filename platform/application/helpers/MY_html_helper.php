@@ -100,15 +100,15 @@ if (!function_exists('gmap')) {
      * @param   int         $zoom               The map zooming.
      * @param   string      $element_id         The id HTML attribute the map containing element.
      * @param   string      $element_class      The class HTML attribute the map containing element.
-     * @return  string                          Return HTML and JavaScript for displaying the map.
+     * @return  string                          Returns HTML and JavaScript for displaying the map.
      *
      * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2015
      * @license The MIT License, http://opensource.org/licenses/MIT
      */
     function gmap($latitude, $longitude, $zoom = null, $element_id = null, $element_class = null) {
 
-        $latitude = (string) $latitude;
-        $longitude = (string) $longitude;
+        $latitude = trim($latitude);
+        $longitude = trim($longitude);
 
         if ($latitude == '' || !is_numeric($latitude) || $longitude == '' || !is_numeric($longitude)) {
             return;
@@ -117,7 +117,7 @@ if (!function_exists('gmap')) {
         $zoom = (int) $zoom;
 
         if ($zoom <= 0) {
-            $zoom = 6;
+            $zoom = 1;
         }
 
         $element_id = (string) $element_id;
@@ -506,3 +506,5 @@ if (!function_exists('merge_attributes_and_classes')) {
     }
 
 }
+
+//------------------------------------------------------------------------------
