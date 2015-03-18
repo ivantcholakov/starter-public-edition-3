@@ -6,7 +6,7 @@
  * @link http://github.com/jamierumbelow/codeigniter-base-model
  * @copyright Copyright (c) 2012, Jamie Rumbelow <http://jamierumbelow.net>
  *
- * Some Modifications have been implemented by Ivan Tcholakov, 2012-2013
+ * Some modifications have been implemented by Ivan Tcholakov, 2012-2015
  * @link https://github.com/ivantcholakov/codeigniter-base-model
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -240,6 +240,15 @@ class MY_Model extends CI_Model
 
         if ($this->_dbdriver == 'oci8' || $this->_subdriver = 'oci') {
             $this->_count_string = 'SELECT COUNT(1) AS ';
+        }
+    }
+
+    public function __clone()
+    {
+        if (is_object($this->_database))
+        {
+            // Make a clone of the query builder, so the state of the original one to be preserved.
+            $this->_database = clone $this->_database;
         }
     }
 
