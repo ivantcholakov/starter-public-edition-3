@@ -97,6 +97,7 @@ class Welcome extends Base_Controller {
         $diagnostics = implode('<br />', $diagnostics);
 
         $this->template
+            ->set_canonical_url(site_url())
             ->set('diagnostics', $diagnostics)
             ->build('welcome_message');
     }
