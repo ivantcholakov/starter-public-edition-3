@@ -80,7 +80,7 @@ class MX_Router extends CI_Router
 
     // Override this method in an extension class.
     // You may use it for slug support.
-    public function remap($segments, $http_request = true) {
+    public function remap($segments, $router_initialization = true) {
 
         return $segments;
     }
@@ -88,12 +88,12 @@ class MX_Router extends CI_Router
     /** Locate the controller **/
     // Modified by Ivan Tcholakov, 21-JAN-2014.
     //public function locate($segments) {
-    public function locate($segments, $http_request = true) {
+    public function locate($segments, $router_initialization = true) {
     //
 
         // Processing slugs, if there are any.
-        if ($http_request) {
-            $segments = $this->remap($segments, $http_request);
+        if ($router_initialization) {
+            $segments = $this->remap($segments, $router_initialization);
         }
 
         $this->module = '';
