@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2014
+ * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2014-2015
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
@@ -67,6 +67,7 @@
                     <li><a href="<?php echo site_url('playground/jsmin'); ?>">JavaScript Minification Test</a></li>
                     <li><a href="<?php echo site_url('playground/star-rating'); ?>">Bootstrap Star Rating Examples</a></li>
                     <li><a href="<?php echo site_url('playground/fb'); ?>">Facebook PHP SDK v4 for CodeIgniter</a></li>
+                    <li><a href="<?php echo site_url('playground/bootstrap-modals'); ?>">Bootstrap Modal Dialogs</a></li>
                 </ul>
 
             </div>
