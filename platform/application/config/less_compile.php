@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2013
+ * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2013-2015
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
@@ -152,6 +152,21 @@ $config['less_compile'] = array(
         'name' => 'bootstrap-social-min',
         'source' => FCPATH.'assets/less/lib/bootstrap-social/bootstrap-social-default.less',
         'destination' => FCPATH.'assets/css/lib/bootstrap-social/bootstrap-social.min.css',
+        'compress' => true
+    ),
+
+    // php cli.php less compile bootstrap3-dialog bootstrap3-dialog-min
+
+    array(
+        'name' => 'bootstrap3-dialog',
+        'source' => FCPATH.'assets/less/lib/bootstrap3-dialog/bootstrap-dialog.less',
+        'destination' => FCPATH.'assets/css/lib/bootstrap3-dialog/bootstrap-dialog.css',
+        'compress' => false
+    ),
+    array(
+        'name' => 'bootstrap3-dialog-min',
+        'source' => FCPATH.'assets/less/lib/bootstrap3-dialog/bootstrap-dialog.less',
+        'destination' => FCPATH.'assets/css/lib/bootstrap3-dialog/bootstrap-dialog.min.css',
         'compress' => true
     ),
 
