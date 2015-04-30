@@ -745,24 +745,24 @@ abstract class CI_DB_driver {
 		{
 			// Modified by Ivan Tcholakov, 25-DEC-2013.
 			// See https://github.com/ivantcholakov/starter-public-edition-4/issues/5
-			//include_once(BASEPATH.'database/DB_result.php');
-			//include_once(BASEPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php');
+			//require_once(BASEPATH.'database/DB_result.php');
+			//require_once(BASEPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php');
 			if (file_exists(APPPATH.'database/DB_result.php'))
 			{
-				include_once APPPATH.'database/DB_result.php';
+				require_once APPPATH.'database/DB_result.php';
 			}
 			else
 			{
-				include_once BASEPATH.'database/DB_result.php';
+				require_once BASEPATH.'database/DB_result.php';
 			}
 
 			if (file_exists(APPPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php'))
 			{
-				include_once APPPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php';
+				require_once APPPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php';
 			}
 			else
 			{
-				include_once BASEPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php';
+				require_once BASEPATH.'database/drivers/'.$this->dbdriver.'/'.$this->dbdriver.'_result.php';
 			}
 			//
 		}
@@ -1238,7 +1238,7 @@ abstract class CI_DB_driver {
 	/**
 	 * Fetch Field Names
 	 *
-	 * @param	string	the table name
+	 * @param	string	$table	Table name
 	 * @return	array
 	 */
 	public function list_fields($table)
@@ -1626,11 +1626,11 @@ abstract class CI_DB_driver {
 			//require_once(BASEPATH.'database/DB_cache.php');
 			if (file_exists(APPPATH.'database/DB_cache.php'))
 			{
-				include_once APPPATH.'database/DB_cache.php';
+				require_once APPPATH.'database/DB_cache.php';
 			}
 			elseif (file_exists(BASEPATH.'database/DB_cache.php'))
 			{
-				include_once BASEPATH.'database/DB_cache.php';
+				require_once BASEPATH.'database/DB_cache.php';
 			}
 			else
 			{
