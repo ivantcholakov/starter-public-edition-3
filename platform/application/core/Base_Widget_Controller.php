@@ -9,7 +9,6 @@ class Base_Widget_Controller extends MY_Controller {
         $this->load
             ->helper('asset')
         ;
-
     }
 
     public function _remap() {
