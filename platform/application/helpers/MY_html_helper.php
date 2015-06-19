@@ -1,5 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Alternative and additional html helper functions
+ * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2013-2015
+ * @license The MIT License, http://opensource.org/licenses/MIT
+ */
+
 if (!function_exists('html_to_text')) {
 
     function html_to_text($html) {
@@ -508,3 +514,44 @@ if (!function_exists('merge_attributes_and_classes')) {
 }
 
 //------------------------------------------------------------------------------
+
+if (!function_exists('antibot'))
+{
+    /**
+     * Create a bot-protected text written in JavaScript.
+     *
+     * @param       string      The input text (may be email, phone number, ...).
+     * @return      string      A JavaScript to visualize the input text.
+     *
+     * @see safe_mailto()
+     */
+    function antibot($text)
+    {
+        $x = array();
+
+        for ($i = 0, $l = strlen($text); $i < $l; $i++)
+        {
+            $x[] = '|'.ord($text[$i]);
+        }
+
+        $x = array_reverse($x);
+
+        $output = "<script type=\"text/javascript\">\n"
+            ."\t//<![CDATA[\n"
+            ."\tvar l=new Array();\n";
+
+        for ($i = 0, $c = count($x); $i < $c; $i++)
+        {
+            $output .= "\tl[".$i."] = '".$x[$i]."';\n";
+        }
+
+        $output .= "\n\tfor (var i = l.length-1; i >= 0; i=i-1) {\n"
+            ."\t\tif (l[i].substring(0, 1) === '|') document.write(\"&#\"+unescape(l[i].substring(1))+\";\");\n"
+            ."\t\telse document.write(unescape(l[i]));\n"
+            ."\t}\n"
+            ."\t//]]>\n"
+            .'</script>';
+
+        return $output;
+    }
+}
