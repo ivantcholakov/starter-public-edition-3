@@ -39,6 +39,8 @@ class MY_Email extends CI_Email {
             $config = array();
         }
 
+        $this->_safe_mode = (!is_php('5.4') && ini_get('safe_mode'));
+
         if (isset($config['useragent'])) {
 
             $useragent = trim($config['useragent']);
@@ -100,8 +102,6 @@ class MY_Email extends CI_Email {
                 $this->_copy_property_to_phpmailer('_smtp_auth');
             }
         }
-
-        $this->_safe_mode = ( ! is_php('5.4') && ini_get('safe_mode'));
 
         log_message('info', 'MY_Email Class Initialized (Engine: '.$this->mailer_engine.')');
     }
@@ -814,6 +814,24 @@ class MY_Email extends CI_Email {
         //
 
         return html_to_text($html);
+    }
+
+    protected function _set_config_option($key, $value) {
+
+        $method = 'set_'.$key;
+
+        if (method_exists($this, $method)) {
+
+            $this->$method($value);
+
+        } elseif (isset($this->$key)) {
+
+            $this->$key = $value;
+
+            if ($this->mailer_engine == 'phpmailer') {
+                $this->_copy_property_to_phpmailer($key);
+            }
+        }
     }
 
     protected function _copy_property_to_phpmailer($key) {
