@@ -612,15 +612,24 @@ class MY_Email extends CI_Email {
 
     public function set_wrapchars($wrapchars) {
 
-        $wrapchars = (int) $wrapchars;
+        if ($this->_is_ci_3) {
+            $wrapchars = (int) $wrapchars;
+        }
 
         $this->wrapchars = $wrapchars;
 
         if ($this->mailer_engine == 'phpmailer') {
 
             if (!$this->wordwrap) {
+
                 $this->phpmailer->WordWrap = 0;
+
             } else {
+
+                if (empty($wrapchars)) {
+                    $wrapchars = 76;
+                }
+
                 $this->phpmailer->WordWrap = $wrapchars;
             }
         }
