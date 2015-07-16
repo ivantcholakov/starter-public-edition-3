@@ -41,67 +41,11 @@ class MY_Email extends CI_Email {
 
         $this->_safe_mode = (!is_php('5.4') && ini_get('safe_mode'));
 
-        if (isset($config['useragent'])) {
-
-            $useragent = trim($config['useragent']);
-            $mailer_engine = strtolower($useragent);
-
-            if (strpos($mailer_engine, 'phpmailer') !== false) {
-                $this->mailer_engine = 'phpmailer';
-            } elseif(strpos($mailer_engine, 'codeigniter') !== false) {
-                $this->mailer_engine = 'codeigniter';
-            } else {
-                unset($config['useragent']);    // An invalid setting;
-            }
+        if (!isset($config['charset'])) {
+            $config['charset'] = config_item('charset');
         }
 
-        if (isset($config['charset'])) {
-
-            $charset = trim($config['charset']);
-
-            if ($charset != '') {
-                $this->charset = $charset;
-                unset($config['charset']);      // We don't need this anymore.
-            }
-
-        } else {
-
-            $charset = trim(config_item('charset'));
-
-            if ($charset != '') {
-                $this->charset = $charset;
-            }
-        }
-
-        $this->charset = strtoupper($this->charset);
-
-        if ($this->mailer_engine == 'phpmailer') {
-
-            //// If your system uses class autoloading feature,
-            //// then the following require statement would not be needed.
-            //if (!class_exists('PHPMailer', false)) {
-            //    require_once APPPATH.'third_party/phpmailer/PHPMailerAutoload.php';
-            //}
-            ////
-
-            $this->phpmailer = new PHPMailer();
-            $this->phpmailer->PluginDir = APPPATH.'third_party/phpmailer/';
-
-            $this->_copy_property_to_phpmailer('charset');
-        }
-
-        if (count($config) > 0) {
-
-            $this->initialize($config);
-
-        } else {
-
-            $this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? FALSE : TRUE;
-
-            if ($this->mailer_engine == 'phpmailer') {
-                $this->_copy_property_to_phpmailer('_smtp_auth');
-            }
-        }
+        $this->initialize($config);
 
         log_message('info', 'MY_Email Class Initialized (Engine: '.$this->mailer_engine.')');
     }
@@ -140,31 +84,27 @@ class MY_Email extends CI_Email {
             $config = array();
         }
 
-        foreach ($config as $key => $val) {
-
-            $method = 'set_'.$key;
-
-            if (method_exists($this, $method)) {
-
-                $this->$method($val);
-
-            } elseif (isset($this->$key)) {
-
-                $this->$key = $val;
-
-                if ($this->mailer_engine == 'phpmailer') {
-                    $this->_copy_property_to_phpmailer($key);
-                }
-            }
+        if (!isset($config['useragent'])) {
+            $config['useragent'] = $this->useragent;
         }
+
+        $this->set_useragent($config['useragent']);
+        unset($config['useragent']);
+
+        if (!isset($config['mailer_engine'])) {
+            $config['mailer_engine'] = null;
+        }
+
+        $this->set_mailer_engine($config['mailer_engine']);
+        unset($config['mailer_engine']);
+
+        foreach ($config as $key => $value) {
+            $this->_set_config_option($key, $value);
+        }
+
+        $this->_set_config_option('_smtp_auth', !($this->smtp_user == '' && $this->smtp_pass == ''));
 
         $this->clear();
-
-        $this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? FALSE : TRUE;
-
-        if ($this->mailer_engine == 'phpmailer') {
-            $this->_copy_property_to_phpmailer('_smtp_auth');
-        }
 
         return $this;
     }
@@ -552,6 +492,53 @@ class MY_Email extends CI_Email {
     // Also, use the configuration file email.php for customizing the default
     // configuration options.
 
+    public function set_useragent($useragent) {
+
+        if ($useragent !== null) {
+
+            $this->useragent = $useragent;
+            $this->set_mailer_engine($useragent);
+        }
+
+        return $this;
+    }
+
+    public function set_mailer_engine($mailer_engine) {
+
+        if ($mailer_engine !== null) {
+
+            $mailer_engine = strtolower(trim($mailer_engine));
+
+            if (strpos($mailer_engine, 'phpmailer') !== false) {
+                $this->mailer_engine = 'phpmailer';
+            } else {
+                $this->mailer_engine = 'codeigniter';
+            }
+
+            if ($this->mailer_engine == 'phpmailer') {
+
+                if (!is_object($this->phpmailer)) {
+
+                    //// If your system uses class autoloading feature,
+                    //// then the following require statement would not be needed.
+                    //if (!class_exists('PHPMailer', false)) {
+                    //    require_once APPPATH.'third_party/phpmailer/PHPMailerAutoload.php';
+                    //}
+                    ////
+
+                    $this->phpmailer = new PHPMailer();
+                    $this->phpmailer->PluginDir = APPPATH.'third_party/phpmailer/';
+                }
+
+                // TODO: Refresh PHPMailer options.
+            }
+
+            $this->clear(true);
+        }
+
+        return $this;
+    }
+
     public function set_protocol($protocol = 'mail') {
 
         $protocol = trim(strtolower($protocol));
@@ -890,7 +877,6 @@ class MY_Email extends CI_Email {
             'smtp_pass' => 'Password',
             'smtp_port' => 'Port',
             'smtp_timeout' => 'Timeout',
-            'charset' => 'CharSet',
         );
 
         if (isset($properties[$key])) {
