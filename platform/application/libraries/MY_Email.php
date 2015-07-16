@@ -27,6 +27,10 @@ class MY_Email extends CI_Email {
     protected static $encodings_ci = array('8bit', '7bit');
     protected static $encodings_phpmailer = array('8bit', '7bit', 'binary', 'base64', 'quoted-printable');
 
+    protected $priority_raw = 3;
+    protected $_encoding_raw = '8bit';
+    protected $smtp_debug_raw = 0;
+
     public function __construct($config = array()) {
 
         $this->_is_ci_3 = (bool) ((int) CI_VERSION >= 3);
@@ -530,7 +534,30 @@ class MY_Email extends CI_Email {
                     $this->phpmailer->PluginDir = APPPATH.'third_party/phpmailer/';
                 }
 
-                // TODO: Refresh PHPMailer options.
+                // Refresh PHPMailer options.
+
+                $options = array(
+                    'charset' => $this->charset,
+                    'protocol' => $this->protocol,
+                    'mailpath' => $this->mailpath,
+                    'smtp_host' => $this->smtp_host,
+                    'smtp_user' => $this->smtp_user,
+                    'smtp_pass' => $this->smtp_pass,
+                    'smtp_port' => $this->smtp_port,
+                    'smtp_timeout' => $this->smtp_timeout,
+                    'smtp_crypto' => $this->smtp_crypto,
+                    'smtp_debug' => $this->smtp_debug_raw,
+                    'wordwrap' => $this->wordwrap,
+                    'wrapchars' => $this->wrapchars,
+                    'mailtype' => $this->mailtype,
+                    'priority' => $this->priority_raw,
+                    'encoding' => $this->_encoding_raw,
+                    '_smtp_auth' => $this->_smtp_auth,
+                );
+
+                foreach ($options as $key => $value) {
+                    $this->_set_config_option($key, $value);
+                }
             }
 
             $this->clear(true);
@@ -655,6 +682,8 @@ class MY_Email extends CI_Email {
 
     public function set_priority($n = 3) {
 
+	$this->priority_raw = $n;
+
         if ($this->mailer_engine == 'phpmailer') {
 
             $this->priority = preg_match('/^[1-5]$/', $n) ? (int) $n : null;
@@ -671,6 +700,8 @@ class MY_Email extends CI_Email {
     // Setting explicitly the body encoding.
     // See https://github.com/ivantcholakov/codeigniter-phpmailer/issues/3
     public function set_encoding($encoding) {
+
+        $this->_encoding_raw = $encoding;
 
         if ($this->mailer_engine == 'phpmailer') {
 
@@ -693,6 +724,8 @@ class MY_Email extends CI_Email {
     // PHPMailer's SMTP debug info level
     // 0 = off, 1 = commands, 2 = commands and data, 3 = as 2 plus connection status, 4 = low level data output.
     public function set_smtp_debug($level) {
+
+        $this->smtp_debug_raw = $level;
 
         $level = (int) $level;
 
@@ -870,13 +903,13 @@ class MY_Email extends CI_Email {
     protected function _copy_property_to_phpmailer($key) {
 
         static $properties = array(
-            '_smtp_auth' => 'SMTPAuth',
             'mailpath' => 'Sendmail',
             'smtp_host' => 'Host',
             'smtp_user' => 'Username',
             'smtp_pass' => 'Password',
             'smtp_port' => 'Port',
             'smtp_timeout' => 'Timeout',
+            '_smtp_auth' => 'SMTPAuth',
         );
 
         if (isset($properties[$key])) {
