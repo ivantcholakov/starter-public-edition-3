@@ -546,8 +546,11 @@ class MY_Email extends CI_Email {
 
 
     // Methods for setting configuration options -------------------------------
-    // Avoid using the following methods directly, use initialize() method for
-    // customizing the configuration options as it is usual for CodeIgniter.
+
+    // Avoid using the configuration setting methods directly. Use the initialize()
+    // method for customizing the configuration options as it is usual for CodeIgniter.
+    // Also, use the configuration file email.php for customizing the default
+    // configuration options.
 
     public function set_protocol($protocol = 'mail') {
 
@@ -605,6 +608,22 @@ class MY_Email extends CI_Email {
         }
 
         return $this;
+    }
+
+    public function set_wrapchars($wrapchars) {
+
+        $wrapchars = (int) $wrapchars;
+
+        $this->wrapchars = $wrapchars;
+
+        if ($this->mailer_engine == 'phpmailer') {
+
+            if (!$this->wordwrap) {
+                $this->phpmailer->WordWrap = 0;
+            } else {
+                $this->phpmailer->WordWrap = $wrapchars;
+            }
+        }
     }
 
     public function set_mailtype($type = 'text') {
@@ -844,19 +863,11 @@ class MY_Email extends CI_Email {
             'smtp_pass' => 'Password',
             'smtp_port' => 'Port',
             'smtp_timeout' => 'Timeout',
-            'wrapchars' => 'WordWrap',
             'charset' => 'CharSet',
         );
 
         if (isset($properties[$key])) {
             $this->phpmailer->{$properties[$key]} = $this->$key;
-        }
-
-        if ($key == 'wrapchars') {
-
-            if (!$this->wordwrap) {
-                $this->phpmailer->WordWrap = 0;
-            }
         }
     }
 
