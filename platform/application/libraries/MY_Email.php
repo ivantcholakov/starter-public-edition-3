@@ -705,7 +705,7 @@ class MY_Email extends CI_Email {
     }
 
 
-    // Overridden methods ------------------------------------------------------
+    // Overridden public methods -----------------------------------------------
 
     public function valid_email($email) {
 
@@ -713,7 +713,7 @@ class MY_Email extends CI_Email {
     }
 
 
-    // Custom methods ----------------------------------------------------------
+    // Custom public methods ---------------------------------------------------
 
     public function full_html($subject, $message) {
 
