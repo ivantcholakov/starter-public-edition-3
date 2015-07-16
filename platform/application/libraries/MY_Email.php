@@ -650,6 +650,22 @@ class MY_Email extends CI_Email {
         return $this;
     }
 
+    public function set_charset($charset) {
+
+        if ($charset !== null) {
+
+            $charset = strtoupper($charset);
+
+            $this->charset = $charset;
+
+            if ($this->mailer_engine == 'phpmailer') {
+                $this->phpmailer->CharSet = $charset;
+            }
+        }
+
+        return $this;
+    }
+
     public function set_priority($n = 3) {
 
         if ($this->mailer_engine == 'phpmailer') {
