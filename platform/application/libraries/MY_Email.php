@@ -633,6 +633,8 @@ class MY_Email extends CI_Email {
                 $this->phpmailer->WordWrap = $wrapchars;
             }
         }
+
+        return $this;
     }
 
     public function set_mailtype($type = 'text') {
