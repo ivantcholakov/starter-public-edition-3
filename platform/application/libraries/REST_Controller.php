@@ -803,31 +803,17 @@ abstract class REST_Controller extends MY_Controller {
      */
     protected function _detect_output_format()
     {
+        // Concatenate formats to a regex pattern e.g. \.(csv|json|xml)
         $pattern = '/\.(' . implode('|', array_keys($this->_supported_formats)) . ')$/';
 
-        // Check if a file extension is used when no get arguments provided
+        // Check if a file extension is used e.g. http://example.com/api/index.json?param1=param2
         $matches = array();
-        if (!$this->_get_args && preg_match($pattern, $this->uri->uri_string(), $matches))
+        if (preg_match($pattern, $this->uri->uri_string(), $matches))
         {
             return $matches[1];
         }
 
-        // Check if a file extension is used
-        elseif ($this->_get_args && is_array(end($this->_get_args)) === FALSE && preg_match($pattern, end($this->_get_args), $matches))
-        {
-            //elseif ($this->_get_args and is_array(end($this->_get_args)) === FALSE and preg_match($pattern, end(array_keys($this->_get_args)), $matches)) {
-            // The key of the last argument
-            $arg_keys = array_keys($this->_get_args);
-            $last_key = end($arg_keys);
-
-            // Remove the extension from arguments too
-            $this->_get_args[$last_key] = preg_replace($pattern, '', $this->_get_args[$last_key]);
-            $this->_args[$last_key] = preg_replace($pattern, '', $this->_args[$last_key]);
-
-            return $matches[1];
-        }
-
-        // Get the format
+        // Get the format via the GET parameter labelled 'format'
         $format = isset($this->_get_args['format']) ? strtolower($this->_get_args['format']) : NULL;
 
         // A format has been passed as an argument in the URL and it is supported
@@ -836,47 +822,45 @@ abstract class REST_Controller extends MY_Controller {
             return $format;
         }
 
-        // Otherwise, check the HTTP_ACCEPT (if it exists and we are allowed)
-        if ($this->config->item('rest_ignore_http_accept') === FALSE && $this->input->server('HTTP_ACCEPT'))
+        // Get the HTTP_ACCEPT server variable
+        $http_accept = $this->input->server('HTTP_ACCEPT');
+
+        // Otherwise, check the HTTP_ACCEPT server variable
+        if ($this->config->item('rest_ignore_http_accept') === FALSE && $http_accept !== NULL)
         {
             // Check all formats against the HTTP_ACCEPT header
             foreach (array_keys($this->_supported_formats) as $format)
             {
                 // Has this format been requested?
-                if (strpos($this->input->server('HTTP_ACCEPT'), $format) !== FALSE)
+                if (strpos($http_accept, $format) !== FALSE)
                 {
-                    // If not HTML or XML assume its right and send it on its way
                     if ($format !== 'html' && $format !== 'xml')
                     {
+                        // If not HTML or XML assume it's correct
                         return $format;
                     }
-
-                    // HTML or XML have shown up as a match
-                    else
+                    elseif ($format === 'html' && strpos($http_accept, 'xml') === FALSE)
                     {
+                        // HTML or XML have shown up as a match
                         // If it is truly HTML, it wont want any XML
-                        if ($format === 'html' && strpos($this->input->server('HTTP_ACCEPT'), 'xml') === FALSE)
-                        {
-                            return $format;
-                        }
-
+                        return $format;
+                    }
+                    else if ($format === 'xml' && strpos($http_accept, 'html') === FALSE)
+                    {
                         // If it is truly XML, it wont want any HTML
-                        elseif ($format === 'xml' && strpos($this->input->server('HTTP_ACCEPT'), 'html') === FALSE)
-                        {
-                            return $format;
-                        }
+                        return $format;
                     }
                 }
             }
-        } // End HTTP_ACCEPT checking
+        }
 
-        // Well, none of that has worked! Let's see if the controller has a default
+        // Check if the controller has a default format
         if (empty($this->rest_format) === FALSE)
         {
             return $this->rest_format;
         }
 
-        // Just use the default format
+        // Obtain the default format from the configuration
         return $this->config->item('rest_default_format');
     }
 
