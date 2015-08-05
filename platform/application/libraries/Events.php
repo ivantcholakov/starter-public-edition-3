@@ -43,6 +43,7 @@ class Events {
     {
         if (!self::$_initialized)
         {
+            self::_load_class(APPPATH.'events.php');
             self::_scan_modules();
             self::$_initialized = true;
         }
@@ -77,40 +78,43 @@ class Events {
         {
             foreach ($module_dirs as $dir)
             {
-                $events_file = APPPATH.'modules/'.$dir.'/events.php';
-
-                // Modified by Ivan Tcholakov, 05-AUG-2015.
-                // See https://github.com/ivantcholakov/starter-public-edition-4/issues/59
-                //$class = 'Events_'.ucfirst(strtolower($dir));
-                //
-                //if (is_file($events_file) && !class_exists($class, false))
-                //{
-                //    include_once $events_file;
-                //
-                //    if (class_exists($class, false))
-                //    {
-                //        new $class;
-                //    }
-                //}
-                if (is_file($events_file))
-                {
-                    $classes = get_declared_classes();
-                    include_once $events_file;
-                    $classes = array_diff(get_declared_classes(), $classes);
-
-                    if (!empty($classes))
-                    {
-                        // No class name convention is enforced.
-                        // Choose class names carefully for avoiding name collisions.
-                        $class = array_shift($classes);
-                        new $class;
-                    }
-                }
-                //
+                self::_load_class(APPPATH.'modules/'.$dir.'/events.php');
             }
         }
 
         return true;
+    }
+
+    private static function _load_class($events_file)
+    {
+        // Modified by Ivan Tcholakov, 05-AUG-2015.
+        // See https://github.com/ivantcholakov/starter-public-edition-4/issues/59
+        //$class = 'Events_'.ucfirst(strtolower($dir));
+        //
+        //if (is_file($events_file) && !class_exists($class, false))
+        //{
+        //    include_once $events_file;
+        //
+        //    if (class_exists($class, false))
+        //    {
+        //        new $class;
+        //    }
+        //}
+        if (is_file($events_file))
+        {
+            $classes = get_declared_classes();
+            include_once $events_file;
+            $classes = array_diff(get_declared_classes(), $classes);
+
+            if (!empty($classes))
+            {
+                // No class name convention is enforced.
+                // Choose class names carefully for avoiding name collisions.
+                $class = array_shift($classes);
+                new $class;
+            }
+        }
+        //
     }
 
     //--------------------------------------------------------------------------
@@ -118,7 +122,7 @@ class Events {
     /**
      * Return all registered event keys
      */
-    static function registered()
+    public static function registered()
     {
         return array_keys(self::$_listeners);
     }
@@ -206,7 +210,7 @@ class Events {
                 $str = '';
                 foreach ($calls as $call)
                 {
-                    //$str .= $call;
+                    // Keep the evil @
                     $str .= @ (string) $call;
                 }
                 return $str;
