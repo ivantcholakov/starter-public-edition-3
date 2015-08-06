@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-echo js('lib/bootstrap3-dialog/bootstrap-dialog.js');
+echo js('lib/bootstrap3-dialog/bootstrap-dialog.min.js');
 
 ?>
 
