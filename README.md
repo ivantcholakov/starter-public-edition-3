@@ -360,7 +360,7 @@ With a little bit older version of this platform the following sites have been c
 * http://salonite.eu/ - an online catalog, beauty salons
 * http://detskigradini.net/ - an online catalog, kindergartens
 * http://sportiada.com/ - an online catalog, sport centers
-* a system for students accomodation, not publicly available
+* a system for students accommodation, not publicly available
 
 Credits
 -------
