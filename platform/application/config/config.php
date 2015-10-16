@@ -552,6 +552,7 @@ $config['parser_valid_drivers'] = array(
     'jsmin',
     'scss',
     'ts',
+    'jsonmin',
 );
 
 /*
