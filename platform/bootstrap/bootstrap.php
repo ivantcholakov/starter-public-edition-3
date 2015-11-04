@@ -81,6 +81,9 @@ if (FCPATH == '' || FCPATH == '/' || !is_dir(FCPATH)) {
     exit(3); // EXIT_CONFIG
 }
 
+// For forward compatibility with Starter 4.
+define('DEFAULTFCPATH', FCPATH);
+
 if (isset($PLATFORMPATH)) {
     define('PLATFORMPATH', rtrim(str_replace('\\', '/', realpath($PLATFORMPATH)), '/').'/');
 } else {
@@ -170,6 +173,9 @@ define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
 
 // The path to the "views" folder
 define('VIEWPATH', APPPATH.'views/');
+
+// For forward compatibility with Starter 4.
+define('COMMONPATH', APPPATH);
 
 // This is the common writable folder to be used by this platform.
 define('WRITABLEPATH', rtrim(str_replace('\\', '/', realpath(dirname(__FILE__).'/../writable')), '/').'/');
