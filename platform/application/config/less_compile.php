@@ -24,14 +24,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'common',
-        'source' => FCPATH.'assets/less/lib/common/common.less',
-        'destination' => FCPATH.'assets/css/lib/common/common.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/common/common.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/common/common.css',
         'compress' => false
     ),
     array(
         'name' => 'common-min',
-        'source' => FCPATH.'assets/less/lib/common/common.less',
-        'destination' => FCPATH.'assets/css/lib/common/common.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/common/common.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/common/common.min.css',
         'compress' => true
     ),
 
@@ -39,14 +39,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'bootstrap-3',
-        'source' => FCPATH.'assets/less/lib/bootstrap-3/bootstrap.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap-3/bootstrap.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap-3/bootstrap.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap-3/bootstrap.css',
         'compress' => false
     ),
     array(
         'name' => 'bootstrap-3-min',
-        'source' => FCPATH.'assets/less/lib/bootstrap-3/bootstrap.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap-3/bootstrap.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap-3/bootstrap.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap-3/bootstrap.min.css',
         'compress' => true
     ),
 
@@ -54,14 +54,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'bootstrap-3-theme',
-        'source' => FCPATH.'assets/less/lib/bootstrap-3/theme.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap-3/bootstrap-theme.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap-3/theme.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap-3/bootstrap-theme.css',
         'compress' => false
     ),
     array(
         'name' => 'bootstrap-3-theme-min',
-        'source' => FCPATH.'assets/less/lib/bootstrap-3/theme.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap-3/bootstrap-theme.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap-3/theme.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap-3/bootstrap-theme.min.css',
         'compress' => true
     ),
 
@@ -69,14 +69,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'font-awesome-4',
-        'source' => FCPATH.'assets/less/lib/font-awesome-4/font-awesome.less',
-        'destination' => FCPATH.'assets/css/lib/font-awesome-4/font-awesome.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/font-awesome-4/font-awesome.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/font-awesome-4/font-awesome.css',
         'compress' => false
     ),
     array(
         'name' => 'font-awesome-4-min',
-        'source' => FCPATH.'assets/less/lib/font-awesome-4/font-awesome.less',
-        'destination' => FCPATH.'assets/css/lib/font-awesome-4/font-awesome.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/font-awesome-4/font-awesome.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/font-awesome-4/font-awesome.min.css',
         'compress' => true
     ),
 
@@ -84,14 +84,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'bootstrap-chosen',
-        'source' => FCPATH.'assets/less/lib/bootstrap-chosen/bootstrap-chosen.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap-chosen/bootstrap-chosen.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap-chosen/bootstrap-chosen.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap-chosen/bootstrap-chosen.css',
         'compress' => false
     ),
     array(
         'name' => 'bootstrap-chosen-min',
-        'source' => FCPATH.'assets/less/lib/bootstrap-chosen/bootstrap-chosen.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap-chosen/bootstrap-chosen.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap-chosen/bootstrap-chosen.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap-chosen/bootstrap-chosen.min.css',
         'compress' => true
     ),
 
@@ -99,14 +99,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'bootstrap-chosen-image',
-        'source' => FCPATH.'assets/less/lib/chosen-image/bootstrap-chosenImage.less',
-        'destination' => FCPATH.'assets/css/lib/chosen-image/bootstrap-chosenImage.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/chosen-image/bootstrap-chosenImage.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/chosen-image/bootstrap-chosenImage.css',
         'compress' => false
     ),
     array(
         'name' => 'bootstrap-chosen-image-min',
-        'source' => FCPATH.'assets/less/lib/chosen-image/bootstrap-chosenImage.less',
-        'destination' => FCPATH.'assets/css/lib/chosen-image/bootstrap-chosenImage.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/chosen-image/bootstrap-chosenImage.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/chosen-image/bootstrap-chosenImage.min.css',
         'compress' => true
     ),
 
@@ -114,14 +114,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'yamm3',
-        'source' => FCPATH.'assets/less/lib/yamm3/yamm.less',
-        'destination' => FCPATH.'assets/css/lib/yamm3/yamm.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/yamm3/yamm.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/yamm3/yamm.css',
         'compress' => false
     ),
     array(
         'name' => 'yamm3-min',
-        'source' => FCPATH.'assets/less/lib/yamm3/yamm.less',
-        'destination' => FCPATH.'assets/css/lib/yamm3/yamm.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/yamm3/yamm.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/yamm3/yamm.min.css',
         'compress' => true
     ),
 
@@ -129,14 +129,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'jasny-bootstrap-3',
-        'source' => FCPATH.'assets/less/lib/jasny-bootstrap-3/jasny-bootstrap-default.less',
-        'destination' => FCPATH.'assets/css/lib/jasny-bootstrap-3/jasny-bootstrap.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/jasny-bootstrap-3/jasny-bootstrap-default.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/jasny-bootstrap-3/jasny-bootstrap.css',
         'compress' => false
     ),
     array(
         'name' => 'jasny-bootstrap-3-min',
-        'source' => FCPATH.'assets/less/lib/jasny-bootstrap-3/jasny-bootstrap-default.less',
-        'destination' => FCPATH.'assets/css/lib/jasny-bootstrap-3/jasny-bootstrap.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/jasny-bootstrap-3/jasny-bootstrap-default.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/jasny-bootstrap-3/jasny-bootstrap.min.css',
         'compress' => true
     ),
 
@@ -144,14 +144,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'bootstrap-social',
-        'source' => FCPATH.'assets/less/lib/bootstrap-social/bootstrap-social-default.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap-social/bootstrap-social.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap-social/bootstrap-social-default.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap-social/bootstrap-social.css',
         'compress' => false
     ),
     array(
         'name' => 'bootstrap-social-min',
-        'source' => FCPATH.'assets/less/lib/bootstrap-social/bootstrap-social-default.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap-social/bootstrap-social.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap-social/bootstrap-social-default.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap-social/bootstrap-social.min.css',
         'compress' => true
     ),
 
@@ -159,14 +159,14 @@ $config['less_compile'] = array(
 
     array(
         'name' => 'bootstrap3-dialog',
-        'source' => FCPATH.'assets/less/lib/bootstrap3-dialog/bootstrap-dialog.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap3-dialog/bootstrap-dialog.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap3-dialog/bootstrap-dialog.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap3-dialog/bootstrap-dialog.css',
         'compress' => false
     ),
     array(
         'name' => 'bootstrap3-dialog-min',
-        'source' => FCPATH.'assets/less/lib/bootstrap3-dialog/bootstrap-dialog.less',
-        'destination' => FCPATH.'assets/css/lib/bootstrap3-dialog/bootstrap-dialog.min.css',
+        'source' => DEFAULTFCPATH.'assets/less/lib/bootstrap3-dialog/bootstrap-dialog.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/bootstrap3-dialog/bootstrap-dialog.min.css',
         'compress' => true
     ),
 
