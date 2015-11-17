@@ -13,6 +13,9 @@
                 See <a href="https://github.com/ivantcholakov/starter-public-edition-4/" target="_blank">https://github.com/ivantcholakov/starter-public-edition-4/</a>
             </p>
 
+            <p>A Font Awesome icon: <i class="fa fa-star"></i></p>
+            <p>A Glyphicon: <span class="glyphicon glyphicon-star"></span></p>
+
             <h2>Self-Diagnostics</h2>
 
             <p><?php echo $diagnostics; ?></p>
