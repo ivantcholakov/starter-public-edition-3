@@ -56,6 +56,9 @@ $route['translate_uri_dashes'] = TRUE;
 // A route for the command-line LESS compiler.
 $route['less/compile/(.+)'] = 'less/compile/index/$1';
 
+// A route for the "on-the-fly" LESS compiler.
+$route['(assets/css/[a-zA-Z0-9_\-\./]+\.css)'] = 'css_server/index/$1';
+
 // Sample REST API routes
 $route['playground/rest/server[-_]api[-_]example/users/(:num)'] = 'playground/rest/server_api_example/users/id/$1'; // Example 4
 $route['playground/rest/server[-_]api[-_]example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'playground/rest/server_api_example/users/id/$1/format/$3$4'; // Example 8
