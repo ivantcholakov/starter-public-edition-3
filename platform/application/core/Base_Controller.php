@@ -10,8 +10,8 @@ class Base_Controller extends MY_Controller {
             ->library('template')
         ;
 
-        $this->template->set_layout('site_example');
-        
+        $this->template->set_layout('front_theme_bs');
+
         $default_title = config_item('default_title');
         $default_description = config_item('default_description');
         $default_keywords = config_item('default_keywords');
