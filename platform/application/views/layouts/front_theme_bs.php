@@ -18,10 +18,6 @@ echo cleartype_ie();
 echo js_platform();
 file_partial('webfontloader');
 
-//echo css('lib/bootstrap-3/bootstrap-no-font-face.min.css');
-//echo css('lib/jasny-bootstrap-3/jasny-bootstrap.min.css');
-//echo css('lib/google-code-prettify/prettify.css');
-//echo css('lib/common/common.min.css');
 echo css('front-theme-bs.min.css');
 
 file_partial('css');
