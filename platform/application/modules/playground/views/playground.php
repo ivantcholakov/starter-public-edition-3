@@ -78,7 +78,8 @@
                     <li><a href="<?php echo site_url('playground/colorbox'); ?>">Colorbox Test</a></li>
                     <li><a href="<?php echo site_url('playground/jsonmin'); ?>">JSON Minification Test</a></li>
                     <li><a href="<?php echo site_url('playground/animate'); ?>">Animate,css Test</a></li>
-               </ul>
+                    <li><a href="<?php echo site_url('playground/material-icons-test'); ?>">Material Icons Test</a></li>
+                </ul>
 
             </div>
 
