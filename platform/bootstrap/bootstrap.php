@@ -224,7 +224,7 @@ define('EXT', '.php');
  * Making sure PEAR packages are to be searched in this site first.
  * --------------------------------------------------------------------
  */
-set_include_path(APPPATH.'third_party/pear'.PATH_SEPARATOR.get_include_path());
+set_include_path(COMMONPATH.'third_party/pear'.PATH_SEPARATOR.get_include_path());
 
 
 /*
@@ -233,11 +233,20 @@ set_include_path(APPPATH.'third_party/pear'.PATH_SEPARATOR.get_include_path());
  * --------------------------------------------------------------------
  */
 
+if (file_exists(COMMONPATH.'config/environment.php')) {
+    include COMMONPATH.'config/environment.php';
+}
+
+if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/environment.php')) {
+    include COMMONPATH.'config/'.ENVIRONMENT.'/environment.php';
+}
+
+if (file_exists(APPPATH.'config/environment.php')) {
+    include APPPATH.'config/environment.php';
+}
+
 if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/environment.php')) {
     include APPPATH.'config/'.ENVIRONMENT.'/environment.php';
-}
-elseif (file_exists(APPPATH.'config/environment.php')) {
-    include APPPATH.'config/environment.php';
 }
 
 
