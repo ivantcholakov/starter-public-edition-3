@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 // Modified by Ivan Tcholakov, 14-FEB-2012.
 //abstract class REST_Controller extends CI_Controller {
-abstract class REST_Controller extends MY_Controller {
+abstract class REST_Controller extends Core_Controller {
 //
 
     // Note: Only the widely used HTTP status codes are documented

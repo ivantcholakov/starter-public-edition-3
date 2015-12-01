@@ -8,7 +8,7 @@
  * echo Modules::run('contact_map_widget/index');
  */
 
-class Contact_map_widget_controller extends MY_Controller {
+class Contact_map_widget_controller extends Core_Controller {
 
     public function __construct() {
 

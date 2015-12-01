@@ -7,7 +7,7 @@
  * Important note: This feature requires Session library/driver to be loaded.
  */
 
-class Captcha_controller extends MY_Controller {
+class Captcha_controller extends Core_Controller {
 
     public function __construct() {
 

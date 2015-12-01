@@ -5,7 +5,7 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
-class Email_controller extends MY_Controller {
+class Email_controller extends Core_Controller {
 
     public function __construct() {
 

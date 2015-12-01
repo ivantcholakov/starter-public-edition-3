@@ -5,7 +5,7 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
-class Submit_controller extends MY_Controller {
+class Submit_controller extends Core_Controller {
 
     public function __construct() {
 

@@ -5,7 +5,7 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
-class Test_controller extends MY_Controller {
+class Test_controller extends Core_Controller {
     
     public function __construct() {
 
@@ -31,7 +31,7 @@ class Test_controller extends MY_Controller {
 
         extract($this->get_message($custom_text));
 
-        $logo = FCPATH.'apple-touch-icon-precomposed.png';
+        $logo = DEFAULTFCPATH.'apple-touch-icon-precomposed.png';
         $has_logo = file_exists($logo);
 
         $body = $this->parser->parse_string(

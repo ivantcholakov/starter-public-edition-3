@@ -7,7 +7,7 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
-class Compile_controller extends MY_Controller {
+class Compile_controller extends Core_Controller {
 
     protected $items;
 
