@@ -5,7 +5,7 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
-class Events_Email {
+class Common_Events_Email {
 
     protected $ci = null;
     protected $settings = null;
