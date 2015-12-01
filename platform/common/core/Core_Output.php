@@ -7,7 +7,7 @@
  * @license The MIT License, http://opensource.org/licenses/MIT for my modifications.
  */
 
-class MY_Output extends CI_Output {
+class Core_Output extends CI_Output {
 
     public function __construct()
     {

@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MY_URI extends CI_URI {
+class Core_URI extends CI_URI {
 
     // This method has been modified for backward compatibility with PHP prior to version 5.2.4.
     public function filter_uri(&$str)

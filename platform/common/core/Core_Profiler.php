@@ -4,7 +4,7 @@
  * @link http://dragffy.com/blog/posts/making-codeigniters-profiler-ajax-compatible
  */
 
-class MY_Profiler extends CI_Profiler {
+class Core_Profiler extends CI_Profiler {
 
     public function __construct() {
 
