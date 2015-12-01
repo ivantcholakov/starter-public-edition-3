@@ -39,7 +39,7 @@ class MX_Lang extends CI_Lang
 
         if (!class_exists('CI')) {
             // This happens before the whole core has been loaded.
-            $alt_path = APPPATH;
+            $alt_path = COMMONPATH;
             return parent::load($langfile, $lang, $return, $add_suffix, $alt_path);
         }
 

@@ -593,6 +593,7 @@ $config['controller_suffix'] = '_controller';
 */
 $config['modules_locations'] = array(
     APPPATH.'modules/' => '../modules/',
+    COMMONPATH.'modules/' => '../../common/modules/',
 );
 
 /*
@@ -608,7 +609,7 @@ $config['modules_locations'] = array(
 */
 
 // Aslo defines PUBLIC_UPLOAD_PATH constant.
-$config['public_upload_path'] = FCPATH.'upload/';
+$config['public_upload_path'] = DEFAULTFCPATH.'upload/';
 
 // Aslo defines PUBLIC_UPLOAD_URL constant.
 $config['public_upload_url'] = '{base_url}'.'upload/';

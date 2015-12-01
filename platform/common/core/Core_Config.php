@@ -5,11 +5,6 @@
  * @license The MIT License, http://opensource.org/licenses/MIT for my modifications.
  */
 
-/* load the MX_Loader class */
-if (!class_exists('MX_Config', false)) {
-    require COMMONPATH.'third_party/MX/Config.php';
-}
-
 class Core_Config extends MX_Config {
 
     /**

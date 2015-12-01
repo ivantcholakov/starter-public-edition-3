@@ -55,6 +55,10 @@ class Modules
     **/
     public static function run($module) {
 
+        // Added by Ivan Tcholakov, 25-JUN-2014.
+        $old_module = get_instance()->load->get_module();
+        //
+
         $method = 'index';
 
         if (($pos = strrpos($module, '/')) != FALSE) {
@@ -72,9 +76,17 @@ class Modules
                 $output = call_user_func_array(array($class, $method), array_slice($args, 1));
                 $buffer = ob_get_clean();
 
+                // Added by Ivan Tcholakov, 25-JUN-2014.
+                get_instance()->load->set_module($old_module);
+                //
+
                 return ($output !== NULL) ? $output : $buffer;
             }
         }
+
+        // Added by Ivan Tcholakov, 25-JUN-2014.
+        get_instance()->load->set_module($old_module);
+        //
 
         log_message('error', "Module controller failed to run: {$module}/{$method}");
     }
@@ -107,13 +119,14 @@ class Modules
         }
 
         /* set the module directory */
-        // Modified by Ivan Tcholakov, 18-OCT-2013.
+        // Modified by Ivan Tcholakov, 16-DEC-2013.
         //$path = APPPATH.'controllers/'.CI::$APP->router->directory;
         $path = resolve_path(APPPATH.'controllers/'.CI::$APP->router->directory).'/';
+        $path_common = resolve_path(COMMONPATH.'controllers/'.CI::$APP->router->directory).'/';
         //
 
         /* load the controller class */
-        // Modified by Ivan Tcholakov, 28-FEB-2012.
+        // Modified by Ivan Tcholakov, 16-DEC-2013.
         //$class = $class.CI::$APP->config->item('controller_suffix');
         if (self::test_load_file(ucfirst($class).CI::$APP->config->item('controller_suffix'), $path)) {
             $class = ucfirst($class).CI::$APP->config->item('controller_suffix');
@@ -123,6 +136,24 @@ class Modules
         }
         elseif (self::test_load_file(ucfirst($class), $path)) {
             $class = ucfirst($class);
+        }
+        //elseif (self::test_load_file($class, $path)) {
+            // Do nothing.
+        //}
+        elseif (self::test_load_file(ucfirst($class).CI::$APP->config->item('controller_suffix'), $path_common)) {
+            $class = ucfirst($class).CI::$APP->config->item('controller_suffix');
+            $path = $path_common;
+        }
+        elseif (self::test_load_file($class.CI::$APP->config->item('controller_suffix'), $path_common)) {
+            $class = $class.CI::$APP->config->item('controller_suffix');
+            $path = $path_common;
+        }
+        elseif (self::test_load_file(ucfirst($class), $path_common)) {
+            $class = ucfirst($class);
+            $path = $path_common;
+        }
+        elseif (self::test_load_file($class, $path_common)) {
+            $path = $path_common;
         }
         //
 
@@ -142,6 +173,11 @@ class Modules
             self::$registry[$key] = new $controller($params);
             self::$registry[$key]->path = $location;
         }
+
+        // Added by Ivan Tcholakov, 03-APR-2014.
+        // A dirty workaround that is needed for Starter 4.
+        self::$registry[$key]->load->set_module(CI::$APP->router->fetch_module());
+        //
 
         return self::$registry[$key];
     }
@@ -216,6 +252,14 @@ class Modules
         $location = $path.$file.'.php';
 
         if (class_exists($file, FALSE)) {
+
+            // Added by Ivan Tcholakov, 02-JUN-2014.
+            // A durty workaround.
+            if ($file == 'Email') {
+                return false;
+            }
+            //
+
             return true;
         }
 
@@ -271,6 +315,12 @@ class Modules
             if (is_file(APPPATH.$base.$path.$file_ext)) {
                 return array(APPPATH.$base.$path, $file);
             }
+
+            // Added by Ivan Tcholakov, 25-JUN-2014.
+            if (is_file(COMMONPATH.$base.$path.$file_ext)) {
+                return array(COMMONPATH.$base.$path, $file);
+            }
+            //
 
             show_error("Unable to locate the {$base} file: {$path}{$file_ext}");
         }

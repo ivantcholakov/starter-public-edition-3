@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MY_Image_lib extends CI_Image_lib
+class Image_lib extends CI_Image_lib
 {
     public $user_width = 0;
     public $user_height = 0;

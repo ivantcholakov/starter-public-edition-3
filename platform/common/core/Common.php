@@ -21,8 +21,25 @@ if ( ! function_exists('get_config'))
 
         if (empty($config))
         {
-            $file_path = APPPATH.'config/config.php';
+            // Added by Ivan Tcholakov, 02-OCT-2013.
+            // Loading the common configuration file first.
+            $file_path = COMMONPATH.'config/config.php';
             $found = FALSE;
+            if (file_exists($file_path))
+            {
+                $found = TRUE;
+                require($file_path);
+            }
+            if (file_exists($file_path = COMMONPATH.'config/'.ENVIRONMENT.'/config.php'))
+            {
+                require($file_path);
+            }
+            //
+
+            $file_path = APPPATH.'config/config.php';
+            // Removed by Ivan Tcholakov, 02-OCT-2013.
+            //$found = FALSE;
+            //
             if (file_exists($file_path))
             {
                 $found = TRUE;
@@ -144,6 +161,43 @@ if ( ! function_exists('load_class'))
 
         $_classes[$class] = new $name();
         return $_classes[$class];
+    }
+}
+
+// ------------------------------------------------------------------------
+
+if ( ! function_exists('get_mimes'))
+{
+    /**
+     * Returns the MIME types array from config/mimes.php
+     *
+     * @return    array
+     */
+    function &get_mimes()
+    {
+        static $_mimes = array();
+
+        if (empty($_mimes))
+        {
+            if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'))
+            {
+                $_mimes = include(APPPATH.'config/'.ENVIRONMENT.'/mimes.php');
+            }
+            elseif (file_exists(APPPATH.'config/mimes.php'))
+            {
+                $_mimes = include(APPPATH.'config/mimes.php');
+            }
+            elseif (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/mimes.php'))
+            {
+                $_mimes = include(COMMONPATH.'config/'.ENVIRONMENT.'/mimes.php');
+            }
+            elseif (file_exists(COMMONPATH.'config/mimes.php'))
+            {
+                $_mimes = include(COMMONPATH.'config/mimes.php');
+            }
+        }
+
+        return $_mimes;
     }
 }
 

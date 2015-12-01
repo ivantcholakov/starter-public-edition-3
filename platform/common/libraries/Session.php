@@ -5,7 +5,7 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
-class MY_Session extends CI_Session {
+class Session extends CI_Session {
 
     public function __construct() {
 

@@ -52,6 +52,7 @@ class Events {
             }
 
             self::_scan_modules();
+            self::_scan_common_modules();
             self::$_initialized = true;
         }
     }
@@ -86,6 +87,42 @@ class Events {
             foreach ($module_dirs as $dir)
             {
                 self::_load_class(APPPATH.'modules/'.$dir.'/events.php');
+            }
+        }
+
+        return true;
+    }
+
+    private static function _scan_common_modules()
+    {
+        $ci = get_instance();
+
+        $ci->load->helper('directory');
+
+        $module_dirs = array();
+
+        $dir_map = directory_map(COMMONPATH.'modules', 1);
+
+        if (!empty($dir_map))
+        {
+            foreach ($dir_map as $key => $name)
+            {
+                if (strpos($name, '.') !== false)
+                {
+                    continue;   // Skip files.
+                }
+
+                $module_dirs[] = rtrim($name, DIRECTORY_SEPARATOR);
+            }
+        }
+
+        @ sort($module_dirs);
+
+        if (!empty($module_dirs))
+        {
+            foreach ($module_dirs as $dir)
+            {
+                self::_load_class(COMMONPATH.'modules/'.$dir.'/events.php');
             }
         }
 

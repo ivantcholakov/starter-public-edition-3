@@ -386,6 +386,16 @@ if ( ! function_exists('convert_accented_characters'))
 
 		if ( ! is_array($array_from))
 		{
+			// Added by Ivan Tcholakov, 26-DEC-2013.
+			if (file_exists(COMMONPATH.'config/foreign_chars.php')) {
+				include COMMONPATH.'config/foreign_chars.php';
+			}
+
+			if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/foreign_chars.php')) {
+				include COMMONPATH.'config/'.ENVIRONMENT.'/foreign_chars.php';
+			}
+			//
+
 			if (file_exists(APPPATH.'config/foreign_chars.php'))
 			{
 				include(APPPATH.'config/foreign_chars.php');

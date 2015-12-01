@@ -40,6 +40,23 @@ class MX_Loader extends CI_Loader
     public $_ci_plugins = array();
     public $_ci_cached_vars = array();
 
+    /**
+     * CORE LOAD CONSTRUCTOR
+     *
+     * Assigns all CI paths to allow common functionality
+     *
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->_ci_library_paths = array(APPPATH, COMMONPATH, BASEPATH);
+        $this->_ci_helper_paths = array(APPPATH, COMMONPATH, BASEPATH);
+        $this->_ci_model_paths = array(APPPATH, COMMONPATH);
+        $this->_ci_view_paths = array(APPPATH.'views/' => TRUE, COMMONPATH.'views/' => TRUE);
+        $this->config->_config_paths = array(COMMONPATH, APPPATH);
+    }
+
     /** Initialize the loader variables **/
     public function initialize($controller = NULL) {
 
@@ -121,6 +138,10 @@ class MX_Loader extends CI_Loader
         {
             require_once APPPATH.'database/DB.php';
         }
+        elseif (file_exists(COMMONPATH.'database/DB.php'))
+        {
+            require_once COMMONPATH.'database/DB.php';
+        }
         else
         {
             require_once BASEPATH.'database/DB.php';
@@ -161,6 +182,10 @@ class MX_Loader extends CI_Loader
         {
             require_once APPPATH.'database/DB_utility.php';
         }
+        elseif (file_exists(COMMONPATH.'database/DB_utility.php'))
+        {
+            require_once COMMONPATH.'database/DB_utility.php';
+        }
         else
         {
             require_once BASEPATH.'database/DB_utility.php';
@@ -169,6 +194,10 @@ class MX_Loader extends CI_Loader
         if (file_exists(APPPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_utility.php'))
         {
             require_once APPPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_utility.php';
+        }
+        elseif (file_exists(COMMONPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_utility.php'))
+        {
+            require_once COMMONPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_utility.php';
         }
         else
         {
@@ -213,6 +242,10 @@ class MX_Loader extends CI_Loader
         {
             require_once APPPATH.'database/DB_forge.php';
         }
+        elseif (file_exists(COMMONPATH.'database/DB_forge.php'))
+        {
+            require_once COMMONPATH.'database/DB_forge.php';
+        }
         else
         {
             require_once BASEPATH.'database/DB_forge.php';
@@ -221,6 +254,10 @@ class MX_Loader extends CI_Loader
         if (file_exists(APPPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_forge.php'))
         {
             require_once APPPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_forge.php';
+        }
+        elseif (file_exists(COMMONPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_forge.php'))
+        {
+            require_once COMMONPATH.'database/drivers/'.$db->dbdriver.'/'.$db->dbdriver.'_forge.php';
         }
         else
         {
@@ -239,6 +276,10 @@ class MX_Loader extends CI_Loader
             //    $class = 'CI_DB_'.$db->dbdriver.'_'.$db->subdriver.'_forge';
             //}
             $driver_path = APPPATH.'database/drivers/'.$db->dbdriver.'/subdrivers/'.$db->dbdriver.'_'.$db->subdriver.'_forge.php';
+            if (!file_exists($driver_path))
+            {
+                $driver_path = COMMONPATH.'database/drivers/'.$db->dbdriver.'/subdrivers/'.$db->dbdriver.'_'.$db->subdriver.'_forge.php';
+            }
             if (!file_exists($driver_path))
             {
                 $driver_path = BASEPATH.'database/drivers/'.$db->dbdriver.'/subdrivers/'.$db->dbdriver.'_'.$db->subdriver.'_forge.php';
@@ -744,7 +785,7 @@ class MX_Loader extends CI_Loader
 
     public function __get($class) {
 
-    return (isset($this->controller)) ? $this->controller->$class : (isset(CI::$APP->$class) ? CI::$APP->$class : load_class(ucfirst($class), 'core'));
+	return (isset($this->controller)) ? $this->controller->$class : (isset(CI::$APP->$class) ? CI::$APP->$class : load_class(ucfirst($class), 'core'));
     }
 
     public function _ci_load($_ci_data) {
@@ -955,6 +996,47 @@ class MX_Loader extends CI_Loader
 
             if (is_array($config_component->_config_paths))
             {
+                // Modified by Ivan Tcholakov, 18-DEC-2014.
+                //$found = FALSE;
+                //foreach ($config_component->_config_paths as $path)
+                //{
+                //    // We test for both uppercase and lowercase, for servers that
+                //    // are case-sensitive with regard to file names. Load global first,
+                //    // override with environment next
+                //    if (file_exists($path.'config/'.strtolower($class).'.php'))
+                //    {
+                //        include($path.'config/'.strtolower($class).'.php');
+                //        $found = TRUE;
+                //    }
+                //    elseif (file_exists($path.'config/'.ucfirst(strtolower($class)).'.php'))
+                //    {
+                //        include($path.'config/'.ucfirst(strtolower($class)).'.php');
+                //        $found = TRUE;
+                //    }
+                //
+                //    if (file_exists($path.'config/'.ENVIRONMENT.'/'.strtolower($class).'.php'))
+                //    {
+                //        include($path.'config/'.ENVIRONMENT.'/'.strtolower($class).'.php');
+                //        $found = TRUE;
+                //    }
+                //    elseif (file_exists($path.'config/'.ENVIRONMENT.'/'.ucfirst(strtolower($class)).'.php'))
+                //    {
+                //        include($path.'config/'.ENVIRONMENT.'/'.ucfirst(strtolower($class)).'.php');
+                //        $found = TRUE;
+                //    }
+                //
+                //    // Break on the first found configuration, thus package
+                //    // files are not overridden by default paths
+                //    if ($found === TRUE)
+                //    {
+                //        break;
+                //    }
+                //}
+                //
+                // Ivan Tcholakov, 18-DEC-2014:
+                // The common configuration files can be overriden.
+                // TODO: A little-bit dirty implementation of this idea.
+                //
                 $found = FALSE;
                 foreach ($config_component->_config_paths as $path)
                 {
@@ -983,30 +1065,46 @@ class MX_Loader extends CI_Loader
                         $found = TRUE;
                     }
 
-                    // Break on the first found configuration, thus package
-                    // files are not overridden by default paths
-                    if ($found === TRUE)
-                    {
+                    if (strpos($path, COMMONPATH) !== 0) {
                         break;
                     }
                 }
+                //
             }
         }
 
         if ($prefix === '')
         {
-            if (class_exists('CI_'.$class, FALSE))
-            {
-                $name = 'CI_'.$class;
-            }
-            elseif (class_exists(config_item('subclass_prefix').$class, FALSE))
+            // Modified by Ivan Tcholakov, 12-OCT-2013.
+            //if (class_exists('CI_'.$class, FALSE))
+            //{
+            //    $name = 'CI_'.$class;
+            //}
+            //elseif (class_exists(config_item('subclass_prefix').$class, FALSE))
+            //{
+            //    $name = config_item('subclass_prefix').$class;
+            //}
+            //else
+            //{
+            //    $name = $class;
+            //}
+            if (class_exists(config_item('subclass_prefix').$class, FALSE))
             {
                 $name = config_item('subclass_prefix').$class;
+            }
+            elseif (class_exists($class, FALSE))
+            {
+                $name = $class;
+            }
+            elseif (class_exists('CI_'.$class, FALSE))
+            {
+                $name = 'CI_'.$class;
             }
             else
             {
                 $name = $class;
             }
+            //
         }
         else
         {
@@ -1194,6 +1292,116 @@ class MX_Loader extends CI_Loader
         // If we got this far we were unable to find the requested class.
         log_message('error', 'Unable to load the requested class: '.$class);
         show_error('Unable to load the requested class: '.$class);
+    }
+
+    // Modified by Ivan Tcholakov, 11-OCT-2013.
+    protected function _ci_autoloader()
+    {
+        $autoload = NULL;
+
+        // A modified way for loading configuration, Ivan Tcholakov.
+        $this->_ci_autoloader_read_config($autoload, COMMONPATH.'config/autoload.php');
+        $this->_ci_autoloader_read_config($autoload, COMMONPATH.'config/'.ENVIRONMENT.'/autoload.php');
+        $this->_ci_autoloader_read_config($autoload, APPPATH.'config/autoload.php');
+        $this->_ci_autoloader_read_config($autoload, APPPATH.'config/'.ENVIRONMENT.'/autoload.php');
+        //
+
+        if ( ! isset($autoload))
+        {
+            return FALSE;
+        }
+
+        // Autoload packages
+        if (isset($autoload['packages']))
+        {
+            foreach ($autoload['packages'] as $package_path)
+            {
+                $this->add_package_path($package_path);
+            }
+        }
+
+        // Load any custom config file
+        if (isset($autoload['config']) && count($autoload['config']) > 0)
+        {
+            $CI =& get_instance();
+            foreach ($autoload['config'] as $key => $val)
+            {
+                $CI->config->load($val);
+            }
+        }
+
+        // Autoload helpers and languages
+        foreach (array('helper', 'language') as $type)
+        {
+            if (isset($autoload[$type]) && count($autoload[$type]) > 0)
+            {
+                $this->$type($autoload[$type]);
+            }
+        }
+
+        // Autoload drivers
+        if (isset($autoload['drivers']))
+        {
+            foreach ($autoload['drivers'] as $item)
+            {
+                $this->driver($item);
+            }
+        }
+
+        // Load libraries
+        if (isset($autoload['libraries']) && count($autoload['libraries']) > 0)
+        {
+            // Load the database driver.
+            if (in_array('database', $autoload['libraries']))
+            {
+                $this->database();
+                $autoload['libraries'] = array_diff($autoload['libraries'], array('database'));
+            }
+
+            // Load all other libraries
+            foreach ($autoload['libraries'] as $item)
+            {
+                $this->library($item);
+            }
+        }
+
+        // Autoload models
+        if (isset($autoload['model']))
+        {
+            $this->model($autoload['model']);
+        }
+    }
+
+    /**
+     * Merges information from autoload.php configuration files in different locations.
+     * @param   null|array  $config_output      The result array (output parameter).
+     * @param   string      $config_file        The current configuration file autoload.php (a full path).
+     * @return  void
+     * @author  Ivan Tcholakov, 2013
+     * @license The MIT License
+     */
+    protected function _ci_autoloader_read_config(& $config_output, $config_file) {
+
+        if (file_exists($config_file)) {
+
+            include($config_file);
+
+            if (isset($autoload) && is_array($autoload)) {
+
+                if (!isset($config_output) || !is_array($config_output)) {
+                    $config_output = array();
+                }
+
+                $config_output = array_merge_recursive($config_output, $autoload);
+
+                foreach ($config_output as & $item) {
+
+                    if (is_array($item)) {
+                        $item = array_values(array_unique($item));
+                    }
+                }
+            }
+        }
     }
 
     public function is_loaded($class) {

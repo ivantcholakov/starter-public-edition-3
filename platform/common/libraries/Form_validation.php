@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MY_Form_validation extends CI_Form_validation {
+class Form_validation extends CI_Form_validation {
 
     public $CI; // See https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/wiki/Home
 

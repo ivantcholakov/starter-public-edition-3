@@ -13,7 +13,7 @@
  * PHPMailer Version 5.2.14+ (November 25, 2015).
  */
 
-class MY_Email extends CI_Email {
+class Email extends CI_Email {
 
     public $phpmailer;  // This property has been made public for testing purposes.
 
@@ -554,7 +554,7 @@ class MY_Email extends CI_Email {
                     //// If your system uses class autoloading feature,
                     //// then the following require statement would not be needed.
                     //if (!class_exists('PHPMailer', false)) {
-                    //    require_once APPPATH.'third_party/phpmailer/PHPMailerAutoload.php';
+                    //    require_once COMMONPATH.'third_party/phpmailer/PHPMailerAutoload.php';
                     //}
                     ////
 

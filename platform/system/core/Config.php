@@ -70,7 +70,10 @@ class CI_Config {
 	 * @used-by	CI_Loader
 	 * @var		array
 	 */
-	public $_config_paths =	array(APPPATH);
+	// Modified by Ivan Tcholakov, 24-DEC-2014.
+	//public $_config_paths =	array(APPPATH);
+	public $_config_paths =	array(COMMONPATH, APPPATH);
+	//
 
 	// --------------------------------------------------------------------
 
@@ -135,7 +138,11 @@ class CI_Config {
 				$file_path = $path.'config/'.$location.'.php';
 				if (in_array($file_path, $this->is_loaded, TRUE))
 				{
-					return TRUE;
+					// Modified by Ivan Tcholakov, 24-DEC-2014.
+					//return TRUE;
+					$loaded = TRUE;
+					continue 2;
+					//
 				}
 
 				if ( ! file_exists($file_path))

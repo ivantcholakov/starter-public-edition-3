@@ -66,4 +66,5 @@ $config['event_registration_classes'] array.
 */
 $config['event_registration_classes'] = array(
     APPPATH.'events.php',
+    COMMONPATH.'events.php',
 );

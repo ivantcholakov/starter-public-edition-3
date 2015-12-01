@@ -53,14 +53,41 @@ function &DB($params = '', $query_builder_override = NULL)
 	// Load the DB config file if a DSN string wasn't passed
 	if (is_string($params) && strpos($params, '://') === FALSE)
 	{
-		// Is the config file in the environment folder?
-		if ( ! file_exists($file_path = APPPATH.'config/'.ENVIRONMENT.'/database.php')
-			&& ! file_exists($file_path = APPPATH.'config/database.php'))
+		// Modified by Ivan Tcholakov, 09-OCT-2013.
+		//// Is the config file in the environment folder?
+		//if ( ! file_exists($file_path = APPPATH.'config/'.ENVIRONMENT.'/database.php')
+		//	&& ! file_exists($file_path = APPPATH.'config/database.php'))
+		//{
+		//	show_error('The configuration file database.php does not exist.');
+		//}
+		//
+		//include($file_path);
+		$config_database_found = false;
+		if (file_exists(COMMONPATH.'config/database.php'))
+		{
+			include COMMONPATH.'config/database.php';
+			$config_database_found = true;
+		}
+		if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/database.php'))
+		{
+			include COMMONPATH.'config/'.ENVIRONMENT.'/database.php';
+			$config_database_found = true;
+		}
+		if (file_exists(APPPATH.'config/database.php'))
+		{
+			include APPPATH.'config/database.php';
+			$config_database_found = true;
+		}
+		if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/database.php'))
+		{
+			include APPPATH.'config/'.ENVIRONMENT.'/database.php';
+			$config_database_found = true;
+		}
+		if (!$config_database_found)
 		{
 			show_error('The configuration file database.php does not exist.');
 		}
-
-		include($file_path);
+		//
 
 		// Modified by Ivan Tcholakov, 05-FEB-2015.
 		//// Make packages contain database config files,
@@ -71,7 +98,10 @@ function &DB($params = '', $query_builder_override = NULL)
 		{
 			foreach (get_instance()->load->get_package_paths() as $path)
 			{
-				if ($path !== APPPATH)
+				// Modified by Ivan Tcholakov, 02-OCT-2013.
+				//if ($path !== APPPATH)
+				if ($path !== APPPATH && $path != COMMONPATH)
+				//
 				{
 					if (file_exists($file_path = $path.'config/'.ENVIRONMENT.'/database.php'))
 					{
@@ -174,6 +204,10 @@ function &DB($params = '', $query_builder_override = NULL)
 	{
 		require_once(APPPATH.'database/DB_driver.php');
 	}
+	elseif (file_exists(COMMONPATH.'database/DB_driver.php'))
+	{
+		require_once(COMMONPATH.'database/DB_driver.php');
+	}
 	else
 	{
 		require_once(BASEPATH.'database/DB_driver.php');
@@ -188,6 +222,10 @@ function &DB($params = '', $query_builder_override = NULL)
 		if (file_exists(APPPATH.'database/DB_query_builder.php'))
 		{
 			require_once(APPPATH.'database/DB_query_builder.php');
+		}
+		elseif (file_exists(COMMONPATH.'database/DB_query_builder.php'))
+		{
+			require_once(COMMONPATH.'database/DB_query_builder.php');
 		}
 		else
 		{
@@ -224,6 +262,10 @@ function &DB($params = '', $query_builder_override = NULL)
 	$driver_file = APPPATH.'database/drivers/'.$params['dbdriver'].'/'.$params['dbdriver'].'_driver.php';
 	if (!file_exists($driver_file))
 	{
+		$driver_file = COMMONPATH.'database/drivers/'.$params['dbdriver'].'/'.$params['dbdriver'].'_driver.php';
+	}
+	if (!file_exists($driver_file))
+	{
 		$driver_file = BASEPATH.'database/drivers/'.$params['dbdriver'].'/'.$params['dbdriver'].'_driver.php';
 	}
 	if (!file_exists($driver_file))
@@ -254,6 +296,10 @@ function &DB($params = '', $query_builder_override = NULL)
 		//	$DB = new $driver($params);
 		//}
 		$driver_file = APPPATH.'database/drivers/'.$DB->dbdriver.'/subdrivers/'.$DB->dbdriver.'_'.$DB->subdriver.'_driver.php';
+		if (!file_exists($driver_file))
+		{
+			$driver_file = COMMONPATH.'database/drivers/'.$DB->dbdriver.'/subdrivers/'.$DB->dbdriver.'_'.$DB->subdriver.'_driver.php';
+		}
 		if (!file_exists($driver_file))
 		{
 			$driver_file = BASEPATH.'database/drivers/'.$DB->dbdriver.'/subdrivers/'.$DB->dbdriver.'_'.$DB->subdriver.'_driver.php';

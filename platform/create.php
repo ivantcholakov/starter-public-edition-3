@@ -153,16 +153,29 @@ if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
     require_once APPPATH.'config/'.ENVIRONMENT.'/constants.php';
 }
 
-require_once APPPATH.'config/constants.php';
+if (file_exists(APPPATH.'config/constants.php'))
+{
+    require_once APPPATH.'config/constants.php';
+}
+
+if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/constants.php'))
+{
+    require_once COMMONPATH.'config/'.ENVIRONMENT.'/constants.php';
+}
+
+require COMMONPATH.'config/constants.php';
+
 
 /*
  * ------------------------------------------------------
  *  Load the global functions
  * ------------------------------------------------------
  */
-// Added by Ivan Tcholakov.
-require_once APPPATH.'core/MY_Common.php';
-//
+if (file_exists(APPPATH.'core/Common.php')) {
+    require_once APPPATH.'core/Common.php';
+}
+
+require COMMONPATH.'core/Common.php';
 require_once BASEPATH.'core/Common.php';
 
 
