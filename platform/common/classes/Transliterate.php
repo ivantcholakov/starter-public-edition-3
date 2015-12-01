@@ -225,6 +225,16 @@ class Transliterate {
 
             if (!isset($search) || !is_array($search)) {
 
+                // Added by Ivan Tcholakov, 03-OCT-2013.
+                if (file_exists(COMMONPATH.'config/foreign_chars.php')) {
+                    include COMMONPATH.'config/foreign_chars.php';
+                }
+
+                if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/foreign_chars.php')) {
+                    include COMMONPATH.'config/'.ENVIRONMENT.'/foreign_chars.php';
+                }
+                //
+
                 if (file_exists(APPPATH.'config/foreign_chars.php')) {
                     include APPPATH.'config/foreign_chars.php';
                 }
