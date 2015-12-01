@@ -12,7 +12,7 @@
  * hierarhical set of pages, categories of products, etc., with internal
  * relationship id - parent_id (tree-like logical structure).
  *
- * A quick example that tests everithing (create Pages model that extends MY_Tree_Model):
+ * A quick example that tests everithing (create Pages model that extends Core_Tree_Model):
  *
  * // Converting and dumping the tree structure as a list.
  * $menu = $this->pages->get_list(
@@ -26,8 +26,8 @@
 
 // If your system uses class autoloading feature,
 // then the following require statement would not be needed.
-//if (!class_exists('MY_Model', false)) {
-//    require dirname(__FILE__).'/MY_Model.php';
+//if (!class_exists('Core_Model', false)) {
+//    require dirname(__FILE__).'/Core_Model.php';
 //}
 
 class Core_Tree_Model extends Core_Model {

@@ -17,7 +17,7 @@
  * ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
  */
 
-class Settings_model extends MY_Model {
+class Settings_model extends Core_Model {
 
     protected $check_for_existing_fields = true;
     public $protected_attributes = array('id');

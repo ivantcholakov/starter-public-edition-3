@@ -487,9 +487,13 @@ if (!function_exists('js_platform')) {
         var BASE_URI = '".BASE_URI."';
         var SERVER_URL = '".SERVER_URL."';
         var SITE_URL = '".SITE_URL."';
+        var site_url = '".site_url()."'; // The language segment is added.
         var SITE_URI = '".SITE_URI."';
+        var site_uri = '".site_uri()."'; // The language segment is added.
         var CURRENT_URL = '".CURRENT_URL."';
         var CURRENT_URI = '".CURRENT_URI."';
+        var DEFAULT_BASE_URL = '".DEFAULT_BASE_URL."';
+        var DEFAULT_BASE_URI = '".DEFAULT_BASE_URI."';
         var ASSET_URI = '".config_item('asset_dir')."';
         var ASSET_IMG_URI = '".image_path('')."';
         var ASSET_JS_URI = '".js_path('')."';

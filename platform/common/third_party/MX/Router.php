@@ -95,19 +95,19 @@ class MX_Router extends CI_Router
     //
 
         // Resolving the language.
-        //if ($router_initialization) {
+        if ($router_initialization) {
 
-        //    if (!empty($segments) && $this->config->valid_language_uri_segment($segments[0])) {
+            if (!empty($segments) && $this->config->valid_language_uri_segment($segments[0])) {
 
-        //        $language = $this->config->language_by_uri_segment($segments[0]);
-        //        array_shift($segments);
-        //        $this->config->set_current_language($language);
+                $language = $this->config->language_by_uri_segment($segments[0]);
+                array_shift($segments);
+                $this->config->set_current_language($language);
 
-        //        if (empty($segments)) {
-        //            $segments = array($this->default_controller, 'index');
-        //        }
-        //    }
-        //}
+                if (empty($segments)) {
+                    $segments = array($this->default_controller, 'index');
+                }
+            }
+        }
 
         // Processing slugs, if there are any.
         if ($router_initialization) {
@@ -509,18 +509,18 @@ class MX_Router extends CI_Router
         // The same check has been placed in locate() method too.
         $segments = $this->uri->segments;
 
-        //if (!empty($segments)) {
+        if (!empty($segments)) {
 
-        //    if ($this->config->valid_language_uri_segment($segments[0])) {
+            if ($this->config->valid_language_uri_segment($segments[0])) {
 
-        //        $this->config->set_current_language($this->config->language_by_uri_segment($segments[0]));
-        //        array_shift($segments);
+                $this->config->set_current_language($this->config->language_by_uri_segment($segments[0]));
+                array_shift($segments);
 
-        //        if (empty($segments)) {
-        //            $segments = array($this->default_controller, 'index');
-        //        }
-        //    }
-        //}
+                if (empty($segments)) {
+                    $segments = array($this->default_controller, 'index');
+                }
+            }
+        }
         //
 
         // Turn the segment array into a URI string
