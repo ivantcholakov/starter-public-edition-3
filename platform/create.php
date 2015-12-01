@@ -760,7 +760,7 @@ if (NORMAL_MVC_EXECUTION) {
 
 } else {
 
-    $found_path = APPPATH.'controllers/'.$class.'.php';
+    $found_path = COMMONPATH.'controllers/'.$class.'.php';
     require $found_path;
 }
 
