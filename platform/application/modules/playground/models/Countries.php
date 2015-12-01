@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Countries extends MY_Model {
+class Countries extends Core_Model {
 
     public $protected_attributes = array('id');
 
