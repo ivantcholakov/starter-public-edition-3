@@ -18,6 +18,70 @@ class Core_Config extends MX_Config {
     {
         $this->config =& get_config();
 
+        // Added by Ivan Tcholakov, 20-JAN-2014.
+        // Load additional configuration data for languages.
+
+        $c = array();
+        $config = array();
+
+        if (file_exists(COMMONPATH.'config/lang.php')) {
+
+            require COMMONPATH.'config/lang.php';
+            $c = array_replace_recursive($c, $config);
+            $config = array();
+        }
+
+        if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/lang.php')) {
+
+            require COMMONPATH.'config/'.ENVIRONMENT.'/lang.php';
+            $c = array_replace_recursive($c, $config);
+            $config = array();
+        }
+
+        if (file_exists(APPPATH.'config/lang.php')) {
+
+            require APPPATH.'config/lang.php';
+            $c = array_replace_recursive($c, $config);
+            $config = array();
+        }
+
+        if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/lang.php')) {
+
+            require APPPATH.'config/'.ENVIRONMENT.'/lang.php';
+            $c = array_replace_recursive($c, $config);
+            $config = array();
+        }
+
+        $c['hide_default_uri_segment'] = !empty($c['hide_default_uri_segment']);
+
+        $languages = isset($c['languages']) && is_array($c['languages']) ? $c['languages'] : array();
+
+        foreach ($languages as $key => $value) {
+
+            if (!isset($value['direction'])) {
+                $languages[$key]['direction'] = 'ltr';
+            }
+
+            if (!isset($value['uri_segment'])) {
+                $languages[$key]['uri_segment'] = $value['code'];
+            }
+        }
+
+        $c['languages'] = $languages;
+
+        $c['default_language'] = $this->config['language'];
+
+        if (!isset($c['enabled_languages']) && !is_array($c['enabled_languages'])) {
+            $c['enabled_languages'] = array($c['default_language']);
+        }
+
+        if (!in_array($c['default_language'], $c['enabled_languages'])) {
+            $c['enabled_languages'][] = $c['default_language'];
+        }
+
+        $this->config = array_replace_recursive($this->config, $c);
+        //
+
         global $DETECT_URL;
 
         // Set the base_url automatically if none was provided
@@ -60,6 +124,28 @@ class Core_Config extends MX_Config {
             define('CURRENT_URL', rtrim(SERVER_URL, '/').CURRENT_URI);
         }
 
+        // Added by Ivan Tcholakov, 13-JAN-2014.
+        if (!defined('DEFAULT_BASE_URL')) {
+
+            if (APPSEGMENT != '') {
+                define('DEFAULT_BASE_URL', preg_replace('/'. preg_quote($this->add_slash(APPSEGMENT), '/') . '$/', '', BASE_URL));
+            } else {
+                define('DEFAULT_BASE_URL', BASE_URL);
+            }
+        }
+        //
+
+        // Added by Ivan Tcholakov, 13-JAN-2014.
+        if (!defined('DEFAULT_BASE_URI')) {
+
+            if (APPSEGMENT != '') {
+                define('DEFAULT_BASE_URI', preg_replace('/'. preg_quote($this->add_slash(APPSEGMENT), '/') . '$/', '', BASE_URI));
+            } else {
+                define('DEFAULT_BASE_URI', BASE_URI);
+            }
+        }
+        //
+
         // Added by Ivan Tcholakov, 26-DEC-2013.
         // See https://github.com/EllisLab/CodeIgniter/issues/2792
         if (!defined('IS_UTF8_CHARSET')) {
@@ -72,7 +158,7 @@ class Core_Config extends MX_Config {
         $public_upload_path = $this->add_slash(
             isset($this->config['public_upload_path']) && $this->config['public_upload_path'] != ''
                 ? $this->config['public_upload_path']
-                : FCPATH.'upload/'
+                : DEFAULTFCPATH.'upload/'
         );
 
         $this->set_item('public_upload_path', $public_upload_path);
@@ -83,8 +169,8 @@ class Core_Config extends MX_Config {
 
         $public_upload_url = $this->add_slash(
             isset($this->config['public_upload_url']) && $this->config['public_upload_url'] != ''
-                ? str_replace('{base_url}', BASE_URL, $this->config['public_upload_url'])
-                : BASE_URL.'upload/'
+                ? str_replace(array('{default_base_url}', '{base_url}'), array(DEFAULT_BASE_URL, BASE_URL), $this->config['public_upload_url'])
+                : DEFAULT_BASE_URL.'upload/'
         );
 
         $this->set_item('public_upload_url', $public_upload_url);
@@ -156,17 +242,22 @@ class Core_Config extends MX_Config {
      *
      * @uses        CI_Config::_uri_string()
      *
-     * @param       string|string[]    $uri         URI string or an array of segments
+     * @param       string|string[]     $uri         URI string or an array of segments
      * @param       string              $protocol
-     * @return    string
+     * @param       string              $language
+     * @return      string
      */
-    public function site_url($uri = '', $protocol = NULL)
+    // Cloned/modified by Ivan Tcholakov, 16-MAR-2014.
+    public function site_url($uri = '', $protocol = NULL, $language = NULL)
     {
-        // Added by Ivan Tcholakov, 12-OCT-2013.
-        if (is_array($uri)) {
+        if (is_array($uri))
+        {
             $uri = implode('/', $uri);
         }
-        //
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
 
         $base_url = $this->slash_item('base_url');
 
@@ -182,6 +273,17 @@ class Core_Config extends MX_Config {
                 $base_url = $protocol.substr($base_url, strpos($base_url, '://'));
             }
         }
+
+        if ($uri == '')
+        {
+            if ($this->hide_default_language_uri_segment() && $language == $this->default_language()) {
+                return $base_url.$this->item('index_page');
+            } else {
+                return $base_url.($this->item('index_page') != '' ? $this->item('index_page').'/' : '').$this->language_uri_segment($language).'/';
+            }
+        }
+
+        $uri = $this->localized($uri, $language);
 
         $uri = $this->_uri_string($uri);
 
@@ -238,16 +340,26 @@ class Core_Config extends MX_Config {
     }
 
     // Added by Ivan Tcholakov, 09-NOV-2013.
-    public function site_uri($uri = '') {
+    public function site_uri($uri = '', $language = NULL) {
 
         if (is_array($uri)) {
             $uri = implode('/', $uri);
         }
 
-        if (empty($uri))
-        {
-            return SITE_URI;
+        if ($language == '') {
+            $language = $this->current_language();
         }
+
+        if ($uri == '')
+        {
+            if ($this->hide_default_language_uri_segment() && $language == $this->default_language()) {
+                return SITE_URI.$this->item('index_page');
+            } else {
+                return SITE_URI.($this->item('index_page') != '' ? $this->item('index_page').'/' : '').$this->language_uri_segment($language).'/';
+            }
+        }
+
+        $uri = $this->localized($uri, $language);
 
         $uri = $this->_uri_string($uri);
 
@@ -275,6 +387,366 @@ class Core_Config extends MX_Config {
         }
 
         return BASE_URI.$this->item('index_page').$uri;
+    }
+
+    // Added by Ivan Tcholakov, 13-JAN-2014.
+    public function default_base_url($uri = '', $protocol = NULL)
+    {
+        if (is_array($uri)) {
+            $uri = implode('/', $uri);
+        }
+
+        $base_url = DEFAULT_BASE_URL;
+
+        if (isset($protocol))
+        {
+            $base_url = $protocol.substr($base_url, strpos($base_url, '://'));
+        }
+
+        return $base_url.ltrim($this->_uri_string($uri), '/');
+    }
+
+    // Added by Ivan Tcholakov, 13-JAN-2014.
+    public function default_base_uri($uri = '') {
+
+        if (is_array($uri)) {
+            $uri = implode('/', $uri);
+        }
+
+        return DEFAULT_BASE_URI.ltrim($this->_uri_string($uri), '/');
+    }
+
+    // Internationalization
+    //--------------------------------------------------------------------------
+
+    // Added by Ivan Tcholakov, 22-JAN-2014.
+    function localized($uri, $language = NULL) {
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
+
+        if ($uri != '') {
+
+            if (!($this->hide_default_language_uri_segment() && $language == $this->default_language())) {
+
+                if (!$this->get_uri_lang($uri)) {
+
+                    if (!preg_match('/(.+)\.(([a-zA-Z0-9]{2,4})|([a-zA-Z0-9]{2}[\-_]{1}[a-zA-Z0-9]{2,3}))$/', $uri)) {
+                        $uri = $this->language_uri_segment($language).'/'.$uri;
+                    }
+                }
+            }
+        }
+
+        return $uri;
+    }
+
+    // Added by Ivan Tcholakov, 22-JAN-2014.
+    // Checks whether the language exists within URI.
+    // When true - returns an array with language segment + rest.
+    public function get_uri_lang($uri = '') {
+
+        if ($uri != '') {
+
+            $result = array();
+
+            $uri = ltrim($uri);
+
+            $uri_expl = explode('/', $uri, 2);
+
+            $result['lang'] = NULL;
+            $result['parts'] = $uri_expl;
+
+            if ($this->valid_language_uri_segment($uri_expl[0])) {
+
+                $result['lang'] = $uri_expl[0];
+
+            } else {
+
+                return false;
+            }
+
+            return $result;
+        }
+
+        return false;
+    }
+
+    // Added by Ivan Tcholakov, 21-JAN-2014.
+    public function multilingual_site() {
+
+        return count($this->enabled_languages()) > 1;
+    }
+
+    // Added by Ivan Tcholakov, 22-JAN-2014.
+    public function hide_default_language_uri_segment() {
+
+        return $this->config['hide_default_uri_segment'];
+    }
+
+    // Added by Ivan Tcholakov, 23-JAN-2014.
+    public function get_language($language) {
+
+        if (array_key_exists($language, $this->config['languages'])) {
+            return $this->config['languages'][$language];
+        }
+
+        return null;
+    }
+
+    // Added by Ivan Tcholakov, 22-JAN-2014.
+    public function set_current_language($language) {
+
+        if ($this->valid_language($language)) {
+            $this->set_item('language', $language);
+        } else {
+            $this->set_item('language', $this->default_language());
+        }
+    }
+
+    // Added by Ivan Tcholakov, 22-JAN-2014.
+    public function current_language() {
+
+        return $this->config['language'];
+    }
+
+    // Added by Ivan Tcholakov, 26-APR-2014.
+    public function current_language_code() {
+
+        return $this->language_code($this->current_language());
+    }
+
+    // Added by Ivan Tcholakov, 26-APR-2014.
+    public function english_language() {
+
+        return 'english';
+    }
+
+    // Added by Ivan Tcholakov, 26-APR-2014.
+    public function english_language_code() {
+
+        return 'en';
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function default_language() {
+
+        return $this->config['default_language'];
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function default_language_code() {
+
+        return $this->language_code($this->default_language());
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function default_language_uri_segment() {
+
+        return $this->language_uri_segment($this->default_language());
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function enabled_languages() {
+
+        return $this->config['enabled_languages'];
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function enabled_languages_codes() {
+
+        $result = array();
+
+        foreach ($this->enabled_languages() as $language) {
+            $result[] = $this->language_code($language);
+        }
+
+        return $result;
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function enabled_languages_uri_segments() {
+
+        $result = array();
+
+        foreach ($this->enabled_languages() as $language) {
+            $result[] = $this->language_uri_segment($language);
+        }
+
+        return $result;
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function valid_language($language) {
+
+        return in_array($language, $this->enabled_languages());
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function valid_language_code($code) {
+
+        return $this->valid_language($this->language_by_code($code));
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function valid_language_uri_segment($uri_segment) {
+
+        return $this->valid_language($this->language_by_uri_segment($uri_segment));
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function language_by_code($code) {
+
+        foreach ($this->config['languages'] as $key => $value) {
+
+            if ($value['code'] == $code) {
+                return $key;
+            }
+        }
+
+        return null;
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function language_by_uri_segment($uri_segment) {
+
+        foreach ($this->config['languages'] as $key => $value) {
+
+            if ($value['uri_segment'] == $uri_segment) {
+                return $key;
+            }
+        }
+
+        return null;
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function language_code($language = null) {
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
+
+        if (array_key_exists($language, $this->config['languages'])) {
+            return $this->config['languages'][$language]['code'];
+        }
+
+        return null;
+    }
+
+    /**
+     * Retrieves a custom language code that exist within the configuration data under the specified key.
+     * This is for serving addins that identify languages with their own sets of codes.
+     *
+     * Example: $phpmailer_lang = $this->config->language_custom_code('phpmailer', 'bulgarian);
+     * For this example there must be 'phpmailer' configuration item (non-mandatory) for the corredponding language
+     * within the configuration file lang.php:
+     *
+     * ...
+     * 'bulgarian' => array(
+     *     'code' => 'bg',              // CLDR language code.
+     *     'direction' => 'ltr',        // This is the value by default, you may omit it.
+     *     'uri_segment' => 'bg',       // If this value == value[code], you may omit it.
+     *     'name' => 'Български',       // Native name.
+     *     'name_en' => 'Bulgarian',    // Name in English.
+     *     'flag' => 'BG',              // Flag (country code).
+     *     'phpmailer' => 'bg',         // Language code used by PHPMailer, in this specific language it can be omited.
+     * ),
+     * ...
+     *
+     * @param string        $key        The key for accessing the custom code.
+     * @param string/null   $language   The language.
+     * @return string/null              Returns the custom code or if not found - the conventional (CLDR) language code.
+     */
+    public function language_custom_code($key, $language = null) {
+
+        $key = (string) $key;
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
+
+        if (array_key_exists($language, $this->config['languages'])) {
+
+            if (array_key_exists($key, $this->config['languages'][$language])) {
+                return $this->config['languages'][$language][$key];
+            }
+
+            return $this->config['languages'][$language]['code'];
+        }
+
+        return null;
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function language_uri_segment($language = null) {
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
+
+        if (array_key_exists($language, $this->config['languages'])) {
+            return $this->config['languages'][$language]['uri_segment'];
+        }
+
+        return null;
+    }
+
+    // Added by Ivan Tcholakov, 20-JAN-2014.
+    public function language_direction($language = null) {
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
+
+        if (array_key_exists($language, $this->config['languages'])) {
+            return $this->config['languages'][$language]['direction'];
+        }
+
+        return null;
+    }
+
+    // Added by Ivan Tcholakov, 18-APR-2014.
+    public function language_name($language = null) {
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
+
+        if (array_key_exists($language, $this->config['languages'])) {
+            return $this->config['languages'][$language]['name'];
+        }
+
+        return null;
+    }
+
+    // Added by Ivan Tcholakov, 18-APR-2014.
+    public function language_name_en($language = null) {
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
+
+        if (array_key_exists($language, $this->config['languages'])) {
+            return $this->config['languages'][$language]['name_en'];
+        }
+
+        return null;
+    }
+
+    // Added by Ivan Tcholakov, 31-MAY-2014.
+    public function language_flag($language = null) {
+
+        if ($language == '') {
+            $language = $this->current_language();
+        }
+
+        if (array_key_exists($language, $this->config['languages'])) {
+            return $this->config['languages'][$language]['flag'];
+        }
+
+        return null;
     }
 
 }

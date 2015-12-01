@@ -148,7 +148,12 @@ if (PLATFORMDESTROY == '' || !is_file(PLATFORMDESTROY)) {
 
 define('APPPATH', PLATFORMPATH.'application/');
 
-// Check the path to the "applications" folder.
+// The url segment of the application, counted from the root public directory of the site.
+define('APPSEGMENT', rtrim(str_replace(DEFAULTFCPATH, '', FCPATH), '/'));
+
+// Is this application default (i.e. at the root public directory of the site)?
+define('ISDEFAULTAPP', APPSEGMENT != '');
+
 if (!is_dir(APPPATH)) {
     header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
     echo 'Your application root folder path (APPPATH) does not appear to be set correctly. Please, make corrections within the following file: '.__FILE__;
