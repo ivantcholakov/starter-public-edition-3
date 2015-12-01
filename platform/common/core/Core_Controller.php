@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 if (!class_exists('MX_Controller', false)) {
-    require APPPATH.'third_party/MX/Controller.php';
+    require COMMONPATH.'third_party/MX/Controller.php';
 }
 
 class Core_Controller extends MX_Controller {

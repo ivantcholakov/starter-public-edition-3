@@ -2,8 +2,10 @@
 
 $PLATFORMPATH = dirname(__FILE__).'/../platform';
 
+$DEFAULTFCPATH = dirname(__FILE__);
+
 if (!isset($FCPATH)) {
-    $FCPATH = dirname(__FILE__);
+    $FCPATH = $DEFAULTFCPATH;
 }
 
 if (!isset($SELF)) {

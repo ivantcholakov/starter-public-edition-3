@@ -81,8 +81,18 @@ if (FCPATH == '' || FCPATH == '/' || !is_dir(FCPATH)) {
     exit(3); // EXIT_CONFIG
 }
 
-// For forward compatibility with Starter 4.
-define('DEFAULTFCPATH', FCPATH);
+if (isset($DEFAULTFCPATH)) {
+    define('DEFAULTFCPATH', rtrim(str_replace('\\', '/', realpath($DEFAULTFCPATH)), '/').'/');
+} else {
+    define('DEFAULTFCPATH', '');
+}
+
+// Check the path to the front controller of the default site.
+if (DEFAULTFCPATH == '' || DEFAULTFCPATH == '/' || !is_dir(DEFAULTFCPATH)) {
+    header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+    echo 'Your front controller folder path of the default site (DEFAULTFCPATH) does not appear to be set correctly.';
+    exit(3); // EXIT_CONFIG
+}
 
 if (isset($PLATFORMPATH)) {
     define('PLATFORMPATH', rtrim(str_replace('\\', '/', realpath($PLATFORMPATH)), '/').'/');
@@ -174,8 +184,14 @@ define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
 // The path to the "views" folder
 define('VIEWPATH', APPPATH.'views/');
 
-// For forward compatibility with Starter 4.
-define('COMMONPATH', APPPATH);
+// The path to the "common" folder
+define('COMMONPATH', rtrim(str_replace('\\', '/', realpath(dirname(__FILE__).'/../common')), '/').'/');
+
+if (COMMONPATH == '' || COMMONPATH == '/' || !is_dir(COMMONPATH)) {
+    header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+    echo 'Your common folder path (COMMONPATH) does not appear to be set correctly. Please, make corrections within the following file: '.__FILE__;
+    exit(3); // EXIT_CONFIG
+}
 
 // This is the common writable folder to be used by this platform.
 define('WRITABLEPATH', rtrim(str_replace('\\', '/', realpath(dirname(__FILE__).'/../writable')), '/').'/');

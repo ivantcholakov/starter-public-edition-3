@@ -7,7 +7,7 @@
 
 /* load the MX_Loader class */
 if (!class_exists('MX_Config', false)) {
-    require APPPATH.'third_party/MX/Config.php';
+    require COMMONPATH.'third_party/MX/Config.php';
 }
 
 class Core_Config extends MX_Config {
