@@ -69,7 +69,7 @@ class Email_test_controller extends Base_Controller {
 
         extract(Modules::run('email/test/get_message'));
 
-        $has_logo = file_exists(FCPATH.'apple-touch-icon-precomposed.png');
+        $has_logo = file_exists(DEFAULTFCPATH.'apple-touch-icon-precomposed.png');
 
         $body = $this->parser->parse_string(
             $body,
