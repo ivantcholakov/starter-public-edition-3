@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Base_Widget_Controller extends MY_Controller {
+class Base_Widget_Controller extends Core_Controller {
 
     public function __construct() {
 
