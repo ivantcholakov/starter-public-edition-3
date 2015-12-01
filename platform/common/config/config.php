@@ -612,7 +612,7 @@ $config['modules_locations'] = array(
 $config['public_upload_path'] = DEFAULTFCPATH.'upload/';
 
 // Aslo defines PUBLIC_UPLOAD_URL constant.
-$config['public_upload_url'] = '{base_url}'.'upload/';
+$config['public_upload_url'] = '{default_base_url}'.'upload/';
 
 // Aslo defines PLATFORM_UPLOAD_PATH constant.
 $config['platform_upload_path'] = PLATFORMPATH.'upload/';
