@@ -8,7 +8,7 @@
  * echo Modules::run('contact_info_widget/index');
  */
 
-class Main_menu_widget_controller extends MY_Controller {
+class Main_menu_widget_controller extends Core_Controller {
 
     public function __construct() {
 

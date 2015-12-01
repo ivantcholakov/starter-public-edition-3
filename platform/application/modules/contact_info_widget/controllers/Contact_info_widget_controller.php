@@ -47,7 +47,7 @@ class Contact_info_widget_controller extends Core_Controller {
 
         if (empty($contacts)) {
 
-            $contacts[] = $this->settings->get(array(
+            $contacts[] = $this->settings->lang(array(
                 'contact_organization',
                 'contact_address',
                 'contact_phone',

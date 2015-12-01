@@ -20,3 +20,11 @@
             <h2>Self-Diagnostics</h2>
 
             <p><?php echo $diagnostics; ?></p>
+
+            <h2>Internationalization Test</h2>
+
+            <p>
+                Switch language by using the menu, see top, right. The text below should be properly translated.
+            </p>
+
+            <p>A translated text: <strong><?php echo lang('welcome.hello'); ?></strong></p>

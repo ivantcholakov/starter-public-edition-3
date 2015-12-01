@@ -5,11 +5,13 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
-class Welcome extends Base_Controller {
+class Welcome_controller extends Base_Controller {
 
     public function __construct() {
 
         parent::__construct();
+
+        $this->lang->load('welcome');
 
         $this->template
             ->title('Application Starter 3 Public Edition')
@@ -79,7 +81,7 @@ class Welcome extends Base_Controller {
 
         } else {
 
-            $diagnostics[] = 'Mailer service - <span style="color: red">disabled. Check $config[\'mailer_enabled\'] option within platform/application/config/config_site.php. Check also the mailer settings within platform/application/config/email.php.</span>';
+            $diagnostics[] = 'Mailer service - <span style="color: red">disabled. Check $config[\'mailer_enabled\'] option within platform/core/common/config/config_site.php. Check also the mailer settings within platform/core/common/config/email.php.</span>';
         }
 
         $diagnostics[] = '<br /><strong>UTF-8 support:</strong>';

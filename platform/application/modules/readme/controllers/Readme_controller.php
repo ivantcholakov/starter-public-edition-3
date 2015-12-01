@@ -28,11 +28,11 @@ class Readme_controller extends Base_Controller {
         if (file_exists(PLATFORMPATH.'../README.md')) {
             $path = realpath(PLATFORMPATH.'../README.md');
         }
-        elseif (file_exists(FCPATH.'../README.md')) {
-            $path = realpath(FCPATH.'../README.md');
+        elseif (file_exists(DEFAULTFCPATH.'../README.md')) {
+            $path = realpath(DEFAULTFCPATH.'../README.md');
         }
-        elseif (file_exists(FCPATH.'README.md')) {
-            $path = FCPATH.'README.md';
+        elseif (file_exists(DEFAULTFCPATH.'README.md')) {
+            $path = DEFAULTFCPATH.'README.md';
         }
 
         $this->template
