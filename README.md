@@ -48,6 +48,7 @@ Don't forget to check platform/writable folder, it should be writable.
 
 Have a look at the files .htaccess and robots.txt and adjust them for your site.
 The PHP configuration files of the application you may find at platform/application/config/ folder.
+Also, the common PHP configuration files you may find at platform/common/config/ folder.
 
 The platform auto-detects its base URL address nevertheless its public part is on the document root of the web-server or not.
 I don't expect you to be forced to set it up manually within platform/application/config/config.php.
@@ -57,6 +58,9 @@ Features
 
 * CodeIgniter 3.0, http://codeigniter.com/, https://github.com/bcit-ci/CodeIgniter
 * On a web-server you can place your site (www folder) within a subdirectory.
+* Codeigniter Cross Modular Extensions - XHMVC,
+https://bitbucket.org/xperez/codeigniter-cross-modular-extensions-xhmvc,
+http://www.4amics.com/x.perez/2013/06/xhmvc-common-modular-extensions/ (only the essential piece of code).
 * Support for the old CI 2.x class/file name convention. When you port your older libraries, models, and controllers,
 you would not be forced to rename them according to the new strict "ucfirst" naming convention.
 * Native PHP session support by default.
@@ -103,11 +107,12 @@ The technique of this hack is available, but it is not mandatory.
 * CodeIgniter Asset Library by Phil Sturgeon.
 * UTF-8 string support for CodeIgniter based on Kohana's implementation, https://github.com/ivantcholakov/codeigniter-utf8
 * PHP fallback function http_build_url(), https://github.com/ivantcholakov/http_build_url
-* MY_Model, https://github.com/ivantcholakov/codeigniter-base-model
+* Core_Model, see https://github.com/ivantcholakov/codeigniter-base-model
 * Some basic javascripts.
 * normalize.css, a collection of HTML element and attribute style-normalizations, https://github.com/necolas/normalize.css
 * Modernizr, a JavaScript library that detects HTML5 and CSS3 features in the user’s browser, http://modernizr.com
 * html5shiv.js and html5shiv-printshiv.js (separate, packed within Modernizr too) - The HTML5 Shiv enables use of HTML5 sectioning elements in legacy Internet Explorer and provides basic HTML5 styling for Internet Explorer 6-9, Safari 4.x (and iPhone 3.x), and Firefox 3.x., https://github.com/aFarkas/html5shiv
+* Internationalization, initially based on CodeIgniter 2.1 internationalization i18n, https://github.com/bcit-ci/CodeIgniter/wiki/CodeIgniter-2.1-internationalization-i18n, but totally reworked.
 * cURL library for CodeIgniter, https://github.com/philsturgeon/codeigniter-curl
 * CodeIgniter-REST Client, https://github.com/philsturgeon/codeigniter-restclient
 * CodeIgniter Rest Server, https://github.com/chriskacerguis/codeigniter-restserver
@@ -125,7 +130,7 @@ The technique of this hack is available, but it is not mandatory.
 * A PHP class for transliteration, https://github.com/ivantcholakov/transliterate
 * AES (256, 192, 128) Symmetric Encryption, Compatible with OpenSSL, https://github.com/ivantcholakov/gibberish-aes-php
 * HTML Purifier, http://htmlpurifier.org/
-* MY_Lang, language translations: Support has been implemented for placeholders %s, %d, etc.
+* Core_Lang, language translations: Support has been implemented for placeholders %s, %d, etc.
 * Translation within views by using i18n tag, http://devzone.zend.com/1441/zend-framework-and-translation/
 
 How to use this feature:
@@ -228,11 +233,11 @@ echo $this->markdownify->parse('hello.html', NULL, TRUE);
 // LESS parser
 $this->load->parser('less');
 echo $this->less->parse_string('@color: #4D926F; #header { color: @color; } h2 { color: @color; }', NULL, TRUE);
-echo $this->less->parse(FCPATH.'assets/less/lib/bootstrap-3/bootstrap.less', NULL, TRUE);
+echo $this->less->parse(DEFAULTFCPATH.'assets/less/lib/bootstrap-3/bootstrap.less', NULL, TRUE);
 ```
 
-Within the folder platform/application/libraries/Parser/drivers/ you may see all the additional parser drivers implemented.
-Also within the folder platform/application/config/ you may find the corresponding configuration files for the drivers,
+Within the folder platform/common/libraries/Parser/drivers/ you may see all the additional parser drivers implemented.
+Also within the folder platform/common/config/ you may find the corresponding configuration files for the drivers,
 name by convention parser_*driver_name*.php. Better don't tweak the default configuration options, you may alter them
 directly on parser call where it is needed.
 
@@ -279,7 +284,7 @@ $this->template
 * CodeIgniter Checkbox Helper, https://gist.github.com/mikedfunk/4004986
 * Configured LESS-assets compiler has been added.
 
-Have a look at platform/application/config/less_compile.php file. It contains a list of files (sources, destinations)
+Have a look at platform/common/config/less_compile.php file. It contains a list of files (sources, destinations)
 to be used for LESS to CSS compilation. You may edit this list according to your needs. Before compilation, make sure
 that destination files (if exist) are writable and their containing folders are writable too.
 
@@ -297,7 +302,7 @@ php cli.php less compile bootstrap-3 bootstrap-3-min
 ```
 
 * A way for database classes/drivers modification: Files under platform/core/framework/database/ folder may be copied
-into platform/applications/{application_name}/database.
+into platform/common/database/ (the prefered location) or platform/application/database.
 The copied files can be modified/customized. See https://github.com/ivantcholakov/starter-public-edition-4/issues/5
 * CodeIgniter Cache Helper, https://github.com/stevenbenner/codeigniter-cache-helper
 * auto_link() helper accepts attributes, https://github.com/bcit-ci/CodeIgniter/wiki/auto-link
@@ -308,6 +313,7 @@ The copied files can be modified/customized. See https://github.com/ivantcholako
 * Bootstrap Hover Dropdown Plugin, https://github.com/CWSpear/bootstrap-hover-dropdown
 * jQuery Validation Plugin, http://jqueryvalidation.org/
 * Extended JavaScript regular expressions XRegExp, http://xregexp.com/
+* DataTables jQuery plugin (http://datatables.net) and Datatable library for server-side processing support.
 * An icon subset of flags from GoSquared, https://www.gosquared.com/resources/flag-icons/
 * Bootstrap Vertical Tabs, https://github.com/dbtek/bootstrap-vertical-tabs
 * Jasny Bootstrap, The missing components for your favorite front-end framework, http://jasny.github.io/bootstrap/, https://github.com/jasny/bootstrap
