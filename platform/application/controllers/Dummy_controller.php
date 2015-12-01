@@ -2,7 +2,7 @@
 
 // Please, do not remove this dummy controller, it is needed for special core initialization.
 
-class Dummy_controller extends MY_Controller {
+class Dummy_controller extends Core_Controller {
 
     public function __construct() {
 
