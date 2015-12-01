@@ -47,7 +47,7 @@ class Image_process_controller extends Base_Controller {
             ->helper('url')
         ;
 
-        $this->image_base_url = base_url();
+        $this->image_base_url = default_base_url();
         $this->image_base_path = DEFAULTFCPATH;
 
         // The following options could be taken from a configuration file.

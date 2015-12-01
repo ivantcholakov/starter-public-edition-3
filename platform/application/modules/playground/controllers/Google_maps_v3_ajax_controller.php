@@ -6,8 +6,7 @@ class Google_maps_v3_ajax_controller extends Base_Ajax_Controller {
 
         parent::__construct();
 
-        $this->load->config('db');
-        $this->load->database($this->config->item('db'), false, true);
+        $this->load->database();
         $this->load->model('map');
     }
 

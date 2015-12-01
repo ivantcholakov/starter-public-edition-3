@@ -73,7 +73,7 @@ class Email_test_controller extends Base_Controller {
 
         $body = $this->parser->parse_string(
             $body,
-            array('has_logo' => $has_logo, 'logo_src' => base_url('apple-touch-icon-precomposed.png')),
+            array('has_logo' => $has_logo, 'logo_src' => default_base_url('apple-touch-icon-precomposed.png')),
             true,
             'mustache'
         );

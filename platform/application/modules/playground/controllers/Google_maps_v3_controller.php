@@ -16,9 +16,6 @@ class Google_maps_v3_controller extends Base_Controller {
         $this->driver_ok = extension_loaded('pdo_sqlite');
 
         if ($this->driver_ok) {
-
-            $this->load->config('db');
-            $this->load->database($this->config->item('db'), false, true);
             $this->load->database();
         }
 

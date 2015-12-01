@@ -17,8 +17,7 @@ class Jquery_chosen_controller extends Base_Controller {
 
         if ($this->driver_ok) {
 
-            $this->load->config('db');
-            $this->load->database($this->config->item('db'), false, true);
+            $this->load->database();
             $this->load->model('countries');
         }
 
