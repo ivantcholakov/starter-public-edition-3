@@ -6,6 +6,56 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
+if (!function_exists('doctype')) {
+
+    /**
+     * Doctype
+     *
+     * Generates a page document type declaration
+     *
+     * Examples of valid options: html5, xhtml-11, xhtml-strict, xhtml-trans,
+     * xhtml-frame, html4-strict, html4-trans, and html4-frame.
+     * All values are saved in the doctypes config file.
+     *
+     * @param     string  type    The doctype to be generated (a short key)
+     * @return    string
+     */
+    function doctype($type = 'xhtml1-strict') {
+
+        static $doctypes;
+
+        if (!isset($doctypes) || !is_array($doctypes)) {
+
+            if (file_exists(COMMONPATH.'config/doctypes.php')) {
+                include(COMMONPATH.'config/doctypes.php');
+            }
+
+            if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/doctypes.php')) {
+                include(COMMONPATH.'config/'.ENVIRONMENT.'/doctypes.php');
+            }
+
+            if (file_exists(APPPATH.'config/doctypes.php')) {
+                include(APPPATH.'config/doctypes.php');
+            }
+
+            if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php')) {
+                include(APPPATH.'config/'.ENVIRONMENT.'/doctypes.php');
+            }
+
+            if (empty($_doctypes) || !is_array($_doctypes)) {
+
+                $doctypes = array();
+                return false;
+            }
+
+            $doctypes = $_doctypes;
+        }
+
+        return isset($doctypes[$type]) ? $doctypes[$type] : false;
+    }
+
+}
+
 if (!function_exists('html_to_text')) {
 
     function html_to_text($html) {

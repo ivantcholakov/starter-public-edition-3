@@ -102,6 +102,10 @@ if (!function_exists('file_partial')) {
         $base_path = isset($data['template_views']) ? $data['template_views'] : VIEWPATH;
 
         if (!file_exists($base_path.'partials/'.$file.'.'.$ext)) {
+            $base_path = COMMONPATH.'views/';
+        }
+
+        if (!file_exists($base_path.'partials/'.$file.'.'.$ext)) {
             return;
         }
 

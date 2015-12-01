@@ -100,7 +100,7 @@ if (!function_exists('recursive_chmod')) {
     require dirname(__FILE__).'/config.php'; // This is www/config.php file.
     require $PLATFORMCREATE;
 
-    $dir = FCPATH.'images/';
+    $dir = DEFAULTFCPATH.'images/';
     ci()->load->helper('file');
 
     recursive_chmod($dir, FILE_WRITE_MODE, DIR_WRITE_MODE);
@@ -172,6 +172,14 @@ if (!function_exists('recursive_chmod')) {
             static $_icons;
 
             if (!isset($_icons)) {
+
+                if (file_exists(COMMONPATH.'config/file_type_icons.php')) {
+                    include(COMMONPATH.'config/file_type_icons.php');
+                }
+
+                if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/file_type_icons.php')) {
+                    include(COMMONPATH.'config/'.ENVIRONMENT.'/file_type_icons.php');
+                }
 
                 if (file_exists(APPPATH.'config/file_type_icons.php')) {
                     include(APPPATH.'config/file_type_icons.php');

@@ -19,6 +19,14 @@ if (!function_exists('_get_smiley_array')) {
 
         if (!isset($_smileys)) {
 
+            if (file_exists(COMMONPATH.'config/smileys.php')) {
+                include(COMMONPATH.'config/smileys.php');
+            }
+
+            if (file_exists(COMMONPATH.'config/'.ENVIRONMENT.'/smileys.php')) {
+                include(COMMONPATH.'config/'.ENVIRONMENT.'/smileys.php');
+            }
+
             if (file_exists(APPPATH.'config/smileys.php')) {
                 include(APPPATH.'config/smileys.php');
             }
