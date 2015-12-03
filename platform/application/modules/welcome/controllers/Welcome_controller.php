@@ -13,10 +13,6 @@ class Welcome_controller extends Base_Controller {
 
         $this->lang->load('welcome');
 
-        $this->template
-            ->title('Application Starter 3 Public Edition')
-        ;
-
         $this->registry->set('nav', 'home');
     }
 
