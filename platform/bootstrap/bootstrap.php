@@ -152,13 +152,13 @@ define('APPSPATH', null);
 if (isset($APPNAME)) {
     define('APPNAME', trim(str_replace(array('\\', '-'), array('/', '_'), $APPNAME), ' /'));
 } else {
-    define('APPNAME', 'default');
+    define('APPNAME', '');
 }
 
 if (isset($DEFAULTAPPNAME)) {
     define('DEFAULTAPPNAME', trim(str_replace(array('\\', '-'), array('/', '_'), $DEFAULTAPPNAME), ' /'));
 } else {
-    define('DEFAULTAPPNAME', 'default');
+    define('DEFAULTAPPNAME', '');
 }
 
 // The url segment of the application, counted from the root public directory of the site.
