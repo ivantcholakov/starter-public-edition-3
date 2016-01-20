@@ -11,8 +11,6 @@ class Readme_controller extends Base_Controller {
 
         parent::__construct();
 
-        $this->load->parser();
-
         $this->template
             ->title('README')
         ;
@@ -33,6 +31,10 @@ class Readme_controller extends Base_Controller {
         }
         elseif (file_exists(DEFAULTFCPATH.'README.md')) {
             $path = DEFAULTFCPATH.'README.md';
+        }
+
+        if ($path != '') {
+            $content = $this->load->view($path, null, true, array('markdown' => array('full_path' => true)));
         }
 
         $this->template
