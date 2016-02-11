@@ -393,6 +393,10 @@ With a little bit older version of this platform the following sites have been c
 * http://sportiada.com/ - an online catalog, sport centers
 * a system for students accommodation, not publicly available
 
+Reported by Webnice Ltd., http://webnicebg.com
+
+* http://mycity.bg (city information, public events)
+
 Credits
 -------
 
