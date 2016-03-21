@@ -15,7 +15,7 @@ if (!function_exists('get_object_vars_recursive')) {
             return $data;
         }
 
-        return array();
+        return null;
     }
 
 }
@@ -144,5 +144,5 @@ if (!function_exists('array_intersect_compare')) {
 
         return false;
     }
-    
+
 }
