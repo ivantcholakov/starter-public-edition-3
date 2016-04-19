@@ -20,18 +20,26 @@ class Thumbnail_controller extends CI_Controller {
 
     public function index() {
 
-        $this->load->library('thumbnail');
+        try {
 
-        // An example for selective watermark activation.
-        $src = $this->input->get('src');
-        $path = str_replace(default_base_url(), '', $src);
+            $this->load->library('thumbnail');
 
-        if (strpos($path, 'assets/img/playground.jpg') === 0) {
-            $this->thumbnail->initialize(array('has_watermark' => true));
+            // An example for selective watermark activation.
+            $src = $this->input->get('src');
+            $path = str_replace(default_base_url(), '', $src);
+
+            if (strpos($path, 'assets/img/playground.jpg') === 0) {
+                $this->thumbnail->initialize(array('has_watermark' => true));
+            }
+            //
+
+            $this->thumbnail->get($this->input->get());
+
+        } catch (Exception $ex) {
+
+            set_status_header(500);
+            exit;
         }
-        //
-
-        $this->thumbnail->get($this->input->get());
     }
 
 }
