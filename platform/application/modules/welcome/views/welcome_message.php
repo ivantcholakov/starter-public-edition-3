@@ -17,10 +17,6 @@
             <p>A Font Awesome icon: <i class="fa fa-star"></i></p>
             <p>A Glyphicon: <span class="glyphicon glyphicon-star"></span></p>
 
-            <h2>Self-Diagnostics</h2>
-
-            <p><?php echo $diagnostics; ?></p>
-
             <h2>Internationalization Test</h2>
 
             <p>
@@ -28,3 +24,7 @@
             </p>
 
             <p>A translated text: <strong><?php echo lang('welcome.hello'); ?></strong></p>
+
+            <h2>Self-Diagnostics</h2>
+
+            <p><?php echo $diagnostics; ?></p>
