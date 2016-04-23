@@ -1,4 +1,6 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed.');
+<?php
+
+defined('BASEPATH') or exit('No direct script access allowed.');
 
 /**
  * Template helper functions
@@ -6,11 +8,9 @@
  * @license The MIT License, http://opensource.org/licenses/MIT
  * Some original functions from Phil Sturgeon have been taken as a starting point.
  */
-
 // Added by Ivan Tcholakov, 29-DEC-2013.
 ci()->config->load('asset', false, true);
 //
-
 // Functions by Phil Sturgeon (with minor modifications).
 //------------------------------------------------------------------------------
 
@@ -18,13 +18,13 @@ if (!function_exists('template_title')) {
 
     function template_title() {
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         if (isset($data['template']['title']) && $data['template']['title'] != '') {
 
             echo
-'
-    <title>'.$data['template']['title'].'</title>';
+            '
+    <title>' . $data['template']['title'] . '</title>';
         }
     }
 
@@ -34,7 +34,7 @@ if (!function_exists('template_metadata')) {
 
     function template_metadata() {
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         if (isset($data['template']['metadata'])) {
             echo $data['template']['metadata'];
@@ -47,7 +47,7 @@ if (!function_exists('template_body')) {
 
     function template_body() {
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         if (isset($data['template']['body'])) {
             echo $data['template']['body'];
@@ -62,7 +62,7 @@ if (!function_exists('template_partial')) {
 
         $name = (string) $name;
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         if (isset($data['template']['partials'][$name])) {
             echo $data['template']['partials'][$name];
@@ -77,7 +77,7 @@ if (!function_exists('template_partial_exists')) {
 
         $name = (string) $name;
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         return isset($data['template']['partials'][$name]);
     }
@@ -101,26 +101,26 @@ if (!function_exists('file_partial')) {
 
         $file = (string) $file;
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         $file_found = null;
 
         if (isset($data['template_views'])) {
 
             $base_path = $data['template_views'];
-            $file_found = ci()->parser->find_file($base_path.'partials/'.$file);
+            $file_found = ci()->parser->find_file($base_path . 'partials/' . $file);
         }
 
         if ($file_found === null) {
 
             $base_path = VIEWPATH;
-            $file_found = ci()->parser->find_file($base_path.'partials/'.$file);
+            $file_found = ci()->parser->find_file($base_path . 'partials/' . $file);
         }
 
         if ($file_found === null) {
 
-            $base_path = $base_path = COMMONPATH.'views/';
-            $file_found = ci()->parser->find_file($base_path.'partials/'.$file);
+            $base_path = $base_path = COMMONPATH . 'views/';
+            $file_found = ci()->parser->find_file($base_path . 'partials/' . $file);
         }
 
         if ($file_found === null) {
@@ -139,7 +139,7 @@ if (!function_exists('template_breadcrumbs')) {
 
     function template_breadcrumbs() {
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         return isset($data['template']['breadcrumbs']) ? $data['template']['breadcrumbs'] : array();
     }
@@ -180,12 +180,11 @@ if (!function_exists('template_enable_oldie')) {
                 if ($browser['is_ie']) {
 
                     if ($browser['ie_version'] < 9 &&
-                        $browser['ie_version'] >= $ie_min_supported) {
+                            $browser['ie_version'] >= $ie_min_supported) {
 
                         $result = true;
                     }
                 }
-
             } else {
 
                 $result = true;
@@ -271,16 +270,15 @@ if (!function_exists('template_ios')) {
 // The order of these functions is according to mandatory order of their
 // calls inside a template.
 //==============================================================================
-
-
 // Document Start
 //------------------------------------------------------------------------------
 
-if (!function_exists('html_tag_no_conflict')) {
+if (!function_exists('html_begin')) {
 
     // Added by Ivan Tcholakov. 21-OCT-2013.
     // Renamed by Ivan Tcholakov, html_tag -> html_tag_no_conflict, 03-JAN-2016.
-    function html_tag_no_conflict($attributes = null) {
+    // Renamed by Ivan Tcholakov, html_tag_no_conflict -> html_begin, 23-APR-2016.
+    function html_begin($attributes = null) {
 
         // Add language code and text direction automatically.
         $attr = array();
@@ -301,11 +299,10 @@ if (!function_exists('html_tag_no_conflict')) {
             $attributes = html_attr_merge($attr, $attributes);
         }
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         $attributes = html_attr_merge(
-            isset($data['template_html_tag_attributes']) ? $data['template_html_tag_attributes'] : '',
-            $attributes
+                isset($data['template_html_tag_attributes']) ? $data['template_html_tag_attributes'] : '', $attributes
         );
 
         // The Modernizr javascript removes this additional class,
@@ -315,21 +312,21 @@ if (!function_exists('html_tag_no_conflict')) {
         if (template_enable_oldie()) {
 
             return
-'<!DOCTYPE html>
-<!--[if IEMobile 7]><html'.html_attr_merge('class="iem7 oldie lt-ie9"', $attributes).'><![endif]-->
-<!--[if lt IE 7]><html'.html_attr_merge('class="ie6 oldie lt-ie9 lt-ie8 lt-ie7"', $attributes).'><![endif]-->
-<!--[if (IE 7)&!(IEMobile)]><html'.html_attr_merge('class="ie7 oldie lt-ie9 lt-ie8"', $attributes).'><![endif]-->
-<!--[if (IE 8)&!(IEMobile)]><html'.html_attr_merge('class="ie8 oldie lt-ie9"', $attributes).'><![endif]-->
+                    '<!DOCTYPE html>
+<!--[if IEMobile 7]><html' . html_attr_merge('class="iem7 oldie lt-ie9"', $attributes) . '><![endif]-->
+<!--[if lt IE 7]><html' . html_attr_merge('class="ie6 oldie lt-ie9 lt-ie8 lt-ie7"', $attributes) . '><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html' . html_attr_merge('class="ie7 oldie lt-ie9 lt-ie8"', $attributes) . '><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html' . html_attr_merge('class="ie8 oldie lt-ie9"', $attributes) . '><![endif]-->
 <!--[if gt IE 8]><!-->
-    <html'.$attributes.'>
+    <html' . $attributes . '>
     <!--<![endif]-->
 <!--[if (gte IE 9)|(gt IEMobile 7)]><!-->
-    <html'.$attributes.'>
+    <html' . $attributes . '>
     <!--<![endif]-->';
         }
 
         return
-"<!DOCTYPE html>
+                "<!DOCTYPE html>
 <html$attributes>";
     }
 
@@ -345,7 +342,7 @@ if (!function_exists('head_tag')) {
     function head_tag() {
 
         return
-'
+                '
 <head>';
     }
 
@@ -359,7 +356,7 @@ if (!function_exists('meta_charset')) {
         $charset = config_item('charset');
 
         return
-"
+                "
     <meta charset=\"$charset\" />";
     }
 
@@ -371,8 +368,8 @@ if (!function_exists('base_href')) {
     function base_href() {
 
         return
-'
-    <base href="'.BASE_URL.'" />';
+                '
+    <base href="' . BASE_URL . '" />';
     }
 
 }
@@ -385,7 +382,7 @@ if (!function_exists('ie_edge')) {
         if (template_ie()) {
 
             return
-'
+                    '
     <meta http-equiv="X-UA-Compatible" content="IE=edge">';
         }
 
@@ -409,9 +406,8 @@ if (!function_exists('viewport')) {
 
         // http://t.co/dKP3o1e
         return
-'
+                '
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />';
-
     }
 
 }
@@ -430,8 +426,8 @@ if (!function_exists('favicon')) {
         }
 
         return
-'
-    <link rel="shortcut icon" type="'.$mime.'" href="'.BASE_URI.$name.'" />';
+                '
+    <link rel="shortcut icon" type="' . $mime . '" href="' . BASE_URI . $name . '" />';
     }
 
 }
@@ -442,8 +438,8 @@ if (!function_exists('apple_touch_icon')) {
     function apple_touch_icon() {
 
         return
-'
-    <link rel="apple-touch-icon" href="'.BASE_URI.'apple-touch-icon.png">';
+                '
+    <link rel="apple-touch-icon" href="' . BASE_URI . 'apple-touch-icon.png">';
     }
 
 }
@@ -454,8 +450,8 @@ if (!function_exists('apple_touch_icon_precomposed')) {
     function apple_touch_icon_precomposed() {
 
         return
-'
-    <link rel="apple-touch-icon-precomposed" href="'.BASE_URI.'apple-touch-icon-precomposed.png">';
+                '
+    <link rel="apple-touch-icon-precomposed" href="' . BASE_URI . 'apple-touch-icon-precomposed.png">';
     }
 
 }
@@ -470,9 +466,8 @@ if (!function_exists('cleartype_ie')) {
             // Mobile IE allows us to activate ClearType technology
             // for smoothing fonts for easy reading.
             return
-'
+                    '
     <meta http-equiv="cleartype" content="on" />';
-
         }
 
         return '';
@@ -494,6 +489,7 @@ if (!function_exists('css_normalize')) {
         //return css('lib/normalize-2/normalize.css');
         return css('lib/normalize-3/normalize.css');
     }
+
 }
 
 
@@ -556,7 +552,7 @@ if (!function_exists('js_platform')) {
         foreach ($constants as $name) {
 
             if (defined($name)) {
-                $constants_js[] = '        var '.$name.' = '.json_encode(constant($name)).';
+                $constants_js[] = '        var ' . $name . ' = ' . json_encode(constant($name)) . ';
 ';
             }
         }
@@ -564,12 +560,12 @@ if (!function_exists('js_platform')) {
         $constants_js = implode('', $constants_js);
 
         return
-'
+                '
     <script type="text/javascript">
     //<![CDATA[
-'.$constants_js.'
-        var site_url = '.json_encode(CURRENT_SITE_URL).'; // The language segment is added. Kept here for BC, replaced by CURRENT_SITE_URL.
-        var site_uri = '.json_encode(CURRENT_SITE_URI).'; // The language segment is added. Kept here for BC, replaced by CURRENT_SITE_URI.
+' . $constants_js . '
+        var site_url = ' . json_encode(CURRENT_SITE_URL) . '; // The language segment is added. Kept here for BC, replaced by CURRENT_SITE_URL.
+        var site_uri = ' . json_encode(CURRENT_SITE_URI) . '; // The language segment is added. Kept here for BC, replaced by CURRENT_SITE_URI.
     //]]>
     </script>';
     }
@@ -586,9 +582,9 @@ if (!function_exists('js_selectivizr')) {
             ci()->load->helper('asset');
 
             return
-'
+                    '
     <!--[if (lt IE 9) & (!IEMobile)]>
-        '.trim(js('lib/selectivizr/selectivizr.js')).'
+        ' . trim(js('lib/selectivizr/selectivizr.js')) . '
     <![endif]-->';
         }
 
@@ -629,13 +625,12 @@ if (!function_exists('js_respond')) {
             }
 
             return
-"
+                    "
     <script type=\"text/javascript\">
     //<![CDATA[
         Modernizr.mq('(min-width:0)') || document.write('\x3Cscr' + 'ipt type=\"text/javascript\" src=\"$js_path\">\x3C/scr' + 'ipt>');
     //]]>
     </script>";
-
         }
 
         return '';
@@ -666,7 +661,6 @@ if (!function_exists('js_jquery')) {
 
             $result = js("lib/jquery/jquery-$jquery_version.js");
             $result .= js('lib/jquery/jquery-migrate-1.2.1.js');
-
         } else {
 
             $result = js("lib/jquery/jquery-$jquery_version.min.js");
@@ -684,8 +678,6 @@ if (!function_exists('js_jquery')) {
 // partials to be included - javascripts (if the placement within the head
 // section is mandatory), custom metadata, etc.
 //------------------------------------------------------------------------------
-
-
 // Head Section End
 //------------------------------------------------------------------------------
 
@@ -695,7 +687,7 @@ if (!function_exists('head_close_tag')) {
     function head_close_tag() {
 
         return
-'
+                '
 </head>';
     }
 
@@ -712,15 +704,14 @@ if (!function_exists('body_tag')) {
 
         ci()->load->helper('html');
 
-        $data =& ci()->load->_ci_cached_vars;
+        $data = & ci()->load->_ci_cached_vars;
 
         $attributes = html_attr_merge(
-            isset($data['template_body_tag_attributes']) ? $data['template_body_tag_attributes'] : '',
-            $attributes
+                isset($data['template_body_tag_attributes']) ? $data['template_body_tag_attributes'] : '', $attributes
         );
 
         return
-"
+                "
 <body$attributes>
 ";
     }
@@ -734,13 +725,13 @@ if (!function_exists('noscript')) {
 
         if ($alternative_message != '') {
 
-                return
-'
-    <noscript>'.$alternative_message.'</noscript>';
+            return
+                    '
+    <noscript>' . $alternative_message . '</noscript>';
         }
 
         return
-'
+                '
     <noscript>Your browser does not support JavaScript!</noscript>';
     }
 
@@ -758,15 +749,15 @@ if (!function_exists('unsupported_browser')) {
             if ($alternative_message != '') {
 
                 return
-'
-    <!--[if lt IE '.$ie_min_supported.']>
-        '.$alternative_message.'
+                        '
+    <!--[if lt IE ' . $ie_min_supported . ']>
+        ' . $alternative_message . '
     <![endif]-->';
             }
 
             return
-'
-    <!--[if lt IE '.$ie_min_supported.']>
+                    '
+    <!--[if lt IE ' . $ie_min_supported . ']>
         <p class="browsehappy">
             You are using an <strong>outdated</strong> browser.
             Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
@@ -802,9 +793,9 @@ if (!function_exists('js_jquery_extra_selectors')) {
             }
 
             return
-'
+                    '
     <!--[if (lt IE 9) & (!IEMobile)]>
-        '.trim($js).'
+        ' . trim($js) . '
     <![endif]-->';
         }
 
@@ -842,13 +833,12 @@ if (!function_exists('js_scale_fix_ios')) {
 
             // iOS scale bug fix
             return
-'
+                    '
     <script type="text/javascript">
     //<![CDATA[
         MBP.scaleFix();
     //]]>
     </script>';
-
         }
 
         return '';
@@ -866,9 +856,9 @@ if (!function_exists('js_imgsizer')) {
             ci()->load->helper('asset');
 
             return
-'
+                    '
     <!--[if (lt IE 9) & (!IEMobile)]>
-        '.trim(js('lib/imgsizer/imgsizer.js')).'
+        ' . trim(js('lib/imgsizer/imgsizer.js')) . '
     <![endif]-->';
         }
 
@@ -892,7 +882,7 @@ if (!function_exists('div_debug')) {
         // This div element is user by the Profiler for debugging AJAX requests.
         // http://www.moojuice.net/posts/making-codeigniters-profiler-ajax-compatible
         return
-'
+                '
     <div id="debug"></div>';
     }
 
@@ -908,7 +898,7 @@ if (!function_exists('body_close_tag')) {
     function body_close_tag() {
 
         return
-'
+                '
 </body>';
     }
 
@@ -924,7 +914,7 @@ if (!function_exists('html_close_tag')) {
     function html_close_tag() {
 
         return
-'
+                '
 </html>';
     }
 
