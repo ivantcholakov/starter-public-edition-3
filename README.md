@@ -403,7 +403,7 @@ Real Life Usage
 With a little bit older version of this platform the following sites have been created (Bulgarian language only):
 
 * http://art-tochka.com/ - an online shop, gifts
-* http://hop-mebeli.com/ - an online shop, furniture
+* ~~http://hop-mebeli.com/ - an online shop, furniture~~ - migrated to starter-public-edition-4
 * http://salonite.eu/ - an online catalog, beauty salons
 * http://detskigradini.net/ - an online catalog, kindergartens
 * http://sportiada.com/ - an online catalog, sport centers
