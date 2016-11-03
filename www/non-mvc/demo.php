@@ -48,7 +48,7 @@ echo apple_touch_icon_precomposed();
 
 ?>
 
-<script type="text/javascript" src="<?php echo js_url('lib/webfontloader/webfontloader.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo js_url('lib/webfontloader/webfontloader.js'); ?>"></script>
 
     <script type="text/javascript">
     //<![CDATA[
