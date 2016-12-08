@@ -38,7 +38,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile font-awesome-4 font-awesome-4-min
@@ -118,7 +118,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile semantic-ui-custom semantic-ui-custom-min
@@ -138,7 +138,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile front-semantic-ui-default-min
@@ -150,7 +150,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile front-semantic-ui-amazon-min
@@ -162,7 +162,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile front-semantic-ui-basic-min
@@ -174,7 +174,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile front-semantic-ui-chubby-min
@@ -186,7 +186,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile front-semantic-ui-classic-min
@@ -198,7 +198,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile front-semantic-ui-flat-min
@@ -210,7 +210,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile front-semantic-ui-github-min
@@ -222,7 +222,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
     // php cli.php less compile front-semantic-ui-material-min
@@ -234,7 +234,7 @@ $config['less_compile'] = array(
         'relativeUrls' => false,
         'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 11', 'Edge >= 12', 'Android >= 4')),
-        'cssmin' => array('implementation' => 'cssnano'),
+        'cssmin' => array('implementation' => 'minifycss'),
     ),
 
 );
