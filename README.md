@@ -12,11 +12,6 @@ Note
 This is an older version of the platform. Further efforts will be applied on Application Starter 4, which supports multiple applications.
 See https://github.com/ivantcholakov/starter-public-edition-4
 
-Live Demo
----------
-
-http://iridadesign.com/starter-public-edition-3/www/
-
 CodeIgniter 3 Documentation
 -----------------------------
 
