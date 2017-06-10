@@ -469,6 +469,7 @@ Installed Composer Packages
 | matthiasmullie/minify               | CSS & JS minifier                                                  | Parser 'cssmin' and 'jsmin' drivers               |
 | phpmailer/phpmailer                 | An email creation and transfer component for PHP                   | The custom Email library                          |
 | tubalmartin/cssmin                  | A PHP port of the YUI CSS compressor                               | Parser 'cssmin' driver                            |
+| oyejorge/less.php                   | A PHP port of the Javascript version of LESS                       | Parser 'less' driver                              |
 
 Real Life Usage
 ---------------
