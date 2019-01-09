@@ -148,8 +148,14 @@ if (PLATFORMDESTROY == '' || !is_file(PLATFORMDESTROY)) {
     exit(3); // EXIT_CONFIG
 }
 
-// Multiple applications are implemented in Starter 4.
-define('APPSPATH', null);
+define('APPSPATH', PLATFORMPATH.'applications/');
+
+// Check the path to the "applications" directory.
+if (!is_dir(APPSPATH)) {
+    header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+    echo 'Your application root directory path (APPSPATH) does not appear to be set correctly. Please, make corrections within the following file: '.__FILE__;
+    exit(3); // EXIT_CONFIG
+}
 
 if (isset($APPNAME)) {
     define('APPNAME', trim(str_replace(array('\\', '-'), array('/', '_'), $APPNAME), ' /'));
@@ -157,10 +163,24 @@ if (isset($APPNAME)) {
     define('APPNAME', '');
 }
 
+// Check validance of the application name.
+if (APPNAME == '') {
+    header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+    echo 'Your application name ($APPNAME) does not appear to be set correctly.';
+    exit(3); // EXIT_CONFIG
+}
+
 if (isset($DEFAULTAPPNAME)) {
     define('DEFAULTAPPNAME', trim(str_replace(array('\\', '-'), array('/', '_'), $DEFAULTAPPNAME), ' /'));
 } else {
     define('DEFAULTAPPNAME', '');
+}
+
+// Check validance of the default application name.
+if (DEFAULTAPPNAME == '') {
+    header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+    echo 'Your default application name ($DEFAULTAPPNAME) does not appear to be set correctly.';
+    exit(3); // EXIT_CONFIG
 }
 
 // The url segment of the application, counted from the root public directory of the site.
@@ -170,12 +190,12 @@ define('APPSEGMENT', rtrim(str_replace(DEFAULTFCPATH, '', FCPATH), '/'));
 define('ISDEFAULTAPP', APPSEGMENT == '');
 
 // The path to the application.
-define('APPPATH', PLATFORMPATH.'application/');
+define('APPPATH', APPSPATH.APPNAME.'/');
 
 // Check the path to the application directory.
 if (!is_dir(APPPATH)) {
     header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-    echo 'Your application root directory path (APPPATH) does not appear to be set correctly.';
+    echo 'Your application name ($APPNAME) does not appear to be set correctly.';
     exit(3); // EXIT_CONFIG
 }
 
