@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2013-2018
+ * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2013-2019
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
@@ -133,6 +133,35 @@ $config['less_compile'] = array(
         'compress' => true
     ),
 
+    // php cli.php less compile datatables-responsive-semantic-ui datatables-responsive-semantic-ui-min
+
+    array(
+        'name' => 'datatables-responsive-semantic-ui',
+        'source' => DEFAULTFCPATH.'assets/less/lib/dataTables/responsive.semanticui.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/dataTables/responsive.semanticui.css',
+        'compress' => false
+    ),
+    array(
+        'name' => 'datatables-responsive-semantic-ui-min',
+        'source' => DEFAULTFCPATH.'assets/less/lib/dataTables/responsive.semanticui.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/dataTables/responsive.semanticui.min.css',
+        'compress' => true
+    ),
+
+    // php cli.php less compile datatables-select-semantic-ui datatables-select-semantic-ui-min
+
+    array(
+        'name' => 'datatables-select-semantic-ui',
+        'source' => DEFAULTFCPATH.'assets/less/lib/dataTables/select.semanticui.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/dataTables/select.semanticui.css',
+        'compress' => false
+    ),
+    array(
+        'name' => 'datatables-select-semantic-ui-min',
+        'source' => DEFAULTFCPATH.'assets/less/lib/dataTables/select.semanticui.less',
+        'destination' => DEFAULTFCPATH.'assets/css/lib/dataTables/select.semanticui.min.css',
+        'compress' => true
+    ),
     // php cli.php less compile semantic-ui semantic-ui-min
 
     array(
