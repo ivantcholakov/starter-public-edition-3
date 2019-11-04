@@ -162,6 +162,7 @@ $config['less_compile'] = array(
         'destination' => DEFAULTFCPATH.'assets/css/lib/dataTables/select.semanticui.min.css',
         'compress' => true
     ),
+
     // php cli.php less compile semantic-ui semantic-ui-min
 
     array(
