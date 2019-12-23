@@ -477,6 +477,7 @@ The copied files can be modified/customized. See https://github.com/ivantcholako
 * Handlebars.js - an extension to the Mustache templating language, https://github.com/wycats/handlebars.js , http://handlebarsjs.com
 * Handlebars.php - Handlebars processor for PHP, https://github.com/XaminProject/handlebars.php
 * Slick, the last carousel you'll ever need, https://github.com/kenwheeler/slick , http://kenwheeler.github.io/slick/
+* Headroom.js - A widget that reacts to the user's scroll, https://github.com/WickyNilliams/headroom.js
 
 The Playground
 --------------
