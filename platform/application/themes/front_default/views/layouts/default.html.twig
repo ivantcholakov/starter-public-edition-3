@@ -22,6 +22,7 @@
 {{ js('lib/phpjs/phpjs.min.js') }}
 {{ js_modernizr() }}
 {{ js_jquery() }}
+{{ js('lib/jquery-base64/jquery.base64.js') }}
 {{ js('lib/jquery-json/jquery.json.js') }}
 {{ partial('ckeditor') }}
 {{ js('lib/sweetalert/sweetalert.min.js') }}
@@ -100,6 +101,8 @@
 {{ js_scale_fix_ios() }}
 
 {{ js('lib/semantic/semantic.min.js?v=' ~ constant('PLATFORM_VERSION')) }}
+{{ js('lib/headroom/headroom.min.js') }}
+{{ js('lib/headroom/jQuery.headroom.min.js') }}
 
 {{ file_partial('scripts') }}
 {{ partial('scripts') }}
