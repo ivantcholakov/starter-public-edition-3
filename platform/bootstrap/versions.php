@@ -11,7 +11,7 @@ define('CI_VERSION', '3.1.11');
  * Platform (Application Starter) Version
  * @var    string
  */
-define('PLATFORM_VERSION', '3.3.44');
+define('PLATFORM_VERSION', '3.3.45');
 
 
 /**
