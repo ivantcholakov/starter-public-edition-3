@@ -476,7 +476,6 @@ The copied files can be modified/customized. See https://github.com/ivantcholako
 * SweetAlert, a beautiful replacement for JavaScript's "alert", https://github.com/t4t5/sweetalert , http://t4t5.github.io/sweetalert/
 * Handlebars.js - an extension to the Mustache templating language, https://github.com/wycats/handlebars.js , http://handlebarsjs.com
 * Handlebars.php - Handlebars processor for PHP, https://github.com/XaminProject/handlebars.php
-* Slick, the last carousel you'll ever need, https://github.com/kenwheeler/slick , http://kenwheeler.github.io/slick/
 * Headroom.js - A widget that reacts to the user's scroll, https://github.com/WickyNilliams/headroom.js
 * Swiper, "the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior" - https://github.com/nolimits4web/swiper , https://swiperjs.com
 
