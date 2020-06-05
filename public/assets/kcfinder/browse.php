@@ -2,7 +2,7 @@
 
 /** This file is part of KCFinder project
   *
-  *      @desc Upload calling script
+  *      @desc Browser calling script
   *   @package KCFinder
   *   @version 3.12
   *    @author Pavel Tzonkov <sunhater@sunhater.com>
@@ -17,12 +17,13 @@ require dirname(__FILE__).'/../../config.php';
 $assign_to_config['csrf_protection'] = false;
 require $PLATFORMCREATE;
 ci()->load->helper('template');
+chdir(dirname(__FILE__));
 //
 
 require "core/bootstrap.php";
-$uploader = "kcfinder\\uploader";  // To execute core/bootstrap.php on older
-$uploader = new $uploader();       // PHP versions (even PHP 4)
-$uploader->upload();
+$browser = "kcfinder\\browser"; // To execute core/bootstrap.php on older
+$browser = new $browser();      // PHP versions (even PHP 4)
+$browser->action();
 
 // Added by Ivan Tcholakov, 20-OCT-2013.
 require $PLATFORMDESTROY;

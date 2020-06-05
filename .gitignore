@@ -25,14 +25,14 @@ platform/upload/*
 !platform/upload/.htaccess
 !platform/upload/index.html
 
-www/editor/*
-!www/editor/.gitkeep
+public/editor/*
+!public/editor/.gitkeep
 
-www/upload/*
-!www/upload/.gitkeep
+public/upload/*
+!public/upload/.gitkeep
 
-www/cache/*
-!www/cache/.gitkeep
+public/cache/*
+!public/cache/.gitkeep
 
 # IDE Files
 #-------------------------
