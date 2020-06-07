@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0706c6a63ba63c5ee0eb2dc5694c74f7",
+    "content-hash": "bec2688997baba145bc32dfff8cb50b7",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -462,16 +462,16 @@
         },
         {
             "name": "ivantcholakov/codeigniter-phpmailer",
-            "version": "v1.4.1",
+            "version": "v1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ivantcholakov/codeigniter-phpmailer.git",
-                "reference": "89b62014d11c2f9425a6f200fbe29c9614e77271"
+                "reference": "e49367119503c619fec981c46bb0b219e43e3dea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ivantcholakov/codeigniter-phpmailer/zipball/89b62014d11c2f9425a6f200fbe29c9614e77271",
-                "reference": "89b62014d11c2f9425a6f200fbe29c9614e77271",
+                "url": "https://api.github.com/repos/ivantcholakov/codeigniter-phpmailer/zipball/e49367119503c619fec981c46bb0b219e43e3dea",
+                "reference": "e49367119503c619fec981c46bb0b219e43e3dea",
                 "shasum": ""
             },
             "require": {
@@ -497,7 +497,7 @@
                 "php",
                 "phpmailer"
             ],
-            "time": "2020-06-06T18:24:10+00:00"
+            "time": "2020-06-06T23:56:52+00:00"
         },
         {
             "name": "leafo/scssphp",
