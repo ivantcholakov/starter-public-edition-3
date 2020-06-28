@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2013-2019
+ * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2013-2020
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
@@ -28,7 +28,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'assets/less/lib/editor/index.less',
         'destination' => DEFAULTFCPATH.'assets/css/lib/editor/editor.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
     ),
     array(
@@ -36,7 +35,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'assets/less/lib/editor/index.less',
         'destination' => DEFAULTFCPATH.'assets/css/lib/editor/editor.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -123,7 +121,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'assets/less/lib/semantic/semantic.less',
         'destination' => DEFAULTFCPATH.'assets/css/lib/semantic/semantic.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
     ),
     array(
@@ -131,7 +128,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'assets/less/lib/semantic/semantic.less',
         'destination' => DEFAULTFCPATH.'assets/css/lib/semantic/semantic.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -143,7 +139,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'assets/less/lib/semantic-custom/semantic-custom.less',
         'destination' => DEFAULTFCPATH.'assets/css/lib/semantic-custom/semantic-custom.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
     ),
     array(
@@ -151,7 +146,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'assets/less/lib/semantic-custom/semantic-custom.less',
         'destination' => DEFAULTFCPATH.'assets/css/lib/semantic-custom/semantic-custom.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -163,7 +157,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_semantic_ui_default/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_default/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -175,7 +168,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_semantic_ui_amazon/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_amazon/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -187,7 +179,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_semantic_ui_basic/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_basic/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -199,7 +190,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_semantic_ui_chubby/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_chubby/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -211,7 +201,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_semantic_ui_classic/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_classic/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -223,7 +212,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_semantic_ui_flat/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_flat/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -235,7 +223,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_semantic_ui_github/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_github/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -247,7 +234,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_semantic_ui_material/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_material/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
@@ -259,7 +245,6 @@ $config['less_compile'] = array(
         'source' => DEFAULTFCPATH.'themes/front_default/less/index.less',
         'destination' => DEFAULTFCPATH.'themes/front_default/css/front.min.css',
         'relativeUrls' => false,
-        'implementation' => 'less.js',
         'autoprefixer' => array('browsers' => array('> 1%', 'last 2 versions', 'Firefox ESR', 'Safari >= 7', 'iOS >= 7', 'ie >= 10', 'Edge >= 12', 'Android >= 4')),
         'cssmin' => array('implementation' => 'cssnano'),
     ),
