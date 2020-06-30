@@ -48,6 +48,7 @@ class Cssnano_Parser {
 
         $filename = tempnam($this->options['tmp_dir'], 'Cssnano_');
         file_put_contents($filename, $str);
+        @chmod($filename, FILE_WRITE_MODE);
 
         try {
 
@@ -150,11 +151,9 @@ class Cssnano_Parser {
 
         $result = array();
 
-        $this->config_file = tempnam($this->options['tmp_dir'], 'Cssnano_config_');
-
-        // The external script requires .json extension,
-        // otherwise the file is not accepted as valid.
-        rename($this->config_file, $this->config_file .= '.json');
+        $config_file = tempnam($this->options['tmp_dir'], 'Cssnano_config_');
+        @chmod($config_file, FILE_WRITE_MODE);
+        $this->config_file = $config_file.'.json';
 
         $config = '{
     "cssnano": {
@@ -162,6 +161,8 @@ class Cssnano_Parser {
     }
 }';
         file_put_contents($this->config_file, $config);
+        @chmod($this->config_file, FILE_WRITE_MODE);
+        @unlink($config_file);
 
         $result[] = '--config '.escape_shell_arg($this->config_file);
 
