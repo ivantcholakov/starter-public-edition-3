@@ -1126,8 +1126,4 @@ return array(
     'WhichBrowser\\Model\\Version' => $vendorDir . '/whichbrowser/parser/src/Model/Version.php',
     'WhichBrowser\\Parser' => $vendorDir . '/whichbrowser/parser/src/Parser.php',
     't1st3\\JSONMin\\JSONMin' => $vendorDir . '/t1st3/php-json-minify/src/t1st3/JSONMin/JSONMin.php',
-    'tubalmartin\\CssMin\\Colors' => $vendorDir . '/tubalmartin/cssmin/src/Colors.php',
-    'tubalmartin\\CssMin\\Command' => $vendorDir . '/tubalmartin/cssmin/src/Command.php',
-    'tubalmartin\\CssMin\\Minifier' => $vendorDir . '/tubalmartin/cssmin/src/Minifier.php',
-    'tubalmartin\\CssMin\\Utils' => $vendorDir . '/tubalmartin/cssmin/src/Utils.php',
 );
