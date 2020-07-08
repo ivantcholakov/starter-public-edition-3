@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2016
+ * @author Ivan Tcholakov <ivantcholakov@gmail.com>, 2016-2020
  * @license The MIT License, http://opensource.org/licenses/MIT
  */
 
@@ -17,7 +17,6 @@ $config['parser_valid_drivers'] = array(
     'twig',
     'handlebars',
     'mustache',
-    'lex',
     'parser',
     'textile',
     'markdown',
@@ -41,7 +40,6 @@ $config['parser_file_extensions'] = array(
     'twig' => array('twig', 'html.twig'),
     'handlebars' => array('handlebars', 'hbs'),
     'mustache' => array('mustache.html', 'mustache'),
-    'lex' => array('lex.html', 'lex'),
     'parser' => array('parser.php'),
     'markdown' => array('md', 'markdown', 'fbmd'),
     'textile' => 'textile',
