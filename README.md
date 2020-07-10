@@ -538,6 +538,7 @@ The copied files can be modified/customized. See https://github.com/ivantcholako
 * Handlebars.php - Handlebars processor for PHP, https://github.com/salesforce/handlebars-php
 * Headroom.js - A widget that reacts to the user's scroll, https://github.com/WickyNilliams/headroom.js
 * Swiper, "the free and most modern mobile touch slider with hardware accelerated transitions and amazing native behavior" - https://github.com/nolimits4web/swiper , https://swiperjs.com
+* highlight.js - Javascript syntax highlighter, https://github.com/highlightjs/highlight.js
 
 The Playground
 --------------
