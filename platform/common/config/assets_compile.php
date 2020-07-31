@@ -79,7 +79,7 @@ $config['tasks'] = [
 
     // LESS --------------------------------------------------------------------
 
-    // php cli.php less compile editor-min
+    // php cli.php assets compile editor-min
 
     [
         'name' => 'editor-min',
@@ -90,7 +90,7 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
-    // php cli.php less compile datatables-semantic-ui-min
+    // php cli.php assets compile datatables-semantic-ui-min
 
     [
         'name' => 'datatables-semantic-ui-min',
@@ -101,7 +101,7 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
-    // php cli.php less compile datatables-responsive-semantic-ui-min
+    // php cli.php assets compile datatables-responsive-semantic-ui-min
 
     [
         'name' => 'datatables-responsive-semantic-ui-min',
@@ -112,7 +112,7 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
-    // php cli.php less compile datatables-select-semantic-ui-min
+    // php cli.php assets compile datatables-select-semantic-ui-min
 
     [
         'name' => 'datatables-select-semantic-ui-min',
@@ -123,7 +123,7 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
-    // php cli.php less compile semantic-ui-min
+    // php cli.php assets compile semantic-ui-min
 
     [
         'name' => 'semantic-ui-min',
@@ -134,7 +134,7 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
-    // php cli.php less compile semantic-ui-custom-min
+    // php cli.php assets compile semantic-ui-custom-min
 
     [
         'name' => 'semantic-ui-custom-min',
@@ -145,7 +145,7 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
-    // php cli.php less compile front-semantic-ui-flat-min
+    // php cli.php assets compile front-semantic-ui-flat-min
 
     [
         'name' => 'front-semantic-ui-flat-min',
@@ -156,7 +156,7 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
-    // php cli.php less compile front-default-min
+    // php cli.php assets compile front-default-min
 
     [
         'name' => 'front-default-min',
