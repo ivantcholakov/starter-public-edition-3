@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'ffd8c109e56954e92a08474f1143be3e3be534d0',
+    'reference' => '6dc447f2635dba70ce9aa1adf7c8f19cc9643826',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'ffd8c109e56954e92a08474f1143be3e3be534d0',
+      'reference' => '6dc447f2635dba70ce9aa1adf7c8f19cc9643826',
     ),
     'codeigniter/framework' => 
     array (
@@ -40,12 +40,12 @@
     ),
     'erusev/parsedown-extra' => 
     array (
-      'pretty_version' => '0.7.1',
-      'version' => '0.7.1.0',
+      'pretty_version' => '0.8.1',
+      'version' => '0.8.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0db5cce7354e4b76f155d092ab5eb3981c21258c',
+      'reference' => '91ac3ff98f0cea243bdccc688df43810f044dcef',
     ),
     'ezyang/htmlpurifier' => 
     array (
@@ -243,8 +243,8 @@
     ),
     'symfony/options-resolver' => 
     array (
-      'pretty_version' => 'v5.1.8',
-      'version' => '5.1.8.0',
+      'pretty_version' => 'v5.1.9',
+      'version' => '5.1.9.0',
       'aliases' => 
       array (
       ),
@@ -270,12 +270,12 @@
     ),
     'symfony/process' => 
     array (
-      'pretty_version' => 'v5.1.8',
-      'version' => '5.1.8.0',
+      'pretty_version' => 'v5.1.9',
+      'version' => '5.1.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f00872c3f6804150d6a0f73b4151daab96248101',
+      'reference' => 'b25b468538c82f6594058aabaa9bac48d7ef2170',
     ),
     't1st3/php-json-minify' => 
     array (
