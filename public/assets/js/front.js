@@ -1,33 +1,20 @@
 
 $(function () {
 
-    // A workaround about dropdown initialization.
-    // See https://github.com/Semantic-Org/Semantic-UI/issues/2072
-    // "[Dropdown] Add Nullable Option for Single Selection"
+    $('.ui.dropdown:not(.native):not(.special)[multiple]').dropdown({
+        fullTextSearch: true,
+        duration: 100
+    });
 
-    $('.ui.dropdown:not(.native):not(.special)[multiple]').dropdown();
-    $('.ui.dropdown:not(.native):not(.special):not([multiple]):not(.nullable)').dropdown();
-    $('.ui.dropdown:not(.native):not(.special):not([multiple]).nullable').dropdown({
-        onChange: function(value) {
-
-            var target = $(this);
-            var wrapper = target.prop('tagName') == 'SELECT' ? target.parent() : target;
-
-            if (value) {
-
-                var icon = wrapper.find('.dropdown.icon');
-
-                icon.removeClass('dropdown').addClass('delete').on('click', function(e) {
-
-                    target.dropdown('clear');
-                    $(this).removeClass('delete').addClass('dropdown');
-
-                    e.preventDefault();
-                    return false;
+    $('.ui.dropdown:not(.native):not(.special):not([multiple]):not(.clearable)').dropdown({
+        fullTextSearch: true,
+        duration: 100
                 });
-            }
-        },
-        fireOnInit: true
+
+    $('.ui.dropdown:not(.native):not(.special):not([multiple]).clearable').dropdown({
+        clearable: true,
+        fullTextSearch: true,
+        duration: 100
     });
 
     $('body').on('click', '.message .close', function() {
