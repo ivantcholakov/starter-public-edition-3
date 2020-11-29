@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '64b9e715e9a9343375d3504ca4c3d7ad0cf6f34e',
+    'reference' => 'ffd8c109e56954e92a08474f1143be3e3be534d0',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '64b9e715e9a9343375d3504ca4c3d7ad0cf6f34e',
+      'reference' => 'ffd8c109e56954e92a08474f1143be3e3be534d0',
     ),
     'codeigniter/framework' => 
     array (
@@ -107,12 +107,12 @@ private static $installed = array (
     ),
     'ivantcholakov/codeigniter-phpmailer' => 
     array (
-      'pretty_version' => 'v1.4.5',
-      'version' => '1.4.5.0',
+      'pretty_version' => 'v1.4.6',
+      'version' => '1.4.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1369336e28411a0212a74cab8794d0931848b738',
+      'reference' => 'fb873593743449bd080fcdabd3877265987a726f',
     ),
     'matthiasmullie/minify' => 
     array (
