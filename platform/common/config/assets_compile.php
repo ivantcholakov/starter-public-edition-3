@@ -1,5 +1,9 @@
 <?php
 
+// Compiling visual themes with Semantic/Fomantic UI might require a lot
+// of memory for node.js. In such case try from a command line this (Linux):
+// export NODE_OPTIONS=--max-old-space-size=8192
+
 // An autoprefixer option: Supported browsers.
 
 $config['autoprefixer_browsers'] = [
@@ -18,67 +22,6 @@ $config['autoprefixer_browsers'] = [
 
 $config['tasks'] = [
 
-    // SCSS --------------------------------------------------------------------
-
-    // php cli.php assets compile sweetalert-min sweetalert-custom-min sweetalert-facebook-min sweetalert-google-min sweetalert-twitter-min
-
-    // php cli.php sweetalert sweetalert-min
-
-    [
-        'name' => 'sweetalert-min',
-        'type' => 'scss',
-        'destination' => DEFAULTFCPATH.'assets/css/lib/sweetalert/sweetalert.min.css',
-        'source' => DEFAULTFCPATH.'assets/scss/lib/sweetalert/sweetalert.scss',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
-
-    // php cli.php assets compile sweetalert-custom-min
-
-    [
-        'name' => 'sweetalert-custom-min',
-        'type' => 'scss',
-        'destination' => DEFAULTFCPATH.'assets/css/lib/sweetalert/sweetalert-custom.min.css',
-        'source' => DEFAULTFCPATH.'assets/scss/lib/sweetalert/sweetalert-custom.scss',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
-
-    // php cli.php assets compile sweetalert-facebook-min
-
-    [
-        'name' => 'sweetalert-facebook-min',
-        'type' => 'scss',
-        'destination' => DEFAULTFCPATH.'assets/css/lib/sweetalert/facebook.min.css',
-        'source' => DEFAULTFCPATH.'assets/scss/lib/sweetalert/facebook.scss',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
-
-    // php cli.php assets compile sweetalert-google-min
-
-    [
-        'name' => 'sweetalert-google-min',
-        'type' => 'scss',
-        'destination' => DEFAULTFCPATH.'assets/css/lib/sweetalert/google.min.css',
-        'source' => DEFAULTFCPATH.'assets/scss/lib/sweetalert/google.scss',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
-
-    // php cli.php assets compile sweetalert-twitter-min
-
-    [
-        'name' => 'sweetalert-twitter-min',
-        'type' => 'scss',
-        'destination' => DEFAULTFCPATH.'assets/css/lib/sweetalert/twitter.min.css',
-        'source' => DEFAULTFCPATH.'assets/scss/lib/sweetalert/twitter.scss',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
-
-    // LESS --------------------------------------------------------------------
-
     // php cli.php assets compile editor-min
 
     [
@@ -86,39 +29,6 @@ $config['tasks'] = [
         'type' => 'less',
         'source' => DEFAULTFCPATH.'assets/less/lib/editor/index.less',
         'destination' => DEFAULTFCPATH.'assets/css/lib/editor/editor.min.css',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
-
-    // php cli.php assets compile datatables-semantic-ui-min
-
-    [
-        'name' => 'datatables-semantic-ui-min',
-        'type' => 'less',
-        'source' => DEFAULTFCPATH.'assets/less/lib/dataTables/dataTables.semanticui.less',
-        'destination' => DEFAULTFCPATH.'assets/css/lib/dataTables/dataTables.semanticui.min.css',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
-
-    // php cli.php assets compile datatables-responsive-semantic-ui-min
-
-    [
-        'name' => 'datatables-responsive-semantic-ui-min',
-        'type' => 'less',
-        'source' => DEFAULTFCPATH.'assets/less/lib/dataTables/responsive.semanticui.less',
-        'destination' => DEFAULTFCPATH.'assets/css/lib/dataTables/responsive.semanticui.min.css',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
-
-    // php cli.php assets compile datatables-select-semantic-ui-min
-
-    [
-        'name' => 'datatables-select-semantic-ui-min',
-        'type' => 'less',
-        'source' => DEFAULTFCPATH.'assets/less/lib/dataTables/select.semanticui.less',
-        'destination' => DEFAULTFCPATH.'assets/css/lib/dataTables/select.semanticui.min.css',
         'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
         'cssmin' => [],
     ],
@@ -145,16 +55,7 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
-    // php cli.php assets compile front-semantic-ui-flat-min
-
-    [
-        'name' => 'front-semantic-ui-flat-min',
-        'type' => 'less',
-        'source' => DEFAULTFCPATH.'themes/front_semantic_ui_flat/less/index.less',
-        'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_flat/css/front.min.css',
-        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
-        'cssmin' => [],
-    ],
+    // -------------------------------------------------------------------------
 
     // php cli.php assets compile front-default-min
 
@@ -167,5 +68,61 @@ $config['tasks'] = [
         'cssmin' => [],
     ],
 
+    // php cli.php assets compile front-semantic-ui-flat-min
+
+    [
+        'name' => 'front-semantic-ui-flat-min',
+        'type' => 'less',
+        'source' => DEFAULTFCPATH.'themes/front_semantic_ui_flat/less/index.less',
+        'destination' => DEFAULTFCPATH.'themes/front_semantic_ui_flat/css/front.min.css',
+        'autoprefixer' => ['browsers' => $config['autoprefixer_browsers']],
+        'cssmin' => [],
+    ],
+
     // -------------------------------------------------------------------------
 ];
+
+if (!function_exists('_assets_compile_create_md5')) {
+
+    function _assets_compile_create_md5($task) {
+
+        $destination_hash = $task['destination'].'.md5';
+        $hash = md5($task['result']);
+
+        if (!write_file($destination_hash, $hash)) {
+            return false;
+        }
+
+        @chmod($destination_hash, FILE_WRITE_MODE);
+    }
+}
+
+if (!function_exists('_assets_compile_create_sha384')) {
+
+    function _assets_compile_create_sha384($task) {
+
+        $destination_hash = $task['destination'].'.sha384';
+        $hash = hash('sha384', $task['result']);
+
+        if (!write_file($destination_hash, $hash)) {
+            return false;
+        }
+
+        @chmod($destination_hash, FILE_WRITE_MODE);
+    }
+}
+
+if (!function_exists('_assets_compile_create_sha384_base64')) {
+
+    function _assets_compile_create_sha384_base64($task) {
+
+        $destination_hash = $task['destination'].'.sha384.base64';
+        $hash = base64_encode(hash('sha384', $task['result']));
+
+        if (!write_file($destination_hash, $hash)) {
+            return false;
+        }
+
+        @chmod($destination_hash, FILE_WRITE_MODE);
+    }
+}
