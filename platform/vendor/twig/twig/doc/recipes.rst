@@ -6,9 +6,6 @@ Recipes
 Displaying Deprecation Notices
 ------------------------------
 
-.. versionadded:: 1.21
-    This works as of Twig 1.21.
-
 Deprecated features generate deprecation notices (via a call to the
 ``trigger_error()`` PHP function). By default, they are silenced and never
 displayed nor logged.
@@ -161,7 +158,7 @@ syntax. But for specific projects, it can make sense to change the defaults.
 
 To change the block delimiters, you need to create your own lexer object::
 
-    $twig = new \Twig\Environment();
+    $twig = new \Twig\Environment(...);
 
     $lexer = new \Twig\Lexer($twig, [
         'tag_comment'   => ['{#', '#}'],
@@ -266,18 +263,24 @@ In the inner loop, the ``loop.parent`` variable is used to access the outer
 context. So, the index of the current ``topic`` defined in the outer for loop
 is accessible via the ``loop.parent.loop.index`` variable.
 
-Defining undefined Functions and Filters on the Fly
----------------------------------------------------
+Defining undefined Functions, Filters, and Tags on the Fly
+----------------------------------------------------------
 
-When a function (or a filter) is not defined, Twig defaults to throw a
-``\Twig\Error\SyntaxError`` exception. However, it can also call a `callback`_ (any
-valid PHP callable) which should return a function (or a filter).
+.. versionadded:: 3.2
 
+    The ``registerUndefinedTokenParserCallback()`` method was added in Twig
+    3.2.
+
+When a function/filter/tag is not defined, Twig defaults to throw a
+``\Twig\Error\SyntaxError`` exception. However, it can also call a `callback`_
+(any valid PHP callable) which should return a function/filter/tag.
+
+For tags, register callbacks with ``registerUndefinedTokenParserCallback()``.
 For filters, register callbacks with ``registerUndefinedFilterCallback()``.
 For functions, use ``registerUndefinedFunctionCallback()``::
 
     // auto-register all native PHP functions as Twig functions
-    // don't try this at home as it's not secure at all!
+    // NEVER do this in a project as it's NOT secure
     $twig->registerUndefinedFunctionCallback(function ($name) {
         if (function_exists($name)) {
             return new \Twig\TwigFunction($name, $name);
@@ -286,7 +289,7 @@ For functions, use ``registerUndefinedFunctionCallback()``::
         return false;
     });
 
-If the callable is not able to return a valid function (or filter), it must
+If the callable is not able to return a valid function/filter/tag, it must
 return ``false``.
 
 If you register more than one callback, Twig will call them in turn until one
@@ -294,7 +297,7 @@ does not return ``false``.
 
 .. tip::
 
-    As the resolution of functions and filters is done during compilation,
+    As the resolution of functions/filters/tags is done during compilation,
     there is no overhead when registering these callbacks.
 
 Validating the Template Syntax
@@ -302,7 +305,7 @@ Validating the Template Syntax
 
 When template code is provided by a third-party (through a web interface for
 instance), it might be interesting to validate the template syntax before
-saving it. If the template code is stored in a `$template` variable, here is
+saving it. If the template code is stored in a ``$template`` variable, here is
 how you can do it::
 
     try {
@@ -326,10 +329,6 @@ If you iterate over a set of files, you can pass the filename to the
         }
     }
 
-.. versionadded:: 1.27
-    ``\Twig\Source`` was introduced in version 1.27, pass the source and the
-    identifier directly on previous versions.
-
 .. note::
 
     This method won't catch any sandbox policy violations because the policy
@@ -350,25 +349,6 @@ To get around this, force Twig to invalidate the bytecode cache::
         // ...
     ]);
 
-.. note::
-
-    Before Twig 1.22, you should extend ``\Twig\Environment`` instead::
-
-        class OpCacheAwareTwigEnvironment extends \Twig\Environment
-        {
-            protected function writeCacheFile($file, $content)
-            {
-                parent::writeCacheFile($file, $content);
-
-                // Compile cached file into bytecode cache
-                if (function_exists('opcache_invalidate') && filter_var(ini_get('opcache.enable'), FILTER_VALIDATE_BOOLEAN)) {
-                    opcache_invalidate($file, true);
-                } elseif (function_exists('apc_compile_file')) {
-                    apc_compile_file($file);
-                }
-            }
-        }
-
 Reusing a stateful Node Visitor
 -------------------------------
 
@@ -380,7 +360,7 @@ This can be achieved with the following code::
 
     protected $someTemplateState = [];
 
-    public function enterNode(Twig_NodeInterface $node, \Twig\Environment $env)
+    public function enterNode(\Twig\Node\Node $node, \Twig\Environment $env)
     {
         if ($node instanceof \Twig\Node\ModuleNode) {
             // reset the state as we are entering a new template
@@ -417,7 +397,7 @@ We have created a simple ``templates`` table that hosts two templates:
 
 Now, let's define a loader able to use this database::
 
-    class DatabaseTwigLoader implements \Twig\Loader\LoaderInterface, \Twig\Loader\ExistsLoaderInterface, \Twig\Loader\SourceContextLoaderInterface
+    class DatabaseTwigLoader implements \Twig\Loader\LoaderInterface
     {
         protected $dbh;
 
@@ -426,17 +406,7 @@ Now, let's define a loader able to use this database::
             $this->dbh = $dbh;
         }
 
-        public function getSource($name)
-        {
-            if (false === $source = $this->getValue('source', $name)) {
-                throw new \Twig\Error\LoaderError(sprintf('Template "%s" does not exist.', $name));
-            }
-
-            return $source;
-        }
-
-        // \Twig\Loader\SourceContextLoaderInterface as of Twig 1.27
-        public function getSourceContext($name)
+        public function getSourceContext(string $name): Source
         {
             if (false === $source = $this->getValue('source', $name)) {
                 throw new \Twig\Error\LoaderError(sprintf('Template "%s" does not exist.', $name));
@@ -445,18 +415,17 @@ Now, let's define a loader able to use this database::
             return new \Twig\Source($source, $name);
         }
 
-        // \Twig\Loader\ExistsLoaderInterface as of Twig 1.11
-        public function exists($name)
+        public function exists(string $name)
         {
             return $name === $this->getValue('name', $name);
         }
 
-        public function getCacheKey($name)
+        public function getCacheKey(string $name): string
         {
             return $name;
         }
 
-        public function isFresh($name, $time)
+        public function isFresh(string $name, int $time): bool
         {
             if (false === $lastModified = $this->getValue('last_modified', $name)) {
                 return false;
@@ -512,7 +481,7 @@ Loading a Template from a String
 --------------------------------
 
 From a template, you can load a template stored in a string via the
-``template_from_string`` function (available as of Twig 1.11 via the
+``template_from_string`` function (via the
 ``\Twig\Extension\StringLoaderExtension`` extension):
 
 .. code-block:: twig
@@ -520,14 +489,10 @@ From a template, you can load a template stored in a string via the
     {{ include(template_from_string("Hello {{ name }}")) }}
 
 From PHP, it's also possible to load a template stored in a string via
-``\Twig\Environment::createTemplate()`` (available as of Twig 1.18)::
+``\Twig\Environment::createTemplate()``::
 
     $template = $twig->createTemplate('hello {{ name }}');
     echo $template->render(['name' => 'Fabien']);
-
-.. note::
-
-    Never use the ``Twig_Loader_String`` loader, which has severe limitations.
 
 Using Twig and AngularJS in the same Templates
 ----------------------------------------------
@@ -557,9 +522,7 @@ include in your templates:
             $interpolateProvider.startSymbol('{[').endSymbol(']}');
         });
 
-  * For Twig, change the delimiters via the ``tag_variable`` Lexer option:
-
-    ..  code-block:: php
+  * For Twig, change the delimiters via the ``tag_variable`` Lexer option::
 
         $env->setLexer(new \Twig\Lexer($env, [
             'tag_variable' => ['{[', ']}'],
