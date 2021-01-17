@@ -42,12 +42,8 @@ $config['helpers'] = array(
 
 // Extending the Twig parser: Choose Twig extensions to be loaded.
 $config['extensions'] = array(
-    'Twig_Extension_StringLoader',
-    array('Twig_Extensions_Extension_Text', false), // TRUE enables the corresponding extension.
-    array('Twig_Extensions_Extension_I18n', false),
-    array('Twig_Extensions_Extension_Intl', false),
-    array('Twig_Extensions_Extension_Array', false),
-    array('Twig_Extensions_Extension_Date', false),
+    array('\Twig\Extension\StringLoaderExtension' => true),
+    array('\Twig\Extra\String\StringExtension' => true),
 );
 
 // Extending the Twig parser: Extra-functions.
@@ -204,7 +200,6 @@ $config['filters'] = array(
     array('count', 'count', array('is_safe' => array('html'))),
     array('gettype', 'gettype', array('is_safe' => array('html'))),
     array('ltrim', array('Parser_Twig_Extension_Php', 'ltrim')),
-    array('money_format', array('Parser_Twig_Extension_Php', 'money_format')),
     array('rtrim', array('Parser_Twig_Extension_Php', 'rtrim')),
     'sprintf',
     'str_repeat',
