@@ -20,11 +20,11 @@ class CKEditor
     /**
      * The version of %CKEditor.
      */
-    const version = '4.6.2';
+    const version = '4.15.1';
     /**
      * A constant string unique for each release of %CKEditor.
      */
-    const timestamp = '20af917';
+    const timestamp = '1aa21195b';
 
     /**
      * URL to the %CKEditor installation directory (absolute or relative to document root).
@@ -130,6 +130,11 @@ class CKEditor
      */
     public function editor($name, $value = "", $config = array(), $events = array())
     {
+        // Added by Ivan Tcholakov, 20-DEC-2020.
+        $this->textareaAttributes = html_attr_add_class($this->textareaAttributes, 'online-editor', true);
+        $this->textareaAttributes = html_attr_set($this->textareaAttributes, 'style', 'visibility: hidden;' , true);
+        //
+
         $attr = "";
         foreach ($this->textareaAttributes as $key => $val) {
             $attr.= " " . $key . '="' . str_replace('"', '&quot;', $val) . '"';
@@ -143,9 +148,9 @@ class CKEditor
 
         $js = $this->returnGlobalEvents();
         if (!empty($_config))
-            $js .= "CKEDITOR.replace('".$name."', ".$this->jsEncode($_config).");";
+            $js .= "if (typeof CKEDITOR !== 'undefined') { if (typeof CKEDITOR.instances['".$name."'] !== 'undefined') { CKEDITOR.instances['".$name."'].destroy(true); } CKEDITOR.replace('".$name."', ".json_encode($_config, JSON_UNESCAPED_UNICODE)."); }";
         else
-            $js .= "CKEDITOR.replace('".$name."');";
+            $js .= "if (typeof CKEDITOR !== 'undefined') { if (typeof CKEDITOR.instances['".$name."'] !== 'undefined') { CKEDITOR.instances['".$name."'].destroy(true); } CKEDITOR.replace('".$name."'); }";
 
         $out .= $this->script($js);
 
@@ -181,10 +186,10 @@ class CKEditor
 
         $js = $this->returnGlobalEvents();
         if (!empty($_config)) {
-            $js .= "CKEDITOR.replace('".$id."', ".$this->jsEncode($_config).");";
+            $js .= "if (typeof CKEDITOR !== 'undefined') { if (typeof CKEDITOR.instances['".$id."'] !== 'undefined') { CKEDITOR.instances['".$id."'].destroy(true); } CKEDITOR.replace('".$id."', ".json_encode($_config, JSON_UNESCAPED_UNICODE)."); }";
         }
         else {
-            $js .= "CKEDITOR.replace('".$id."');";
+            $js .= "if (typeof CKEDITOR !== 'undefined') { if (typeof CKEDITOR.instances['".$id."'] !== 'undefined') { CKEDITOR.instances['".$id."'].destroy(true); } CKEDITOR.replace('".$id."'); }";
         }
         $out .= $this->script($js);
 
@@ -225,22 +230,22 @@ class CKEditor
         $js = $this->returnGlobalEvents();
         if (empty($_config)) {
             if (empty($className)) {
-                $js .= "CKEDITOR.replaceAll();";
+                $js .= "if (typeof CKEDITOR !== 'undefined') { CKEDITOR.replaceAll(); }";
             }
             else {
-                $js .= "CKEDITOR.replaceAll('".$className."');";
+                $js .= "if (typeof CKEDITOR !== 'undefined') { CKEDITOR.replaceAll('".$className."'); }";
             }
         }
         else {
             $classDetection = "";
-            $js .= "CKEDITOR.replaceAll( function(textarea, config) {\n";
+            $js .= "if (typeof CKEDITOR !== 'undefined') { CKEDITOR.replaceAll( function(textarea, config) {\n";
             if (!empty($className)) {
                 $js .= "    var classRegex = new RegExp('(?:^| )' + '". $className ."' + '(?:$| )');\n";
                 $js .= "    if (!classRegex.test(textarea.className))\n";
                 $js .= "        return false;\n";
             }
-            $js .= "    CKEDITOR.tools.extend(config, ". $this->jsEncode($_config) .", true);";
-            $js .= "} );";
+            $js .= "    CKEDITOR.tools.extend(config, ". json_encode($_config, JSON_UNESCAPED_UNICODE) .", true);";
+            $js .= "} ); }";
 
         }
 
@@ -515,42 +520,4 @@ class CKEditor
         return $ckeditorUrl;
     }
 
-    /**
-     * This little function provides a basic JSON support.
-     *
-     * @param mixed $val
-     * @return string
-     */
-    private function jsEncode($val)
-    {
-        if (is_null($val)) {
-            return 'null';
-        }
-        if (is_bool($val)) {
-            return $val ? 'true' : 'false';
-        }
-        if (is_int($val)) {
-            return $val;
-        }
-        if (is_float($val)) {
-            return str_replace(',', '.', $val);
-        }
-        if (is_array($val) || is_object($val)) {
-            if (is_array($val) && (array_keys($val) === range(0,count($val)-1))) {
-                return '[' . implode(',', array_map(array($this, 'jsEncode'), $val)) . ']';
-            }
-            $temp = array();
-            foreach ($val as $k => $v){
-                $temp[] = $this->jsEncode("{$k}") . ':' . $this->jsEncode($v);
-            }
-            return '{' . implode(',', $temp) . '}';
-        }
-        // String otherwise
-        if (strpos($val, '@@') === 0)
-            return substr($val, 2);
-        if (strtoupper(substr($val, 0, 9)) == 'CKEDITOR.')
-            return $val;
-
-        return '"' . str_replace(array("\\", "/", "\n", "\t", "\r", "\x08", "\x0c", '"'), array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'), $val) . '"';
-    }
 }

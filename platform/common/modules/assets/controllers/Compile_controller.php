@@ -40,12 +40,13 @@ class Compile_controller extends Core_Controller {
 
     public function index()
     {
-        echo PHP_EOL;
+        $this->line('');
 
         $params = array_slice($this->uri->rsegment_array(), 2);
 
         if (empty($this->tasks)) {
-            return;
+
+            $this->terminate('There are no configured tasks.');
         }
 
         $tasks = [];
@@ -65,48 +66,68 @@ class Compile_controller extends Core_Controller {
         }
 
         if (empty($tasks)) {
-            return;
+
+            $this->terminate('No task has been found.');
         }
 
         foreach ($tasks as $task) {
 
-            $source = isset($task['source']) ? (string) $task['source'] : '';
+            if (!isset($task['name']) || trim($task['name']) == '') {
+
+                $this->terminate('No task name has been specified.');
+            }
+
+            if (!isset($task['type']) || trim($task['type']) == '') {
+
+                $this->terminate('No task type has been specified.');
+            }
+
+            $this->line('Task: '.$task['name']);
+            $this->line('Type: '.$task['type']);
+
+            if (isset($task['source']) && trim($task['source']) == '') {
+
+                $this->terminate($task['name'].': Empty source file name.');
+            }
 
             if (isset($task['source'])) {
 
-                if ($source == '') {
-                    continue;
-                }
+                $source = (string) $task['source'];
 
                 if (!is_file($source)) {
 
-                    echo $task['name'].': '.sprintf('Failed to find the source file "%s".', $source).PHP_EOL;
-
-                    return;
+                    $this->terminate($task['name'].': '.sprintf('Failed to find the source file "%s".', $source));
                 }
 
                 $task['source'] = $source;
+
+                $this->line('Source: '.$task['source']);
+
+                $task['source_dir'] = rtrim(str_replace('\\', '/', realpath(dirname($task['source']))), '/').'/';
             }
 
-            $destination = isset($task['destination']) ? (string) $task['destination'] : '';
+            if (isset($task['destination']) && trim($task['destination']) == '') {
+
+                $this->terminate($task['name'].': Empty destination file name.');
+            }
 
             if (isset($task['destination'])) {
 
-                if ($destination == '') {
-                    continue;
-                }
+                $destination = (string) $task['destination'];
 
                 $dir = pathinfo($destination, PATHINFO_DIRNAME);
                 file_exists($dir) OR mkdir($dir, DIR_WRITE_MODE, TRUE);
 
                 if (!is_dir($dir)) {
 
-                    echo $task['name'].': '.sprintf('Failed to create the destination directory "%s".', $dir).PHP_EOL;
-
-                    return;
+                    $this->terminate($task['name'].': '.sprintf('Failed to create the destination directory "%s".', $dir));
                 }
 
                 $task['destination'] = $destination;
+
+                $this->line('Destination: '.$task['destination']);
+
+                $task['destination_dir'] = rtrim(str_replace('\\', '/', realpath(dirname($task['destination']))), '/').'/';
             }
 
             if (isset($task['before'])) {
@@ -115,14 +136,19 @@ class Compile_controller extends Core_Controller {
 
                     if (is_callable($task['before'])) {
 
-                        call_user_func_array($task['before'], [$task]);
+                        if (call_user_func_array($task['before'], [$task]) === false) {
+                            $this->terminate($task['name'].': "before" routine has failed.');
+                        }
 
                     } else {
 
                         foreach($task['before'] as $before) {
 
                             if (is_callable($before)) {
-                                call_user_func_array($before, [$task]);
+
+                                if (call_user_func_array($before, [$task]) === false) {
+                                    $this->terminate($task['name'].': "before" routine has failed.');
+                                }
                             }
                         }
                     }
@@ -130,7 +156,10 @@ class Compile_controller extends Core_Controller {
                 } else {
 
                     if (is_callable($task['before'])) {
-                        call_user_func_array($task['before'], [$task]);
+
+                        if (call_user_func_array($task['before'], [$task]) === false) {
+                            $this->terminate($task['name'].': "before" routine has failed.');
+                        }
                     }
                 }
             }
@@ -141,14 +170,14 @@ class Compile_controller extends Core_Controller {
 
                 if (!write_file($task['destination'], $task['result'])) {
 
-                    echo $task['name'].': '.sprintf('Failed to write the destination file "%s".', $task['destination']).PHP_EOL;
+                    $this->terminate($task['name'].': '.sprintf('Failed to write the destination file "%s".', $task['destination']));
 
-                    return;
+                } else {
+
+                    $this->line($task['name'].': Destination file has been written successfully.');
                 }
 
                 @chmod($task['destination'], FILE_WRITE_MODE);
-
-                echo $task['name'].': '.$task['destination'].PHP_EOL;
             }
 
             if (isset($task['after'])) {
@@ -157,14 +186,19 @@ class Compile_controller extends Core_Controller {
 
                     if (is_callable($task['after'])) {
 
-                        call_user_func_array($task['after'], [$task]);
+                        if (call_user_func_array($task['after'], [$task]) === false) {
+                            $this->terminate($task['name'].': "after" routine has failed.');
+                        }
 
                     } else {
 
                         foreach($task['after'] as $after) {
 
                             if (is_callable($after)) {
-                                call_user_func_array($after, [$task]);
+
+                                if (call_user_func_array($after, [$task]) === false) {
+                                    $this->terminate($task['name'].': "after" routine has failed.');
+                                }
                             }
                         }
                     }
@@ -172,7 +206,10 @@ class Compile_controller extends Core_Controller {
                 } else {
 
                     if (is_callable($task['after'])) {
-                        call_user_func_array($task['after'], [$task]);
+
+                        if (call_user_func_array($task['after'], [$task]) === false) {
+                            $this->terminate($task['name'].': "after" routine has failed.');
+                        }
                     }
                 }
             }
@@ -180,9 +217,23 @@ class Compile_controller extends Core_Controller {
             if (isset($task['result'])) {
                 unset($task['result']);
             }
-        }
 
+            $this->line($task['name'].': Done.');
+
+            $this->line('');
+        }
+    }
+
+    protected function line($message)
+    {
+        echo $message.PHP_EOL;
+    }
+
+    protected function terminate($message)
+    {
+        echo $message.PHP_EOL;
         echo PHP_EOL;
+        exit(1);
     }
 
     protected function find($name)
@@ -268,11 +319,117 @@ class Compile_controller extends Core_Controller {
 
             foreach ($task['sources'] as & $subtask) {
 
+                $subtask['name'] = $task['name'];
+
+                if (!isset($subtask['type']) || trim($subtask['type']) == '') {
+
+                    $this->terminate('No subtask type has been specified.');
+                }
+
+                $this->line('Subtask: '.$subtask['type']);
+
                 if (!in_array($subtask['type'], ['copy', 'less', 'scss', 'autoprefixer', 'cssmin'])) {
-                    continue;
+
+                    $this->terminate('Invalid subtask type: '.$subtask['type']);
+                }
+
+                if (isset($subtask['source']) && trim($subtask['source']) == '') {
+
+                    $this->terminate('Subtask: Empty source file name.');
+                }
+
+                if (isset($subtask['source'])) {
+
+                    $source = (string) $subtask['source'];
+
+                    if (!is_file($source)) {
+
+                        $this->terminate('Subtask: '.sprintf('Failed to find the source file "%s".', $source));
+                    }
+
+                    $subtask['source'] = $source;
+
+                    $this->line('Source: '.$subtask['source']);
+
+                    $subtask['source_dir'] = rtrim(str_replace('\\', '/', realpath(dirname($subtask['source']))), '/').'/';
+                }
+
+                if (isset($task['destination_dir'])) {
+                    $subtask['destination_dir'] = $task['destination_dir'];
+                }
+
+                if (isset($subtask['before'])) {
+
+                    if (is_array($subtask['before'])) {
+
+                        if (is_callable($subtask['before'])) {
+
+                            if (call_user_func_array($subtask['before'], [$subtask]) === false) {
+                                $this->terminate($subtask['name'].': "before" routine has failed.');
+                            }
+
+                        } else {
+
+                            foreach($subtask['before'] as $before) {
+
+                                if (is_callable($before)) {
+
+                                    if (call_user_func_array($before, [$subtask]) === false) {
+                                        $this->terminate($subtask['name'].': "before" routine has failed.');
+                                    }
+                                }
+                            }
+                        }
+
+                    } else {
+
+                        if (is_callable($subtask['before'])) {
+
+                            if (call_user_func_array($subtask['before'], [$subtask]) === false) {
+                                $this->terminate($subtask['name'].': "before" routine has failed.');
+                            }
+                        }
+                    }
                 }
 
                 $this->execute($subtask);
+
+                // Remove @charset "UTF-8"; , because this declaration would be invalid if it was used several times.
+                $subtask['result'] = preg_replace('/\@charset\s*["\']UTF-8["\']\s*;{0,1}/i', '', $subtask['result'], 1);
+
+                if (isset($subtask['after'])) {
+
+                    if (is_array($subtask['after'])) {
+
+                        if (is_callable($subtask['after'])) {
+
+                            if (call_user_func_array($subtask['after'], [$subtask]) === false) {
+                                $this->terminate($subtask['name'].': "after" routine has failed.');
+                            }
+
+                        } else {
+
+                            foreach($subtask['after'] as $after) {
+
+                                if (is_callable($after)) {
+
+                                    if (call_user_func_array($after, [$subtask]) === false) {
+                                        $this->terminate($subtask['name'].': "after" routine has failed.');
+                                    }
+                                }
+                            }
+                        }
+
+                    } else {
+
+                        if (is_callable($subtask['after'])) {
+
+                            if (call_user_func_array($subtask['after'], [$subtask]) === false) {
+                                $this->terminate($subtask['name'].': "after" routine has failed.');
+                            }
+                        }
+                    }
+                }
 
                 if ($first) {
                     $task['result'] = trim($subtask['result']);
@@ -299,11 +456,114 @@ class Compile_controller extends Core_Controller {
 
             foreach ($task['sources'] as & $subtask) {
 
+                $subtask['name'] = $task['name'];
+
+                if (!isset($subtask['type']) || trim($subtask['type']) == '') {
+
+                    $this->terminate('No subtask type has been specified.');
+                }
+
+                $this->line('Subtask: '.$subtask['type']);
+
                 if (!in_array($subtask['type'], ['copy', 'jsmin'])) {
-                    continue;
+
+                    $this->terminate('Invalid subtask type: '.$subtask['type']);
+                }
+
+                if (isset($subtask['source']) && trim($subtask['source']) == '') {
+
+                    $this->terminate('Subtask: Empty source file name.');
+                }
+
+                if (isset($subtask['source'])) {
+
+                    $source = (string) $subtask['source'];
+
+                    if (!is_file($source)) {
+
+                        $this->terminate('Subtask: '.sprintf('Failed to find the source file "%s".', $source));
+                    }
+
+                    $subtask['source'] = $source;
+
+                    $this->line('Source: '.$subtask['source']);
+
+                    $subtask['source_dir'] = rtrim(str_replace('\\', '/', realpath(dirname($subtask['source']))), '/').'/';
+                }
+
+                if (isset($task['destination_dir'])) {
+                    $subtask['destination_dir'] = $task['destination_dir'];
+                }
+
+                if (isset($subtask['before'])) {
+
+                    if (is_array($subtask['before'])) {
+
+                        if (is_callable($subtask['before'])) {
+
+                            if (call_user_func_array($subtask['before'], [$subtask]) === false) {
+                                $this->terminate($subtask['name'].': "before" routine has failed.');
+                            }
+
+                        } else {
+
+                            foreach($subtask['before'] as $before) {
+
+                                if (is_callable($before)) {
+
+                                    if (call_user_func_array($before, [$subtask]) === false) {
+                                        $this->terminate($subtask['name'].': "before" routine has failed.');
+                                    }
+                                }
+                            }
+                        }
+
+                    } else {
+
+                        if (is_callable($subtask['before'])) {
+
+                            if (call_user_func_array($subtask['before'], [$subtask]) === false) {
+                                $this->terminate($subtask['name'].': "before" routine has failed.');
+                            }
+                        }
+                    }
                 }
 
                 $this->execute($subtask);
+
+                if (isset($subtask['after'])) {
+
+                    if (is_array($subtask['after'])) {
+
+                        if (is_callable($subtask['after'])) {
+
+                            if (call_user_func_array($subtask['after'], [$subtask]) === false) {
+                                $this->terminate($subtask['name'].': "after" routine has failed.');
+                            }
+
+                        } else {
+
+                            foreach($subtask['after'] as $after) {
+
+                                if (is_callable($after)) {
+
+                                    if (call_user_func_array($after, [$subtask]) === false) {
+                                        $this->terminate($subtask['name'].': "after" routine has failed.');
+                                    }
+                                }
+                            }
+                        }
+
+                    } else {
+
+                        if (is_callable($subtask['after'])) {
+
+                            if (call_user_func_array($subtask['after'], [$subtask]) === false) {
+                                $this->terminate($subtask['name'].': "after" routine has failed.');
+                            }
+                        }
+                    }
+                }
 
                 if ($first) {
                     $task['result'] = trim($subtask['result']);
