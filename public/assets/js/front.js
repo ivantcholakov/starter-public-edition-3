@@ -9,7 +9,7 @@ $(function () {
     $('.ui.dropdown:not(.native):not(.special):not([multiple]):not(.clearable)').dropdown({
         fullTextSearch: true,
         duration: 100
-                });
+    });
 
     $('.ui.dropdown:not(.native):not(.special):not([multiple]).clearable').dropdown({
         clearable: true,

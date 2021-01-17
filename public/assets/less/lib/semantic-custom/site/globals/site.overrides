@@ -3,6 +3,43 @@
 *******************************/
 
 
+/* Colorbox */
+
+@colorbox-example-dir: "example3/";
+@colorbox-import-file: "@{default-assets-css-lib-path}colorbox/@{colorbox-example-dir}colorbox.css";
+@colorbox-image-dir: "@{default-assets-uri}css/lib/colorbox/@{colorbox-example-dir}images/";
+
+@import (inline) "@{colorbox-import-file}";
+
+/* Colorbox Fix URLs */
+
+#cboxLoadingGraphic {
+    background-image: url("@{colorbox-image-dir}loading.gif");
+}
+
+#cboxPrevious {
+    background-image: url("@{colorbox-image-dir}controls.png");
+}
+
+#cboxNext {
+    background-image: url("@{colorbox-image-dir}controls.png");
+}
+
+#cboxClose {
+    background-image: url("@{colorbox-image-dir}controls.png");
+}
+
+/* End Colorbox Fix URLs */
+
+/* Colorbox Visual Corrections */
+
+#cboxPrevious, #cboxNext, #cboxSlideshow, #cboxClose {
+    outline: 0 !important;
+}
+
+/* End Colorbox */
+
+
 /* Force <pre> and <code> Tags to Word Wrap */
 
 code, pre {
@@ -12,6 +49,19 @@ code, pre {
 }
 
 /* End Force <pre> and <code> Tags to Word Wrap */
+
+
+/* Code */
+
+code {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #333;
+    background: #f8f8f8;
+}
+
+/* End Code */
 
 
 /* Colored Texts */
@@ -29,6 +79,16 @@ code, pre {
 }
 
 /* End Colored Texts */
+
+
+/* Workarounds */
+
+.ui.card .content .header {
+    // jQuery.ellipsis mistakenly lowers the height, keep it.
+    min-height: 26px;
+}
+
+/* End Workarounds */
 
 
 /* Printing */
