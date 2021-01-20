@@ -545,6 +545,7 @@ if (!function_exists('js_platform')) {
             'UA_IS_MOBILE',
             'UA_IS_ROBOT',
             'UA_IS_REFERRAL',
+            'WEB_ASSET_CACHE_BUST_NUMBER',
         );
 
         $constants_js = array();
@@ -563,10 +564,7 @@ if (!function_exists('js_platform')) {
 '
     <script type="text/javascript">
     //<![CDATA[
-'.$constants_js.'
-        var site_url = '.json_encode(CURRENT_SITE_URL).'; // The language segment is added. Kept here for BC, replaced by CURRENT_SITE_URL.
-        var site_uri = '.json_encode(CURRENT_SITE_URI).'; // The language segment is added. Kept here for BC, replaced by CURRENT_SITE_URI.
-    //]]>
+'.$constants_js.'    //]]>
     </script>';
     }
 
@@ -578,7 +576,7 @@ if (!function_exists('js_modernizr')) {
     // Modified by Ivan Tcholakov, 08-DEC-2020.
     function js_modernizr() {
 
-        return '    <script type="text/javascript" src="'.html_attr_escape(base_url('assets/composer-asset/components/modernizr/modernizr.js?v='.PLATFORM_VERSION)).'"></script>';
+        return '    <script type="text/javascript" src="'.html_attr_escape(base_url('assets/composer-asset/components/modernizr/modernizr.js?v='.WEB_ASSET_CACHE_BUST_NUMBER)).'"></script>';
     }
 
 }
@@ -589,7 +587,7 @@ if (!function_exists('js_jquery')) {
     // Modified by Ivan Tcholakov, 08-DEC-2020.
     function js_jquery() {
 
-        return '    <script type="text/javascript" src="'.html_attr_escape(base_url('assets/composer-asset/components/jquery/jquery.min.js?v='.PLATFORM_VERSION)).'"></script>';
+        return '    <script type="text/javascript" src="'.html_attr_escape(base_url('assets/composer-asset/components/jquery/jquery.min.js?v='.WEB_ASSET_CACHE_BUST_NUMBER)).'"></script>';
     }
 
 }
