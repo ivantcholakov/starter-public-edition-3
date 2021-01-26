@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '5d7088975ff2aac42ce936533eda90543c6e1ffb',
+    'reference' => '6b5aef0a887cbb654d42abadc153da481be44af6',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '5d7088975ff2aac42ce936533eda90543c6e1ffb',
+      'reference' => '6b5aef0a887cbb654d42abadc153da481be44af6',
     ),
     'codeigniter/framework' => 
     array (
@@ -284,7 +284,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '600038234d7523270505fc1bfc442fbe813b8f2d',
+      'reference' => 'db043e108edc5065662fec040aedea5bf30f8a12',
     ),
     'roundcube/plugin-installer' => 
     array (
