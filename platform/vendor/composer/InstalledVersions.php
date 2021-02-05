@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '82a87c83c763a676855c0ed357c3ae3fa74ca883',
+    'reference' => 'fd20ad5cae69a82c5e6a9b19d50bce4b37f84e37',
     'name' => '__root__',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '82a87c83c763a676855c0ed357c3ae3fa74ca883',
+      'reference' => 'fd20ad5cae69a82c5e6a9b19d50bce4b37f84e37',
     ),
     'codeigniter/framework' => 
     array (
@@ -50,7 +50,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '899338a3ea4651533493ffd9d1ce7002e9ddf53e',
+      'reference' => '0925b5099919300a239909588351a6482c5e792d',
     ),
     'components/highlightjs' => 
     array (
