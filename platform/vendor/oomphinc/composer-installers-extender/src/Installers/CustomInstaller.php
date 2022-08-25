@@ -15,7 +15,7 @@ use Composer\Installers\BaseInstaller;
  */
 class CustomInstaller extends BaseInstaller
 {
-    public function getLocations()
+    public function getLocations($frameworkType)
     {
         /* In some cases where installers use 'library' or other non namespaced
          * types composer will fail to handle the installer but this project is

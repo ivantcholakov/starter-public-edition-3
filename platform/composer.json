@@ -1,7 +1,11 @@
 {
     "config": {
         "preferred-install": "dist",
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -14,9 +18,9 @@
         }
     },
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.3.0",
         "oomphinc/composer-installers-extender": "^2.0",
-        "codeigniter/framework": "dev-3.1-stable#0925b5099919300a239909588351a6482c5e792d",
+        "codeigniter/framework": "3.1.13",
         "roave/security-advisories": "dev-master",
         "symfony/polyfill-php73": "^1.17",
         "symfony/polyfill-php74": "^1.17",
@@ -36,7 +40,7 @@
         "symfony/filesystem": "^5.1",
         "symfony/finder": "^5.1",
         "fg/multiplayer": "^1.2.1",
-        "voku/portable-utf8": "^5.4",
+        "voku/portable-utf8": "^6.0",
         "voku/anti-xss": "^4.1",
         "erusev/parsedown": "^1.7",
         "erusev/parsedown-extra": "^0.8.1",
@@ -45,15 +49,15 @@
         "netcarver/textile": "^3.7",
         "twig/twig": "^3.0",
         "twig/string-extra": "^3.0",
-        "salesforce/handlebars-php": "^2.3",
+        "salesforce/handlebars-php": "^3.0",
         "scssphp/scssphp": "^1.1",
         "matthiasmullie/minify": "^1.3",
         "t1st3/php-json-minify": "^0.6.2",
         "whichbrowser/parser": "^2.0",
         "ezyang/htmlpurifier": "^4.8.0",
-        "ivantcholakov/codeigniter-phpmailer": "^1.4",
+        "ivantcholakov/codeigniter-phpmailer": "^1.5",
         "guzzlehttp/guzzle": "~7.0",
-        "components/jquery": "3.5.1",
+        "components/jquery": "3.6.0",
         "components/modernizr": "^3.5",
         "components/webfontloader": "^1.6",
         "components/highlightjs": "^9.16",
