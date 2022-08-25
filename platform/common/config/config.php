@@ -188,7 +188,7 @@ $config['composer_autoload'] = COMPOSER_PATH;
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-=+';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-=+\p{L}';
 
 /*
 |--------------------------------------------------------------------------
@@ -384,6 +384,10 @@ $config['encryption_key_for_settings'] = hex2bin('f7f04794cfeb2e5ee5c417ea4159da
 |
 |    The session cookie name, must contain only [0-9a-z_-] characters
 |
+| 'sess_samesite'
+|
+|    Session cookie SameSite attribute: Lax (default), Strict or None
+|
 | 'sess_expiration'
 |
 |    The number of SECONDS you want the session to last.
@@ -424,6 +428,7 @@ $config['encryption_key_for_settings'] = hex2bin('f7f04794cfeb2e5ee5c417ea4159da
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ac584bae';
+$config['sess_samesite'] = 'Lax';
 $config['sess_expiration'] = 4 * 60 * 60;  // 4 hours
 $config['sess_save_path'] = is_really_writable(WRITABLEPATH) ? WRITABLEPATH.'sessions/' : NULL;
 $config['sess_match_ip'] = FALSE;
