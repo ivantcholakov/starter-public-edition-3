@@ -356,7 +356,7 @@ if (!function_exists('get_email_settings')) {
         $config['oauth_client_id'] = isset($settings['email_oauth_client_id']) ? (string) $settings['email_oauth_client_id'] : $config['oauth_client_id'];
         $config['oauth_client_secret'] = isset($settings['email_oauth_client_secret']) ? (string) $settings['email_oauth_client_secret'] : $config['oauth_client_secret'];
         $config['oauth_refresh_token'] = isset($settings['email_oauth_refresh_token']) ? (string) $settings['email_oauth_refresh_token'] : $config['oauth_refresh_token'];
-
+        
         $config['dkim_domain'] = isset($settings['email_dkim_domain']) ? (string) $settings['email_dkim_domain'] : $config['dkim_domain'];
         $config['dkim_private'] = isset($settings['email_dkim_private']) ? (string) $settings['email_dkim_private'] : $config['dkim_private'];
         $config['dkim_private_string'] = isset($settings['email_dkim_private_string']) ? (string) $settings['email_dkim_private_string'] : $config['dkim_private_string'];
