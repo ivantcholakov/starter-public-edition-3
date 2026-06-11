@@ -17,17 +17,13 @@ class CI_Parser_scss extends CI_Parser_driver {
 
         $this->allowed_formatters = array(
             'expanded',
-            'nested',
             'compressed',
-            'compact',
-            'crunched',
         );
 
         // Default configuration options.
 
         $this->config = array(
             'import_paths' => array(''),
-            'number_precision' => 5,
             'formatter' => 'expanded',
             'line_number_style' => null,
             'full_path' => FALSE,
@@ -86,7 +82,6 @@ class CI_Parser_scss extends CI_Parser_driver {
 
         $parser->setImportPaths($options['import_paths']);
         $parser->addImportPath(dirname($template));
-        $parser->setNumberPrecision($options['number_precision']);
 
         $formatter = $options['formatter'];
 
@@ -125,7 +120,6 @@ class CI_Parser_scss extends CI_Parser_driver {
         $parser = new \ScssPhp\ScssPhp\Compiler();
 
         $parser->setImportPaths($options['import_paths']);
-        $parser->setNumberPrecision($options['number_precision']);
 
         $formatter = $options['formatter'];
 

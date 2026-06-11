@@ -8,11 +8,8 @@
 // Import Paths
 $config['import_paths'] = array('');
 
-// Number Precision
-$config['number_precision'] = 5;
-
 // Output Formatting
-$config['formatter'] = 'expanded';  // 'expanded', 'nested', 'compressed', 'compact', or 'crunched'
+$config['formatter'] = 'expanded';  // 'expanded' or 'compressed'
 
 // Line Number Style
 $config['line_number_style'] = null;
