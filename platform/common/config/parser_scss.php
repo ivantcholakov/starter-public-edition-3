@@ -10,6 +10,3 @@ $config['import_paths'] = array('');
 
 // Output Formatting
 $config['formatter'] = 'expanded';  // 'expanded' or 'compressed'
-
-// Line Number Style
-$config['line_number_style'] = null;

@@ -25,7 +25,6 @@ class CI_Parser_scss extends CI_Parser_driver {
         $this->config = array(
             'import_paths' => array(''),
             'formatter' => 'expanded',
-            'line_number_style' => null,
             'full_path' => FALSE,
         );
 
@@ -90,12 +89,12 @@ class CI_Parser_scss extends CI_Parser_driver {
             $formatter = 'expanded';
         }
 
-        $formatter = 'ScssPhp\ScssPhp\Formatter\\'.ucfirst($formatter);
-        $parser->setFormatter($formatter);
+        $parser->setOutputStyle(\ScssPhp\ScssPhp\OutputStyle::fromString($formatter));
 
-        $parser->setLineNumberStyle($options['line_number_style']);
-
-        $template = $parser->compile(@ file_get_contents($template));
+        $template =
+            $parser
+                ->compileFile($template)
+                ->getCss();
 
         return $this->output($template, $return, $ci, $is_mx);
     }
@@ -128,12 +127,12 @@ class CI_Parser_scss extends CI_Parser_driver {
             $formatter = 'expanded';
         }
 
-        $formatter = 'ScssPhp\ScssPhp\Formatter\\'.ucfirst($formatter);
-        $parser->setFormatter($formatter);
+        $parser->setOutputStyle(\ScssPhp\ScssPhp\OutputStyle::fromString($formatter));
 
-        $parser->setLineNumberStyle($options['line_number_style']);
-
-        $template = $parser->compile($template);
+        $template =
+            $parser
+                ->compileString(@ (string) file_get_contents($template))
+                ->getCss();
 
         return $this->output($template, $return, $ci, $is_mx);
     }
