@@ -50,6 +50,13 @@ class CI_Parser_scss extends CI_Parser_driver {
             }
         }
 
+        foreach ($this->config['import_paths'] as $key => $value) {
+
+            if ($value == '') {
+                $this->config['import_paths'][$key] = getcwd();
+            }
+        }
+
         log_message('info', 'CI_Parser_scss Class Initialized');
     }
 
