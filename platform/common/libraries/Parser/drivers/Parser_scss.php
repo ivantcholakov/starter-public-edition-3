@@ -131,7 +131,7 @@ class CI_Parser_scss extends CI_Parser_driver {
 
         $template =
             $parser
-                ->compileString(@ (string) file_get_contents($template))
+                ->compileString($template)
                 ->getCss();
 
         return $this->output($template, $return, $ci, $is_mx);
