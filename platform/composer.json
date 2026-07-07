@@ -57,7 +57,7 @@
         "whichbrowser/parser": "2.1.8",
         "ezyang/htmlpurifier": "4.19.0",
         "ivantcholakov/codeigniter-phpmailer": "1.6.0",
-        "guzzlehttp/guzzle": "7.11.1",
+        "guzzlehttp/guzzle": "7.12.1",
         "components/jquery": "3.7.1",
         "components/modernizr": "3.5.0",
         "components/webfontloader": "1.6.3",
