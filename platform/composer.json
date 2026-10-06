@@ -8,14 +8,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "extra": {
-        "installer-types": ["library", "component"],
-        "installer-paths": {
-            "../public/assets/composer-asset/{$vendor}/{$name}/": [
-                "type:component"
-            ]
-        }
-    },
     "require": {
         "php": ">=8.2.0",
         "paragonie/sodium_compat": "2.5.0",
@@ -56,13 +48,7 @@
         "ezyang/htmlpurifier": "4.19.0",
         "ivantcholakov/codeigniter-phpmailer": "1.6.0",
         "guzzlehttp/guzzle": "7.13.2",
-        "components/jquery": "3.7.1",
-        "components/modernizr": "3.5.0",
-        "components/webfontloader": "1.6.3",
-        "components/highlightjs": "9.16.2",
         "scrivo/highlight.php": "9.18.1.10",
-        "desandro/imagesloaded": "4.1.4",
-        "desandro/masonry": "4.2.2",
         "voku/anti-xss": "4.1.44",
         "voku/portable-ascii": "2.1.1"
     }
